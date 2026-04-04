@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.flooringhubnc.com/sitemap.xml
