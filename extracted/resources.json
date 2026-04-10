@@ -1,0 +1,1383 @@
+{
+  "scripts": [
+    {
+      "src": "https://analytics.wpmucdn.com/matomo.js",
+      "async": true,
+      "defer": true,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/45ed0ba2-4224-4d95-9227-205aa7bd7d9f.js",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/f3294a25-d198-4651-a501-45f49eb64fdb.js",
+      "async": false,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/a9e4881e-5a7d-40c9-805b-051d1ec1890f.js",
+      "async": false,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/4106d36f-8c37-4571-9482-6d6bab9280a0.js",
+      "async": false,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://www.flooringhubnc.com/wp-content/plugins/google-site-kit/dist/assets/js/googlesitekit-consent-mode-bc2e26cfa69fcd4a8261.js",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/1b1a264e-2ca4-46f9-b06a-048201e2d47b.js",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/99251c12-7449-452f-ab25-3c0e0768066a.js",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/239b9089-134e-4e8c-a0ed-b072ba75104f.js",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/b3fe9cd4-a285-472e-9701-56b14e38bb53.js",
+      "async": false,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/2faaeb3f-05f5-4e10-b41c-175718bb3429.js",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    },
+    {
+      "src": "https://hb.wpmucdn.com/www.flooringhubnc.com/d83f8ef4-2bf4-4382-bc37-cdef506cbda4.js",
+      "async": true,
+      "defer": false,
+      "type": "text/javascript"
+    }
+  ],
+  "stylesheets": [
+    {
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/4f29146d-ab27-4d8f-82b5-be5bc4cabc91.css",
+      "media": "all"
+    },
+    {
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/7839835a-232e-4709-abf1-b0e50df26c34.css",
+      "media": "all"
+    },
+    {
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/f2371ed7-9b8b-48fe-9b53-3e88077e1843.css",
+      "media": "all"
+    },
+    {
+      "href": "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,latin-ext&display=swap",
+      "media": "all"
+    },
+    {
+      "href": "https://www.flooringhubnc.com/wp-content/et-cache/35/et-divi-dynamic-tb-378-tb-372-35-late.css",
+      "media": "all"
+    },
+    {
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/b3fa44e5-d878-4813-8e13-2249f7d82bb0.css",
+      "media": "all"
+    },
+    {
+      "href": "https://www.flooringhubnc.com/wp-content/et-cache/35/et-divi-dynamic-tb-378-tb-372-35.css",
+      "media": "all"
+    },
+    {
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/5b556c7b-a885-46e7-b103-64277f8e65cf.css",
+      "media": "all"
+    },
+    {
+      "href": "https://fonts.googleapis.com/css?family=Abhaya+Libre:regular,500,600,700,800|Adamina:regular|Actor:regular|Alice:regular|Aleo:300,300italic,regular,italic,700,700italic&subset=latin,latin-ext&display=swap",
+      "media": "all"
+    },
+    {
+      "href": "https://www.flooringhubnc.com/wp-content/et-cache/35/et-core-unified-tb-378-tb-372-deferred-35.min.css?ver=1773615072",
+      "media": "all"
+    },
+    {
+      "href": "https://www.flooringhubnc.com/wp-content/uploads/trustindex-google-widget.css?1773955722",
+      "media": "all"
+    }
+  ],
+  "fonts": [
+    {
+      "family": "FKGroteskNeue",
+      "style": "normal",
+      "weight": "normal",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "loaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "loaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "500",
+      "status": "loaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "700",
+      "status": "loaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Adamina",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Alice",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "ETmodules",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "dashicons",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "italic",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "700",
+      "status": "loaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Open Sans",
+      "style": "normal",
+      "weight": "800",
+      "status": "loaded"
+    },
+    {
+      "family": "FontAwesome",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "FontAwesome",
+      "style": "normal",
+      "weight": "900",
+      "status": "unloaded"
+    },
+    {
+      "family": "FontAwesome",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "ETmodules",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "FontAwesome",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "FontAwesome",
+      "style": "normal",
+      "weight": "900",
+      "status": "unloaded"
+    },
+    {
+      "family": "FontAwesome",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "500",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "500",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "500",
+      "status": "loaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "700",
+      "status": "loaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Abhaya Libre",
+      "style": "normal",
+      "weight": "800",
+      "status": "unloaded"
+    },
+    {
+      "family": "Actor",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Adamina",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "italic",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "300",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Aleo",
+      "style": "normal",
+      "weight": "700",
+      "status": "unloaded"
+    },
+    {
+      "family": "Alice",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Alice",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Alice",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Alice",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "italic",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "400",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "600",
+      "status": "unloaded"
+    },
+    {
+      "family": "Trustindex Poppins",
+      "style": "normal",
+      "weight": "600",
+      "status": "loaded"
+    }
+  ],
+  "preloads": [
+    {
+      "rel": "dns-prefetch",
+      "href": "https://www.googletagmanager.com/",
+      "as": ""
+    },
+    {
+      "rel": "dns-prefetch",
+      "href": "https://fonts.googleapis.com/",
+      "as": ""
+    },
+    {
+      "rel": "dns-prefetch",
+      "href": "https://b4317609.smushcdn.com/",
+      "as": ""
+    },
+    {
+      "rel": "dns-prefetch",
+      "href": "https://hb.wpmucdn.com/",
+      "as": ""
+    },
+    {
+      "rel": "preconnect",
+      "href": "https://hb.wpmucdn.com/",
+      "as": ""
+    },
+    {
+      "rel": "preconnect",
+      "href": "http://fonts.googleapis.com/",
+      "as": ""
+    },
+    {
+      "rel": "preconnect",
+      "href": "https://fonts.gstatic.com/",
+      "as": ""
+    },
+    {
+      "rel": "preload",
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/45ed0ba2-4224-4d95-9227-205aa7bd7d9f.js",
+      "as": "script"
+    },
+    {
+      "rel": "preload",
+      "href": "https://www.flooringhubnc.com/wp-content/plugins/google-site-kit/dist/assets/js/googlesitekit-consent-mode-bc2e26cfa69fcd4a8261.js",
+      "as": "script"
+    },
+    {
+      "rel": "preload",
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/1b1a264e-2ca4-46f9-b06a-048201e2d47b.js",
+      "as": "script"
+    },
+    {
+      "rel": "preload",
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/99251c12-7449-452f-ab25-3c0e0768066a.js",
+      "as": "script"
+    },
+    {
+      "rel": "preload",
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/239b9089-134e-4e8c-a0ed-b072ba75104f.js",
+      "as": "script"
+    },
+    {
+      "rel": "preload",
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/2faaeb3f-05f5-4e10-b41c-175718bb3429.js",
+      "as": "script"
+    },
+    {
+      "rel": "preload",
+      "href": "https://hb.wpmucdn.com/www.flooringhubnc.com/d83f8ef4-2bf4-4382-bc37-cdef506cbda4.js",
+      "as": "script"
+    },
+    {
+      "rel": "preload",
+      "href": "https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7",
+      "as": "script"
+    }
+  ]
+}

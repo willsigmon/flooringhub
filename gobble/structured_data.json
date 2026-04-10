@@ -1,0 +1,148 @@
+[
+  {
+    "type": "json-ld",
+    "data": {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Flooring Hub",
+      "alternateName": "Flooring Hub NC",
+      "description": "North Carolina's trusted flooring specialist. Over 25 years of expert hardwood, LVP, laminate, carpet installation and floor leveling. Free in-home estimates.",
+      "url": "https://www.flooringhubnc.com",
+      "telephone": "+13305730370",
+      "email": "tsmith@flooringhubnc.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Tom Smith",
+        "jobTitle": "Owner & Master Craftsman"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Raleigh",
+        "addressRegion": "NC",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Raleigh"
+        },
+        {
+          "@type": "City",
+          "name": "Durham"
+        },
+        {
+          "@type": "City",
+          "name": "Chapel Hill"
+        },
+        {
+          "@type": "City",
+          "name": "Cary"
+        },
+        {
+          "@type": "City",
+          "name": "Apex"
+        },
+        {
+          "@type": "City",
+          "name": "Garner"
+        },
+        {
+          "@type": "City",
+          "name": "Clayton"
+        },
+        {
+          "@type": "City",
+          "name": "Fuquay-Varina"
+        },
+        {
+          "@type": "City",
+          "name": "Wake Forest"
+        },
+        {
+          "@type": "City",
+          "name": "Holly Springs"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Flooring Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hardwood Flooring Installation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Luxury Vinyl Plank (LVP) Installation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Laminate Flooring Installation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Carpet Installation"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Floor Leveling"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Trim & Staircases"
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "10",
+        "bestRating": "5"
+      },
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/p/Flooring-Hub-61578767536673/",
+        "https://www.instagram.com/flooringhubnc/"
+      ]
+    }
+  },
+  {
+    "type": "open-graph",
+    "data": {
+      "og:title": "Flooring Hub | The Flooring Experts",
+      "og:description": "North Carolina's trusted flooring specialist. 25+ years of expert installation. Free in-home estimates.",
+      "og:type": "website",
+      "og:url": "https://www.flooringhubnc.com"
+    }
+  }
+]

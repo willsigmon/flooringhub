@@ -1,0 +1,353 @@
+{
+  "source": {
+    "url": "http://localhost:8765/",
+    "title": "Flooring Hub | The Flooring Experts - Raleigh, NC",
+    "capturedAt": "2026-04-04T00:46:13.057Z",
+    "language": "en"
+  },
+  "dimensions": {
+    "pageWidth": 2348,
+    "pageHeight": 11847,
+    "devicePixelRatio": 1,
+    "capturedWidth": 2348,
+    "capturedHeight": 11847
+  },
+  "sections": [
+    {
+      "index": 0,
+      "format": "image/webp",
+      "quality": 0.92,
+      "sizeMB": "0.13",
+      "scaled": false,
+      "scaleFactor": 1,
+      "startY": 0,
+      "endY": 3896,
+      "heightPx": 3896
+    },
+    {
+      "index": 1,
+      "format": "image/webp",
+      "quality": 0.92,
+      "sizeMB": "0.26",
+      "scaled": false,
+      "scaleFactor": 1,
+      "startY": 3896,
+      "endY": 7792,
+      "heightPx": 3896
+    },
+    {
+      "index": 2,
+      "format": "image/webp",
+      "quality": 0.92,
+      "sizeMB": "0.23",
+      "scaled": false,
+      "scaleFactor": 1,
+      "startY": 7792,
+      "endY": 11847,
+      "heightPx": 4055
+    }
+  ],
+  "pageStructure": {
+    "headings": [
+      {
+        "level": 1,
+        "text": "Flooring Hub - The Flooring Guru",
+        "offsetTop": 366
+      },
+      {
+        "level": 2,
+        "text": "Why Flooring Hub",
+        "offsetTop": 1446
+      },
+      {
+        "level": 3,
+        "text": "25+ Years Expertise",
+        "offsetTop": 104
+      },
+      {
+        "level": 3,
+        "text": "Precise Installation",
+        "offsetTop": 104
+      },
+      {
+        "level": 3,
+        "text": "Licensed & Insured",
+        "offsetTop": 104
+      },
+      {
+        "level": 3,
+        "text": "One Point of Contact",
+        "offsetTop": 104
+      },
+      {
+        "level": 3,
+        "text": "Transparent Pricing",
+        "offsetTop": 104
+      },
+      {
+        "level": 3,
+        "text": "Local & Reliable",
+        "offsetTop": 104
+      },
+      {
+        "level": 2,
+        "text": "Our Promise to You",
+        "offsetTop": 0
+      },
+      {
+        "level": 2,
+        "text": "How It Works",
+        "offsetTop": 2774
+      },
+      {
+        "level": 3,
+        "text": "Free Consultation",
+        "offsetTop": 32
+      },
+      {
+        "level": 3,
+        "text": "Material Selection",
+        "offsetTop": 32
+      },
+      {
+        "level": 3,
+        "text": "Expert Installation",
+        "offsetTop": 32
+      },
+      {
+        "level": 3,
+        "text": "Final Walkthrough",
+        "offsetTop": 32
+      },
+      {
+        "level": 2,
+        "text": "Services",
+        "offsetTop": 3845
+      },
+      {
+        "level": 3,
+        "text": "Hardwood Flooring",
+        "offsetTop": 248
+      },
+      {
+        "level": 3,
+        "text": "Luxury Vinyl Plank",
+        "offsetTop": 248
+      },
+      {
+        "level": 3,
+        "text": "Laminate Flooring",
+        "offsetTop": 248
+      },
+      {
+        "level": 3,
+        "text": "Carpet",
+        "offsetTop": 248
+      },
+      {
+        "level": 3,
+        "text": "Floor Leveling",
+        "offsetTop": 248
+      },
+      {
+        "level": 3,
+        "text": "Custom Trim & Stairs",
+        "offsetTop": 248
+      },
+      {
+        "level": 2,
+        "text": "About Flooring Hub",
+        "offsetTop": 7
+      },
+      {
+        "level": 2,
+        "text": "Our Values",
+        "offsetTop": 6073
+      },
+      {
+        "level": 3,
+        "text": "Customer Satisfaction First",
+        "offsetTop": 88
+      },
+      {
+        "level": 3,
+        "text": "Expert Guidance",
+        "offsetTop": 88
+      },
+      {
+        "level": 3,
+        "text": "Detail-Driven",
+        "offsetTop": 88
+      },
+      {
+        "level": 3,
+        "text": "High-Quality Materials",
+        "offsetTop": 88
+      },
+      {
+        "level": 3,
+        "text": "Certified Professionals",
+        "offsetTop": 88
+      },
+      {
+        "level": 2,
+        "text": "Free In-Home Consultation & Estimate",
+        "offsetTop": 0
+      },
+      {
+        "level": 2,
+        "text": "Request a quote in seconds.",
+        "offsetTop": 62
+      },
+      {
+        "level": 3,
+        "text": "Get Your Free Estimate",
+        "offsetTop": 41
+      },
+      {
+        "level": 2,
+        "text": "Testimonials",
+        "offsetTop": 8023
+      },
+      {
+        "level": 2,
+        "text": "Exclusive Partners",
+        "offsetTop": 9088
+      },
+      {
+        "level": 3,
+        "text": "Uzin Leveling Products",
+        "offsetTop": 113
+      },
+      {
+        "level": 3,
+        "text": "Carlisle Wide Plank Flooring",
+        "offsetTop": 113
+      },
+      {
+        "level": 3,
+        "text": "Sheoga Hardwood",
+        "offsetTop": 113
+      },
+      {
+        "level": 2,
+        "text": "Service Area",
+        "offsetTop": 7
+      },
+      {
+        "level": 2,
+        "text": "FAQ",
+        "offsetTop": 10588
+      },
+      {
+        "level": 2,
+        "text": "Flooring Hub",
+        "offsetTop": 68
+      },
+      {
+        "level": 3,
+        "text": "Get in Touch",
+        "offsetTop": 0
+      },
+      {
+        "level": 3,
+        "text": "Ready to Start?",
+        "offsetTop": 0
+      }
+    ],
+    "linkCount": 19,
+    "topLinks": [
+      {
+        "href": "http://localhost:8765/#process",
+        "text": "Process"
+      },
+      {
+        "href": "http://localhost:8765/#services",
+        "text": "Services"
+      },
+      {
+        "href": "http://localhost:8765/#about",
+        "text": "About"
+      },
+      {
+        "href": "http://localhost:8765/#testimonials",
+        "text": "Reviews"
+      },
+      {
+        "href": "http://localhost:8765/#faq",
+        "text": "FAQ"
+      },
+      {
+        "href": "http://localhost:8765/#quote",
+        "text": "Free Estimate"
+      },
+      {
+        "href": "http://localhost:8765/#contact",
+        "text": "Schedule a Free Estimate"
+      },
+      {
+        "href": "http://localhost:8765/#contact",
+        "text": "Schedule Now"
+      },
+      {
+        "href": "tel:3305730370",
+        "text": "Give us a call"
+      },
+      {
+        "href": "tel:3305730370",
+        "text": "(330) 573-0370"
+      },
+      {
+        "href": "mailto:tsmith@flooringhubnc.com",
+        "text": "email us"
+      },
+      {
+        "href": "mailto:tsmith@flooringhubnc.com",
+        "text": "tsmith@flooringhubnc.com"
+      },
+      {
+        "href": "tel:3305730370",
+        "text": "(330) 573-0370"
+      },
+      {
+        "href": "tel:3305730370",
+        "text": "Call Now"
+      },
+      {
+        "href": "mailto:tsmith@flooringhubnc.com",
+        "text": "Email Us"
+      },
+      {
+        "href": "http://localhost:8765/privacy.html",
+        "text": "Privacy Policy"
+      },
+      {
+        "href": "http://localhost:8765/terms.html",
+        "text": "Terms of Service"
+      },
+      {
+        "href": "tel:3305730370",
+        "text": "Call Now"
+      },
+      {
+        "href": "mailto:tsmith@flooringhubnc.com",
+        "text": "Email"
+      }
+    ]
+  },
+  "meta": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "description": "Flooring Hub is Raleigh's trusted flooring specialist. Over 25 years of expert hardwood, LVP, laminate, carpet installation. Free in-home estimates.",
+    "keywords": "flooring installation Raleigh NC, hardwood flooring, LVP flooring, laminate flooring, carpet installation, floor leveling, flooring contractor Raleigh",
+    "og:title": "Flooring Hub | The Flooring Experts",
+    "og:description": "North Carolina's trusted flooring specialist. 25+ years of expert installation. Free in-home estimates.",
+    "og:type": "website",
+    "og:url": "https://www.flooringhubnc.com"
+  },
+  "processing": {
+    "elapsedMs": 4928,
+    "totalCaptures": 9,
+    "compressionStrategy": "auto",
+    "textExtractionEnabled": true
+  }
+}

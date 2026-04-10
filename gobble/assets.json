@@ -1,0 +1,57 @@
+{
+  "images": [
+    {
+      "src": "http://localhost:8765/assets/logo.png",
+      "alt": "Flooring Hub",
+      "width": 1150,
+      "height": 762,
+      "loading": "auto"
+    },
+    {
+      "src": "http://localhost:8765/assets/logo.png",
+      "alt": "Flooring Hub - The Flooring Guru",
+      "width": 1150,
+      "height": 762,
+      "loading": "auto"
+    },
+    {
+      "src": "http://localhost:8765/assets/logo.png",
+      "alt": "Flooring Hub",
+      "width": 1150,
+      "height": 762,
+      "loading": "auto"
+    }
+  ],
+  "backgroundImages": [
+    {
+      "src": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80",
+      "element": "div",
+      "class": "service-img"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1622428051717-dcd8412959de?w=600&q=80",
+      "element": "div",
+      "class": "service-img"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80",
+      "element": "div",
+      "class": "service-img"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=600&q=80",
+      "element": "div",
+      "class": "service-img"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80",
+      "element": "div",
+      "class": "service-img"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80",
+      "element": "div",
+      "class": "service-img"
+    }
+  ]
+}

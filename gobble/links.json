@@ -1,0 +1,78 @@
+[
+  {
+    "href": "http://localhost:8765/#process",
+    "text": "Process"
+  },
+  {
+    "href": "http://localhost:8765/#services",
+    "text": "Services"
+  },
+  {
+    "href": "http://localhost:8765/#about",
+    "text": "About"
+  },
+  {
+    "href": "http://localhost:8765/#testimonials",
+    "text": "Reviews"
+  },
+  {
+    "href": "http://localhost:8765/#faq",
+    "text": "FAQ"
+  },
+  {
+    "href": "http://localhost:8765/#quote",
+    "text": "Free Estimate"
+  },
+  {
+    "href": "http://localhost:8765/#contact",
+    "text": "Schedule a Free Estimate"
+  },
+  {
+    "href": "http://localhost:8765/#contact",
+    "text": "Schedule Now"
+  },
+  {
+    "href": "tel:3305730370",
+    "text": "Give us a call"
+  },
+  {
+    "href": "tel:3305730370",
+    "text": "(330) 573-0370"
+  },
+  {
+    "href": "mailto:tsmith@flooringhubnc.com",
+    "text": "email us"
+  },
+  {
+    "href": "mailto:tsmith@flooringhubnc.com",
+    "text": "tsmith@flooringhubnc.com"
+  },
+  {
+    "href": "tel:3305730370",
+    "text": "(330) 573-0370"
+  },
+  {
+    "href": "tel:3305730370",
+    "text": "Call Now"
+  },
+  {
+    "href": "mailto:tsmith@flooringhubnc.com",
+    "text": "Email Us"
+  },
+  {
+    "href": "http://localhost:8765/privacy.html",
+    "text": "Privacy Policy"
+  },
+  {
+    "href": "http://localhost:8765/terms.html",
+    "text": "Terms of Service"
+  },
+  {
+    "href": "tel:3305730370",
+    "text": "Call Now"
+  },
+  {
+    "href": "mailto:tsmith@flooringhubnc.com",
+    "text": "Email"
+  }
+]
