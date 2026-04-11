@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: Check JavaScript syntax
+        run: |
+          set -e
+          js_files=$(find . -type f \
+            \( -name "*.js" -o -name "*.mjs" -o -name "*.cjs" \) \
+            -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/.next/*" -print)
+
+          if [ -z "$js_files" ]; then
+            echo "No JavaScript files found; skipping"
+            exit 0
+          fi
+
+          printf '%s\0' $js_files | xargs -0 -r node --check
+      - name: Validate JSON files
+        run: |
+          python3 - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          broken = False
+          for path in Path('.').rglob('*.json'):
+              parts = path.parts
+              if '.git' in parts or 'node_modules' in parts:
+                  continue
+              try:
+                  json.loads(path.read_text(encoding='utf-8'))
+              except Exception as exc:
+                  print(f"Invalid JSON: {path} -> {exc}", file=sys.stderr)
+                  broken = True
+
+          if broken:
+              sys.exit(1)
+
+          print('JSON validation passed.')
+          PY
