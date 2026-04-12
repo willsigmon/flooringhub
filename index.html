@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://flooringhub.vercel.app/assets/stairs-after.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
   <!-- Structured Data for AI/Search Discovery -->
@@ -105,6 +105,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#process">Process</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Work</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -115,47 +116,81 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="hero-slideshow">
-      <div class="hero-slide slide-1" style="background-image: url('assets/stairs-after.jpg')"></div>
-      <div class="hero-slide slide-2" style="background-image: url('assets/cary-fireplace.jpg')"></div>
-      <div class="hero-slide slide-3" style="background-image: url('assets/cary-hallway.jpg')"></div>
-      <div class="hero-slide slide-4" style="background-image: url('assets/lvp-raleigh.jpg')"></div>
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-left">
-        <div class="hero-headline-row fade-up delay-1">
-          <div class="hero-icon-wrap">
-            <img src="assets/icon.png" alt="" class="hero-icon">
-            <div class="icon-shine"></div>
-          </div>
-          <h1 class="hero-title">The foundation of<br>every <span class="hero-accent">beautiful</span><br><span class="hero-accent">home</span> starts here.</h1>
-        </div>
-        <p class="hero-sub fade-up delay-2">25+ years of expert craftsmanship across the Triangle.</p>
-        <div class="hero-actions fade-up delay-3">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="hero-kicker">
+          <span class="hero-kicker-dot"></span>
+          Est. 1999 &nbsp;·&nbsp; Raleigh / Durham / Cary
+        </span>
+        <h1 class="hero-title">
+          <span class="reveal-line"><span class="reveal-inner">The foundation of</span></span>
+          <span class="reveal-line"><span class="reveal-inner">every <em class="hero-accent">beautiful</em></span></span>
+          <span class="reveal-line"><span class="reveal-inner"><em class="hero-accent">home</em> starts here.</span></span>
+        </h1>
+        <p class="hero-sub">Twenty-five years of hand-selected hardwood, precision installation, and one person accountable start to finish &mdash; Tom Smith, on-site, every project.</p>
+        <div class="hero-actions">
           <a href="#quote" class="btn btn-primary">Get a Free Estimate</a>
           <a href="tel:3305730370" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             (330) 573-0370
           </a>
         </div>
-        <div class="hero-trust fade-up delay-4">
+        <div class="hero-trust">
           <div class="trust-item">
-            <span class="trust-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <svg class="trust-star-svg" viewBox="0 0 120 20" aria-label="5 out of 5 stars">
+              <defs>
+                <polygon id="star5" points="10,1 12.5,7.5 19,8 14,12.5 15.5,19 10,15.5 4.5,19 6,12.5 1,8 7.5,7.5"/>
+              </defs>
+              <use href="#star5" x="0"/>
+              <use href="#star5" x="25"/>
+              <use href="#star5" x="50"/>
+              <use href="#star5" x="75"/>
+              <use href="#star5" x="100"/>
+            </svg>
             <span>5.0 on Google</span>
           </div>
           <div class="trust-divider"></div>
-          <div class="trust-item">
-            <span>Raleigh & Triangle Area</span>
-          </div>
+          <div class="trust-item"><span>Licensed &amp; Insured</span></div>
           <div class="trust-divider"></div>
-          <div class="trust-item">
-            <span>Licensed & Insured</span>
+          <div class="trust-item"><span>NWFA Member</span></div>
+        </div>
+      </div>
+
+      <div class="hero-feature">
+        <div class="hero-feature-frame">
+          <div class="hero-feature-img-wrap">
+            <img class="hero-feature-img is-active" src="assets/stairs-after.jpg" alt="Custom hardwood staircase">
+            <img class="hero-feature-img" src="assets/cary-fireplace.jpg" alt="Cary fireplace hardwood install">
+            <img class="hero-feature-img" src="assets/cary-hallway.jpg" alt="Cary hardwood hallway">
+            <img class="hero-feature-img" src="assets/lvp-raleigh.jpg" alt="Raleigh LVP install">
+          </div>
+          <div class="hero-feature-corner tl"></div>
+          <div class="hero-feature-corner tr"></div>
+          <div class="hero-feature-corner bl"></div>
+          <div class="hero-feature-corner br"></div>
+        </div>
+        <div class="hero-stat-chip">
+          <div class="hero-stat">
+            <span class="hero-stat-num" data-count="25">25+</span>
+            <span class="hero-stat-label">Years</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num" data-count="500">500+</span>
+            <span class="hero-stat-label">Homes</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">5.0&#9733;</span>
+            <span class="hero-stat-label">Google</span>
           </div>
         </div>
       </div>
     </div>
+
     <div class="hero-scroll-hint">
+      <span class="hero-scroll-label">Scroll</span>
       <div class="scroll-line"></div>
     </div>
   </section>
@@ -342,6 +377,138 @@
             <p>The finishing touches that make a floor feel complete. Custom treads, risers, transitions, and trim -- crafted to match perfectly.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof: Before/After Slider -->
+  <section class="section proof" id="proof">
+    <div class="container">
+      <h2 class="section-label fade-up reveal-words">Proof, not promises</h2>
+      <p class="section-headline fade-up reveal-words">Drag to see the difference.</p>
+
+      <div class="ba-stage fade-up">
+        <div class="ba-slider" data-ba style="--ba-pos: 50%;">
+          <img class="ba-img ba-after" src="assets/laminate-after.jpg" alt="After: installed laminate flooring">
+          <div class="ba-before-wrap">
+            <img class="ba-img ba-before" src="assets/laminate-before.jpg" alt="Before: old floor">
+          </div>
+          <div class="ba-handle" role="slider" tabindex="0" aria-label="Drag to reveal before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <div class="ba-handle-line"></div>
+            <div class="ba-handle-knob">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6" transform="translate(6 0)"/></svg>
+            </div>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+        <div class="ba-tabs" role="tablist">
+          <button class="ba-tab is-active" type="button" data-ba-tab
+            data-before="assets/laminate-before.jpg"
+            data-after="assets/laminate-after.jpg"
+            data-caption="Laminate install &middot; Raleigh">
+            <span class="ba-tab-num">01</span>
+            <span class="ba-tab-label">Laminate install</span>
+          </button>
+          <button class="ba-tab" type="button" data-ba-tab
+            data-before="assets/hardwood-before.jpg"
+            data-after="assets/stairs-after.jpg"
+            data-caption="Hardwood renewal &middot; Custom staircase">
+            <span class="ba-tab-num">02</span>
+            <span class="ba-tab-label">Hardwood renewal</span>
+          </button>
+          <button class="ba-tab" type="button" data-ba-tab
+            data-before="assets/refinish-during.jpg"
+            data-after="assets/cary-fireplace.jpg"
+            data-caption="Full refinish &middot; Cary">
+            <span class="ba-tab-num">03</span>
+            <span class="ba-tab-label">Refinish</span>
+          </button>
+        </div>
+        <p class="ba-caption" data-ba-caption>Laminate install &middot; Raleigh</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Gallery -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <h2 class="section-label fade-up">Selected work</h2>
+      <p class="section-headline fade-up">Twenty-five years, one floor at a time.</p>
+
+      <div class="gallery-filter fade-up" role="tablist">
+        <button class="g-pill is-active" type="button" data-filter="all">All</button>
+        <button class="g-pill" type="button" data-filter="hardwood">Hardwood</button>
+        <button class="g-pill" type="button" data-filter="lvp">LVP</button>
+        <button class="g-pill" type="button" data-filter="carpet">Carpet</button>
+        <button class="g-pill" type="button" data-filter="refinish">Refinish</button>
+      </div>
+
+      <div class="gallery-grid fade-up">
+        <figure class="g-tile g-tile--hero" data-cat="hardwood">
+          <img src="assets/stairs-after.jpg" alt="Custom hardwood staircase with precision trim work">
+          <figcaption class="g-caption">
+            <span class="g-cat">Hardwood &middot; Signature</span>
+            <span class="g-title">Custom staircase &amp; treads</span>
+            <span class="g-meta">Raleigh &middot; Oak, hand-finished</span>
+          </figcaption>
+        </figure>
+        <figure class="g-tile" data-cat="hardwood">
+          <img src="assets/cary-fireplace.jpg" alt="Hardwood floor around a fireplace">
+          <figcaption class="g-caption">
+            <span class="g-cat">Hardwood</span>
+            <span class="g-title">Living room &amp; hearth</span>
+            <span class="g-meta">Cary</span>
+          </figcaption>
+        </figure>
+        <figure class="g-tile" data-cat="hardwood">
+          <img src="assets/cary-hallway.jpg" alt="Hardwood hallway installation">
+          <figcaption class="g-caption">
+            <span class="g-cat">Hardwood</span>
+            <span class="g-title">Long hallway run</span>
+            <span class="g-meta">Cary</span>
+          </figcaption>
+        </figure>
+        <figure class="g-tile g-tile--wide" data-cat="lvp">
+          <img src="assets/lvp-raleigh.jpg" alt="Luxury vinyl plank installation">
+          <figcaption class="g-caption">
+            <span class="g-cat">LVP</span>
+            <span class="g-title">Open-plan LVP install</span>
+            <span class="g-meta">Raleigh &middot; 1,200 sqft</span>
+          </figcaption>
+        </figure>
+        <figure class="g-tile" data-cat="hardwood">
+          <img src="assets/cary-kitchen.jpg" alt="Hardwood kitchen floor">
+          <figcaption class="g-caption">
+            <span class="g-cat">Hardwood</span>
+            <span class="g-title">Kitchen transition</span>
+            <span class="g-meta">Cary</span>
+          </figcaption>
+        </figure>
+        <figure class="g-tile" data-cat="carpet">
+          <img src="assets/carpet-bedroom.jpg" alt="Bedroom carpet install">
+          <figcaption class="g-caption">
+            <span class="g-cat">Carpet</span>
+            <span class="g-title">Plush bedroom</span>
+            <span class="g-meta">Raleigh</span>
+          </figcaption>
+        </figure>
+        <figure class="g-tile" data-cat="carpet">
+          <img src="assets/carpet-stairs.jpg" alt="Carpeted staircase">
+          <figcaption class="g-caption">
+            <span class="g-cat">Carpet</span>
+            <span class="g-title">Full staircase runner</span>
+            <span class="g-meta">Durham</span>
+          </figcaption>
+        </figure>
+        <figure class="g-tile" data-cat="refinish">
+          <img src="assets/refinish-during.jpg" alt="Floor refinishing in progress">
+          <figcaption class="g-caption">
+            <span class="g-cat">Refinish</span>
+            <span class="g-title">Full sand &amp; refinish</span>
+            <span class="g-meta">In progress</span>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -540,14 +707,18 @@
       <p class="section-headline fade-up">What our customers say.</p>
       <div class="testimonial-grid">
         <div class="testimonial-card fade-up">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="stars" aria-label="5 out of 5 stars">
+            <svg class="stars-svg" viewBox="0 0 120 20"><defs><polygon id="tstar5" points="10,1 12.5,7.5 19,8 14,12.5 15.5,19 10,15.5 4.5,19 6,12.5 1,8 7.5,7.5"/></defs><use href="#tstar5" x="0"/><use href="#tstar5" x="25"/><use href="#tstar5" x="50"/><use href="#tstar5" x="75"/><use href="#tstar5" x="100"/></svg>
+          </div>
           <p class="testimonial-text">"Tom was great to work with. His knowledge and skill are unmatched. I'd highly recommend Tom to anyone and everyone."</p>
           <div class="testimonial-author">
             <span class="author-name">Ruairi M.</span>
           </div>
         </div>
         <div class="testimonial-card fade-up">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="stars" aria-label="5 out of 5 stars">
+            <svg class="stars-svg" viewBox="0 0 120 20"><defs><polygon id="tstar5" points="10,1 12.5,7.5 19,8 14,12.5 15.5,19 10,15.5 4.5,19 6,12.5 1,8 7.5,7.5"/></defs><use href="#tstar5" x="0"/><use href="#tstar5" x="25"/><use href="#tstar5" x="50"/><use href="#tstar5" x="75"/><use href="#tstar5" x="100"/></svg>
+          </div>
           <p class="testimonial-text">"My experience with Flooring Hub was Exceptionally Amazing from beginning to end. They far surpassed and exceeded my expectations in the excellent quality of service and professionalism."</p>
           <div class="testimonial-author">
             <span class="author-name">Mary B.</span>
@@ -555,28 +726,36 @@
           </div>
         </div>
         <div class="testimonial-card fade-up">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="stars" aria-label="5 out of 5 stars">
+            <svg class="stars-svg" viewBox="0 0 120 20"><defs><polygon id="tstar5" points="10,1 12.5,7.5 19,8 14,12.5 15.5,19 10,15.5 4.5,19 6,12.5 1,8 7.5,7.5"/></defs><use href="#tstar5" x="0"/><use href="#tstar5" x="25"/><use href="#tstar5" x="50"/><use href="#tstar5" x="75"/><use href="#tstar5" x="100"/></svg>
+          </div>
           <p class="testimonial-text">"What a fantastic company! Tom, the owner, is fantastic. Knows his stuff on flooring, and works hard to provide the greatest options and project goals."</p>
           <div class="testimonial-author">
             <span class="author-name">Krystal G.</span>
           </div>
         </div>
         <div class="testimonial-card fade-up">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="stars" aria-label="5 out of 5 stars">
+            <svg class="stars-svg" viewBox="0 0 120 20"><defs><polygon id="tstar5" points="10,1 12.5,7.5 19,8 14,12.5 15.5,19 10,15.5 4.5,19 6,12.5 1,8 7.5,7.5"/></defs><use href="#tstar5" x="0"/><use href="#tstar5" x="25"/><use href="#tstar5" x="50"/><use href="#tstar5" x="75"/><use href="#tstar5" x="100"/></svg>
+          </div>
           <p class="testimonial-text">"Tom put luxury vinyl plank throughout our entire home and it looks great! Nearly every visitor has admired the quality and craftsmanship."</p>
           <div class="testimonial-author">
             <span class="author-name">Hotomato S.</span>
           </div>
         </div>
         <div class="testimonial-card fade-up">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="stars" aria-label="5 out of 5 stars">
+            <svg class="stars-svg" viewBox="0 0 120 20"><defs><polygon id="tstar5" points="10,1 12.5,7.5 19,8 14,12.5 15.5,19 10,15.5 4.5,19 6,12.5 1,8 7.5,7.5"/></defs><use href="#tstar5" x="0"/><use href="#tstar5" x="25"/><use href="#tstar5" x="50"/><use href="#tstar5" x="75"/><use href="#tstar5" x="100"/></svg>
+          </div>
           <p class="testimonial-text">"Tom is stellar, they got our old carpets completely replaced and the installation was without a doubt the easiest experience I've had with a contractor."</p>
           <div class="testimonial-author">
             <span class="author-name">Brent A.</span>
           </div>
         </div>
         <div class="testimonial-card fade-up">
-          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="stars" aria-label="5 out of 5 stars">
+            <svg class="stars-svg" viewBox="0 0 120 20"><defs><polygon id="tstar5" points="10,1 12.5,7.5 19,8 14,12.5 15.5,19 10,15.5 4.5,19 6,12.5 1,8 7.5,7.5"/></defs><use href="#tstar5" x="0"/><use href="#tstar5" x="25"/><use href="#tstar5" x="50"/><use href="#tstar5" x="75"/><use href="#tstar5" x="100"/></svg>
+          </div>
           <p class="testimonial-text">"Versatile, knowledgeable, thorough, and fair priced. Tommy brings an uplifting and personable demeanor that will brighten your day."</p>
           <div class="testimonial-author">
             <span class="author-name">Ben M.</span>
