@@ -149,10 +149,44 @@ document.addEventListener('DOMContentLoaded', function () {
     el.addEventListener('touchstart', function () { haptic('light'); }, { passive: true });
   });
 
-  // Medium haptic on form submit
+  // ---- Lead form submission ----
   var leadForm = document.getElementById('leadForm');
   if (leadForm) {
-    leadForm.addEventListener('submit', function () { haptic('medium'); });
+    leadForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      haptic('medium');
+
+      var firstName = document.getElementById('firstName').value.trim();
+      var lastName = document.getElementById('lastName').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var phone = document.getElementById('phone').value.trim();
+      var service = document.getElementById('service').value;
+      var details = document.getElementById('details').value.trim();
+
+      var subject = encodeURIComponent('New Estimate Request from ' + firstName + ' ' + lastName);
+      var body = encodeURIComponent(
+        'Name: ' + firstName + ' ' + lastName + '\n' +
+        'Email: ' + email + '\n' +
+        'Phone: ' + (phone || 'Not provided') + '\n' +
+        'Service: ' + (service || 'Not specified') + '\n' +
+        'Details: ' + (details || 'None') + '\n\n' +
+        'Submitted from flooringhubnc.com'
+      );
+
+      window.location.href = 'mailto:tsmith@flooringhubnc.com?subject=' + subject + '&body=' + body;
+
+      // Show success state using safe DOM methods
+      while (leadForm.firstChild) { leadForm.removeChild(leadForm.firstChild); }
+      var successDiv = document.createElement('div');
+      successDiv.className = 'form-success';
+      var h3 = document.createElement('h3');
+      h3.textContent = 'Thank you, ' + firstName + '!';
+      var p = document.createElement('p');
+      p.textContent = 'Your email client should open with your estimate request. If it doesn\'t, email us directly at tsmith@flooringhubnc.com or call (330) 573-0370.';
+      successDiv.appendChild(h3);
+      successDiv.appendChild(p);
+      leadForm.appendChild(successDiv);
+    });
   }
 
   // ---- Mobile nav toggle ----

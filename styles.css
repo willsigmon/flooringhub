@@ -609,41 +609,6 @@ h1, h2, h3, h4 {
   background: rgba(255, 255, 255, 0.18);
 }
 
-.hero-scroll-hint {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  opacity: 0;
-  animation: heroFadeUp 0.9s var(--transition) 1.25s forwards;
-}
-
-.hero-scroll-label {
-  font-family: var(--font-ui);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(196, 170, 118, 0.7);
-}
-
-.scroll-line {
-  width: 1px;
-  height: 52px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.4; transform: scaleY(0.6); }
-  50% { opacity: 1; transform: scaleY(1); }
-}
-
 /* ============================================
    SECTIONS
    ============================================ */
@@ -789,30 +754,6 @@ h1, h2, h3, h4 {
   font-size: 0.92rem;
   color: var(--silver);
   line-height: 1.65;
-}
-
-/* Promise Banner */
-.promise-banner {
-  background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-light) 100%);
-  padding: 64px 0;
-}
-
-.promise-content {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.promise-content h2 {
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  color: var(--white);
-  margin-bottom: 24px;
-}
-
-.promise-content p {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.8;
 }
 
 /* Services */
@@ -1481,92 +1422,6 @@ h1, h2, h3, h4 {
   margin-bottom: 20px !important;
 }
 
-/* Core Values */
-.values {
-  background: var(--charcoal);
-}
-
-.values .section-label {
-  color: var(--accent-light);
-}
-
-.values .section-headline {
-  color: var(--white);
-}
-
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2px;
-}
-
-.value-item {
-  padding: 40px 24px;
-  background: var(--charcoal-light);
-  transition: all 0.4s var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-
-.value-item::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  transition: width 0.5s var(--transition);
-}
-
-.value-item:hover::before {
-  width: 100%;
-}
-
-.value-item:hover {
-  background: var(--charcoal-mid);
-}
-
-.value-number {
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent);
-  opacity: 0.4;
-  display: block;
-  margin-bottom: 16px;
-  line-height: 1;
-}
-
-.value-item h3 {
-  font-size: 1.05rem;
-  color: var(--white);
-  margin-bottom: 10px;
-}
-
-.value-item p {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.45);
-  line-height: 1.6;
-}
-
-@media (max-width: 1024px) {
-  .values-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .values-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .values-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* CTA Banner */
 .cta-banner {
@@ -1759,6 +1614,23 @@ h1, h2, h3, h4 {
   font-size: 0.78rem;
   color: var(--silver);
   margin-top: 14px;
+}
+
+.form-success {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.form-success h3 {
+  font-size: 1.6rem;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+
+.form-success p {
+  font-size: 0.95rem;
+  color: var(--silver);
+  line-height: 1.7;
 }
 
 @media (max-width: 768px) {
@@ -2533,14 +2405,12 @@ h1, h2, h3, h4 {
   .hero-sub,
   .hero-actions,
   .hero-trust,
-  .hero-feature,
-  .hero-scroll-hint {
+  .hero-feature {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
   }
 
-  .scroll-line,
   .trust-track,
   .hero-kicker-dot { animation: none !important; }
 
@@ -2690,10 +2560,6 @@ h1, h2, h3, h4 {
 
   .hero-stat-num { font-size: 1.3rem; }
   .hero-stat-label { font-size: 0.56rem; }
-  .hero-scroll-hint { display: none; }
-
-  .promise-banner { padding: 64px 0; }
-
   .cta-banner { padding: 56px 0; }
 
   .section-headline {
