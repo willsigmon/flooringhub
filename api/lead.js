@@ -204,6 +204,73 @@ async function sendFallbackEmail(payload) {
   return { ok: true };
 }
 
+async function postToFormSubmit(payload) {
+  const toEmail = process.env.LEAD_TO_EMAIL || process.env.ADMIN_EMAIL || 'tsmith@flooringhubnc.com';
+  const endpoint = process.env.FORMSUBMIT_ENDPOINT || `https://formsubmit.co/ajax/${encodeURIComponent(toEmail)}`;
+  const formBody = new URLSearchParams({
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+    email: payload.email,
+    phone: payload.phone || '',
+    service: payload.service || '',
+    details: payload.details || '',
+    leadId: payload.id || '',
+    utm_source: payload.utm?.source || '',
+    utm_medium: payload.utm?.medium || '',
+    utm_campaign: payload.utm?.campaign || '',
+    utm_content: payload.utm?.content || '',
+    utm_term: payload.utm?.term || '',
+    lead_page: payload.utm?.page || '',
+    lead_button: payload.utm?.button || '',
+    source: payload.meta?.source || 'website',
+    submittedAt: payload.meta?.submittedAt || '',
+    _subject: `New Flooring Hub Lead: ${payload.service || 'General Inquiry'}`,
+    _template: 'table',
+    _captcha: 'false',
+    _replyto: payload.email
+  });
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Origin: 'https://www.flooringhubnc.com',
+      Referer: 'https://www.flooringhubnc.com/',
+      'User-Agent': 'Mozilla/5.0 (compatible; FlooringHubLeadBot/1.0; +https://www.flooringhubnc.com)'
+    },
+    body: formBody.toString()
+  });
+
+  const responseText = await response.text();
+  let responseBody = {};
+
+  if (responseText) {
+    try {
+      responseBody = JSON.parse(responseText);
+    } catch (_error) {
+      responseBody = { message: responseText };
+    }
+  }
+
+  if (!response.ok) {
+    throw new Error(responseBody.message || `FormSubmit request failed: ${response.status}`);
+  }
+
+  if (String(responseBody.success).toLowerCase() !== 'true') {
+    const message = responseBody.message || 'FormSubmit rejected the lead.';
+    if (/activation/i.test(message)) {
+      const activationError = new Error('Lead email delivery needs one-time activation.');
+      activationError.code = 'FORMSUBMIT_ACTIVATION_REQUIRED';
+      throw activationError;
+    }
+
+    throw new Error(message);
+  }
+
+  return { ok: true, response: responseBody };
+}
+
 async function deliverLead(payload) {
   let webhookError = null;
 
@@ -226,6 +293,16 @@ async function deliverLead(payload) {
       ok: true,
       name: 'resend',
       fallback: webhookError ? 'webhook_failed' : 'webhook_unconfigured'
+    };
+  }
+
+  const formSubmitResult = await postToFormSubmit(payload);
+  if (!formSubmitResult.skipped) {
+    return {
+      ok: true,
+      name: 'formsubmit',
+      fallback: webhookError ? 'webhook_failed' : 'webhook_unconfigured',
+      response: formSubmitResult.response || null
     };
   }
 
@@ -337,11 +414,15 @@ module.exports = async (req, res) => {
         integration
       });
     } catch (integrationError) {
-      return jsonResponse(res, integrationError.message === 'Lead forwarding is not configured.' ? 503 : 502, {
+      const isActivationError = integrationError.code === 'FORMSUBMIT_ACTIVATION_REQUIRED';
+      const isConfigError = integrationError.message === 'Lead forwarding is not configured.';
+      return jsonResponse(res, isActivationError || isConfigError ? 503 : 502, {
         ok: false,
-        message: integrationError.message === 'Lead forwarding is not configured.'
-          ? 'Lead delivery is not configured yet. Please call Tom directly for now.'
-          : 'Lead forwarding is currently unavailable. Please call to confirm.',
+        message: isActivationError
+          ? 'Lead email delivery is waiting on a one-time activation email. Please call Tom directly until that is completed.'
+          : isConfigError
+            ? 'Lead delivery is not configured yet. Please call Tom directly for now.'
+            : 'Lead forwarding is currently unavailable. Please call to confirm.',
         leadId: normalizedPayload.id
       });
     }
