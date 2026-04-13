@@ -47,6 +47,21 @@ body {
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -780,6 +795,48 @@ h1, h2, h3, h4 {
   background-size: cover;
   background-position: center;
   transition: transform 8s ease-out;
+}
+
+.service-hero-bg-hardwood {
+  background-image: image-set(
+    url('assets/hardwood-before.webp') type('image/webp'),
+    url('assets/hardwood-before.jpg') type('image/jpeg')
+  );
+}
+
+.service-feature-bg-lvp {
+  background-image: image-set(
+    url('assets/lvp-raleigh.webp') type('image/webp'),
+    url('assets/lvp-raleigh.jpg') type('image/jpeg')
+  );
+}
+
+.service-feature-bg-laminate {
+  background-image: image-set(
+    url('assets/laminate-before.webp') type('image/webp'),
+    url('assets/laminate-before.jpg') type('image/jpeg')
+  );
+}
+
+.service-card-bg-carpet {
+  background-image: image-set(
+    url('assets/carpet-bedroom.webp') type('image/webp'),
+    url('assets/carpet-bedroom.jpg') type('image/jpeg')
+  );
+}
+
+.service-card-bg-leveling {
+  background-image: image-set(
+    url('assets/refinish-during.webp') type('image/webp'),
+    url('assets/refinish-during.jpg') type('image/jpeg')
+  );
+}
+
+.service-card-bg-trim {
+  background-image: image-set(
+    url('assets/stairs-after.webp') type('image/webp'),
+    url('assets/stairs-after.jpg') type('image/jpeg')
+  );
 }
 
 .service-hero:hover .service-hero-img {
@@ -1520,6 +1577,46 @@ h1, h2, h3, h4 {
   top: 100px;
 }
 
+.thank-you-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 52px;
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.thank-you-wrap h1 {
+  color: var(--charcoal);
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  margin-bottom: 14px;
+}
+
+.thank-you-wrap p {
+  color: var(--silver);
+  margin-bottom: 28px;
+  max-width: 620px;
+  line-height: 1.7;
+}
+
+.thank-you-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.thank-you-note {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.thank-you-note p {
+  font-size: 0.88rem;
+  margin-bottom: 0;
+  color: var(--charcoal-mid);
+}
+
+
 .lead-form {
   background: var(--off-white);
   padding: 40px 36px;
@@ -1576,12 +1673,52 @@ h1, h2, h3, h4 {
   appearance: none;
 }
 
+.form-group input.is-invalid,
+.form-group select.is-invalid,
+.form-group textarea.is-invalid {
+  border-color: #b00020;
+  box-shadow: 0 0 0 3px rgba(176, 0, 32, 0.12);
+}
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(168, 144, 96, 0.12);
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.form-feedback {
+  margin-top: 10px;
+  padding: 10px 0;
+  font-size: 0.86rem;
+  min-height: 1.4em;
+  color: var(--charcoal-mid);
+}
+
+.form-feedback.is-error {
+  color: #b00020;
+}
+
+.form-feedback.is-success {
+  color: #146c43;
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  color: #b00020;
+  font-size: 0.75rem;
 }
 
 .form-group input::placeholder,
