@@ -1,0 +1,9 @@
+site/
+gobble/
+extracted/
+FlooringHub
+*.zip
+.DS_Store
+.vercel
+.env
+.env.*

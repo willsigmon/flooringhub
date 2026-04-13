@@ -131,16 +131,288 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function trackEvent(name, data) {
+    if (typeof window.va === 'function') {
+      window.va('event', name, data || {});
+    }
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, data || {});
+    }
+  }
+
+  function trackCtaEvent(el, action) {
+    if (!el || !el.getAttribute) return;
+    var cta = el.getAttribute('data-cta');
+    if (!cta) return;
+    trackEvent(action || 'cta_click', {
+      cta: cta,
+      label: cta,
+      section: (el.closest('section') && el.closest('section').getAttribute('id')) || 'unknown'
+    });
+  }
+
+  function setButtonState(button, enabled, label) {
+    if (!button) return;
+    button.disabled = !enabled;
+    if (typeof label === 'string') {
+      button.textContent = label;
+    }
+  }
+
+  function populateUtmFields() {
+    var params = new URLSearchParams(window.location.search);
+    var utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+    utmFields.forEach(function (key) {
+      var field = document.getElementById(key);
+      var val = params.get(key);
+      if (field && val) {
+        field.value = val;
+      }
+    });
+    var pageField = document.getElementById('leadPage');
+    if (pageField) {
+      pageField.value = window.location.pathname;
+    }
+  }
+
+  function showFormState(formStatus, message, isError) {
+    if (!formStatus) return;
+    formStatus.textContent = message || '';
+    formStatus.classList.toggle('is-error', isError === true);
+    formStatus.classList.toggle('is-success', isError === false);
+    if (message === '') {
+      formStatus.classList.remove('is-error', 'is-success');
+    }
+  }
+
+  function setFieldError(field, isError, message) {
+    var key = field.getAttribute('id');
+    if (!key) return;
+    var group = field.closest('.form-group');
+    if (!group) return;
+
+    var errorEl = group.querySelector('.field-error');
+    if (!errorEl && isError) {
+      errorEl = document.createElement('span');
+      errorEl.className = 'field-error';
+      group.appendChild(errorEl);
+    }
+
+    if (errorEl) {
+      if (isError) {
+        errorEl.textContent = message;
+      } else {
+        errorEl.textContent = '';
+      }
+    }
+
+    field.classList.toggle('is-invalid', Boolean(isError));
+    field.setAttribute('aria-invalid', isError ? 'true' : 'false');
+  }
+
+  function validateLeadForm(form) {
+    var requiredFields = form.querySelectorAll('[required]');
+    var hasError = false;
+    var email = form.querySelector('#email');
+    var phone = form.querySelector('#phone');
+    var firstName = form.querySelector('#firstName');
+    var lastName = form.querySelector('#lastName');
+    var service = form.querySelector('#service');
+    var details = form.querySelector('#details');
+
+    requiredFields.forEach(function (field) {
+      setFieldError(field, false);
+    });
+
+    [firstName, lastName, email].forEach(function (field) {
+      if (!field.value.trim()) {
+        setFieldError(field, true, 'This field is required.');
+        hasError = true;
+      }
+    });
+
+    if (email && email.value && !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email.value)) {
+      setFieldError(email, true, 'Please enter a valid email.');
+      hasError = true;
+    }
+
+    if (service && service.value.length === 0) {
+      setFieldError(service, true, 'Please choose a service.');
+      hasError = true;
+    }
+
+    if (phone && phone.value && phone.value.replace(/\\D/g, '').length < 10) {
+      setFieldError(phone, true, 'Please enter a valid phone number.');
+      hasError = true;
+    }
+
+    if (details && details.value.trim().length > 500) {
+      setFieldError(details, true, 'Please keep details under 500 characters.');
+      hasError = true;
+    }
+
+    return hasError;
+  }
+
+  function initGaMeasurementId() {
+    var meta = document.querySelector('meta[name="ga-measurement-id"]');
+    if (!meta || !meta.content) {
+      return;
+    }
+
+    var measurementId = meta.content.trim();
+    if (!measurementId || typeof window.gtag === 'function') {
+      return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId, {
+      anonymize_ip: true,
+      cookie_flags: 'SameSite=None;Secure'
+    });
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    document.head.appendChild(script);
+  }
+
+  function submitLeadForm(event) {
+    event.preventDefault();
+    var form = event.target;
+    var formStatus = document.getElementById('leadFormStatus');
+    var submitBtn = form.querySelector('.form-submit');
+    var buttonId = form.querySelector('button[data-cta]') ? form.querySelector('button[data-cta]').getAttribute('data-cta') : 'lead-submit';
+
+    if (submitBtn) {
+      trackCtaEvent(submitBtn, 'lead_submit_attempt');
+    }
+
+    if (validateLeadForm(form)) {
+      showFormState(formStatus, 'Please fix the highlighted fields and try again.', true);
+      trackEvent('lead_validation_error', {
+        cta: buttonId,
+        section: 'lead_form'
+      });
+      return;
+    }
+
+    var hp = form.querySelector('#leadHoneypot').value;
+    if (hp) {
+      showFormState(formStatus, 'Submission blocked.', true);
+      trackEvent('lead_bot_blocked', {
+        cta: buttonId,
+        section: 'lead_form'
+      });
+      return;
+    }
+
+    var originalBtnLabel = submitBtn ? submitBtn.textContent : '';
+    setButtonState(submitBtn, false, 'Submitting...');
+
+    showFormState(formStatus, 'Submitting your request...');
+    var buttonField = document.getElementById('leadButton');
+    if (buttonField) {
+      buttonField.value = buttonId;
+    }
+
+    var formData = new FormData(form);
+    var payload = {};
+    formData.forEach(function (value, key) {
+      payload[key] = (value || '').toString().trim();
+    });
+
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(function (response) {
+        return response.text().then(function (rawText) {
+          var parsed;
+          try {
+            parsed = rawText ? JSON.parse(rawText) : {};
+          } catch (error) {
+            parsed = { message: rawText || 'Invalid server response.' };
+          }
+          return { ok: response.ok, status: response.status, data: parsed };
+        });
+      })
+      .then(function (result) {
+        if (result.data && result.data.duplicate) {
+          showFormState(formStatus, 'You already submitted this request recently. Tom will reach out shortly.', false);
+          trackEvent('lead_duplicate', {
+            cta: buttonId,
+            section: 'lead_form'
+          });
+          return;
+        }
+
+        if (!result.ok || !result.data || result.data.ok !== true) {
+          throw new Error((result.data && result.data.message) || ('Unable to submit your request. Please try again. (' + result.status + ')'));
+        }
+
+        trackEvent('lead_submit', {
+          campaign: form.querySelector('#utm_campaign').value || 'n/a',
+          service: payload.service || 'unknown',
+          medium: form.querySelector('#utm_medium').value || 'direct',
+          button: buttonId
+        });
+        showFormState(formStatus, 'Thanks! Your request was sent successfully.', false);
+        form.reset();
+        populateUtmFields();
+        setTimeout(function () {
+          window.location.assign('thank-you.html');
+        }, 900);
+      })
+      .catch(function (error) {
+        showFormState(formStatus, error.message || 'Network issue. Please try again in a moment.', true);
+        trackEvent('lead_submit_error', {
+          cta: buttonId,
+          section: 'lead_form',
+          error: String(error && error.message || 'unknown')
+        });
+      })
+      .finally(function () {
+        setButtonState(submitBtn, true, originalBtnLabel || 'Request Free Estimate');
+      });
+  }
+
+  function initCtaTracking() {
+    document.querySelectorAll('[data-cta]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        trackCtaEvent(el, 'cta_click');
+      });
+
+      if (el.tagName === 'A' && el.getAttribute('href') === '#') {
+        el.addEventListener('click', function (event) {
+          event.preventDefault();
+        });
+      }
+    });
+  }
+
   // Haptics on all buttons, CTAs, and interactive elements
   document.querySelectorAll('.btn, .btn-primary, .btn-ghost, .btn-outline, .nav-cta, .mobile-cta-btn, .form-submit, .faq-question, .nav-toggle').forEach(function (el) {
     el.addEventListener('touchstart', function () { haptic('light'); }, { passive: true });
   });
 
-  // Medium haptic on form submit
   var leadForm = document.getElementById('leadForm');
   if (leadForm) {
+    populateUtmFields();
+    leadForm.addEventListener('submit', submitLeadForm);
     leadForm.addEventListener('submit', function () { haptic('medium'); });
   }
+
+  initGaMeasurementId();
+  initCtaTracking();
 
   // ---- Mobile nav toggle ----
   var toggle = document.getElementById('navToggle');
