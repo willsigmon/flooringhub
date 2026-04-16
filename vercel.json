@@ -5,7 +5,6 @@
       "maxDuration": 10
     }
   },
-  "_redirects_disabled_note": "Re-enable the flooringhub.vercel.app -> flooringhubnc.com 301 AFTER DNS is pointed at Vercel. Today the production domain still serves the old WordPress site, so this redirect would send new-site traffic to the stale one.",
   "headers": [
     {
       "source": "/(.*)",
