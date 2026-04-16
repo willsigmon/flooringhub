@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/logo-horizontal.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/stairs-after.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/stairs-after-1024w.webp" imagesrcset="assets/stairs-after-640w.webp 640w, assets/stairs-after-1024w.webp 1024w, assets/stairs-after-1600w.webp 1600w" imagesizes="(max-width: 900px) 92vw, 50vw" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
   <script defer src="/_vercel/insights/script.js"></script>
 
@@ -189,10 +189,26 @@
       <div class="hero-feature">
         <div class="hero-feature-frame">
           <div class="hero-feature-img-wrap">
-            <img class="hero-feature-img is-active" src="assets/stairs-after.webp" alt="Custom hardwood staircase" loading="eager" decoding="async" fetchpriority="high">
-            <img class="hero-feature-img" src="assets/cary-fireplace.webp" alt="Cary fireplace hardwood install" loading="lazy" decoding="async">
-            <img class="hero-feature-img" src="assets/cary-hallway.webp" alt="Cary hardwood hallway" loading="lazy" decoding="async">
-            <img class="hero-feature-img" src="assets/lvp-raleigh.webp" alt="Raleigh LVP install" loading="lazy" decoding="async">
+            <img class="hero-feature-img is-active"
+                 src="assets/stairs-after-1024w.webp"
+                 srcset="assets/stairs-after-640w.webp 640w, assets/stairs-after-1024w.webp 1024w, assets/stairs-after-1600w.webp 1600w"
+                 sizes="(max-width: 900px) 92vw, 50vw"
+                 alt="Custom hardwood staircase" loading="eager" decoding="async" fetchpriority="high">
+            <img class="hero-feature-img"
+                 src="assets/cary-fireplace-1024w.webp"
+                 srcset="assets/cary-fireplace-640w.webp 640w, assets/cary-fireplace-1024w.webp 1024w, assets/cary-fireplace-1600w.webp 1600w"
+                 sizes="(max-width: 900px) 92vw, 50vw"
+                 alt="Cary fireplace hardwood install" loading="lazy" decoding="async">
+            <img class="hero-feature-img"
+                 src="assets/cary-hallway-1024w.webp"
+                 srcset="assets/cary-hallway-640w.webp 640w, assets/cary-hallway-1024w.webp 1024w, assets/cary-hallway-1600w.webp 1600w"
+                 sizes="(max-width: 900px) 92vw, 50vw"
+                 alt="Cary hardwood hallway" loading="lazy" decoding="async">
+            <img class="hero-feature-img"
+                 src="assets/lvp-raleigh-1024w.webp"
+                 srcset="assets/lvp-raleigh-640w.webp 640w, assets/lvp-raleigh-1024w.webp 1024w, assets/lvp-raleigh-1600w.webp 1600w"
+                 sizes="(max-width: 900px) 92vw, 50vw"
+                 alt="Raleigh LVP install" loading="lazy" decoding="async">
           </div>
           <div class="hero-feature-corner tl"></div>
           <div class="hero-feature-corner tr"></div>
@@ -404,9 +420,17 @@
 
       <div class="ba-stage fade-up">
         <div class="ba-slider" data-ba style="--ba-pos: 50%;">
-          <img class="ba-img ba-after" src="assets/laminate-after.jpg" alt="After: installed laminate flooring">
+          <img class="ba-img ba-after"
+               src="assets/laminate-after-1024w.webp"
+               srcset="assets/laminate-after-640w.webp 640w, assets/laminate-after-1024w.webp 1024w, assets/laminate-after-1600w.webp 1600w"
+               sizes="(max-width: 1200px) 100vw, 1200px"
+               alt="After: installed laminate flooring" loading="lazy" decoding="async">
           <div class="ba-before-wrap">
-            <img class="ba-img ba-before" src="assets/laminate-before.jpg" alt="Before: old floor">
+            <img class="ba-img ba-before"
+                 src="assets/laminate-before-1024w.webp"
+                 srcset="assets/laminate-before-640w.webp 640w, assets/laminate-before-1024w.webp 1024w, assets/laminate-before-1600w.webp 1600w"
+                 sizes="(max-width: 1200px) 100vw, 1200px"
+                 alt="Before: old floor" loading="lazy" decoding="async">
           </div>
           <div class="ba-handle" role="slider" tabindex="0" aria-label="Drag to reveal before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
             <div class="ba-handle-line"></div>
@@ -419,22 +443,22 @@
         </div>
         <div class="ba-tabs" role="tablist">
           <button class="ba-tab is-active" type="button" data-ba-tab
-            data-before="assets/laminate-before.jpg"
-            data-after="assets/laminate-after.jpg"
+            data-before="assets/laminate-before-1024w.webp"
+            data-after="assets/laminate-after-1024w.webp"
             data-caption="Laminate install &middot; Raleigh">
             <span class="ba-tab-num">01</span>
             <span class="ba-tab-label">Laminate install</span>
           </button>
           <button class="ba-tab" type="button" data-ba-tab
-            data-before="assets/hardwood-before.jpg"
-            data-after="assets/stairs-after.jpg"
+            data-before="assets/hardwood-before-1024w.webp"
+            data-after="assets/stairs-after-1024w.webp"
             data-caption="Hardwood renewal &middot; Custom staircase">
             <span class="ba-tab-num">02</span>
             <span class="ba-tab-label">Hardwood renewal</span>
           </button>
           <button class="ba-tab" type="button" data-ba-tab
-            data-before="assets/refinish-during.jpg"
-            data-after="assets/cary-fireplace.jpg"
+            data-before="assets/refinish-during-1024w.webp"
+            data-after="assets/cary-fireplace-1024w.webp"
             data-caption="Full refinish &middot; Cary">
             <span class="ba-tab-num">03</span>
             <span class="ba-tab-label">Refinish</span>
