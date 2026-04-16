@@ -181,7 +181,7 @@ h1, h2, h3, h4 {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 28px 0;
+  padding: 22px 0;
   transition: all 0.4s var(--transition);
 }
 
@@ -189,7 +189,7 @@ h1, h2, h3, h4 {
   background: rgba(28, 28, 30, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 20px 0;
+  padding: 14px 0;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
@@ -200,27 +200,42 @@ h1, h2, h3, h4 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
+  min-width: 0;
 }
 
+/* Logo is 720x240 (3:1). Height drives size; width is derived to preserve
+   aspect; object-fit + aspect-ratio prevent any squash if a parent ever
+   tries to constrain width. */
 .logo-img {
-  height: 64px;
+  display: block;
+  height: 76px;
   width: auto;
-  max-width: 280px;
-  transition: all 0.4s var(--transition);
+  max-width: none;
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+  object-position: left center;
+  transition: height 0.4s var(--transition), opacity 0.3s var(--transition);
 }
 
 .nav.scrolled .logo-img {
-  height: 48px;
+  height: 58px;
 }
 
 .logo-img:hover {
-  opacity: 0.85;
+  opacity: 0.88;
+}
+
+@media (max-width: 640px) {
+  .logo-img { height: 60px; }
+  .nav.scrolled .logo-img { height: 48px; }
 }
 
 .logo-text {
