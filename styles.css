@@ -692,9 +692,17 @@ h1, h2, h3, h4 {
 
 .trust-track {
   display: flex;
-  gap: 56px;
   animation: marqueeScroll 30s linear infinite;
   width: max-content;
+}
+
+.trust-set {
+  display: flex;
+  gap: 56px;
+  /* Right padding equals the gap so the visual spacing between set-1 last
+     item and set-2 first item matches the internal gap -- no seam on loop. */
+  padding-right: 56px;
+  flex-shrink: 0;
 }
 
 .trust-logo-item {
@@ -1802,15 +1810,190 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Testimonials */
+/* Testimonials carousel (infinite, jewel-tone, parallaxing) */
 .testimonials {
-  background: var(--off-white);
+  background: var(--charcoal);
+  color: var(--white);
+  padding-bottom: 96px;
+  overflow: hidden;
+  position: relative;
 }
 
+.testimonials::before {
+  /* Ambient warm radial wash behind the cards for depth */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 500px at 15% 20%, rgba(168, 144, 96, 0.10), transparent 60%),
+    radial-gradient(900px 400px at 85% 85%, rgba(120, 60, 50, 0.12), transparent 60%);
+  pointer-events: none;
+}
+
+.testimonials-intro {
+  position: relative;
+  z-index: 1;
+}
+
+.testimonials .section-label { color: var(--accent-light); }
+.testimonials .section-headline { color: var(--white); }
+
+.t-carousel {
+  position: relative;
+  margin-top: 52px;
+  padding: 36px 0 16px;
+  /* Soft edge fade so cards enter/exit visually instead of hard-clipping */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.t-track {
+  display: flex;
+  width: max-content;
+  padding: 32px 0;
+  animation: tMarquee 88s linear infinite;
+  will-change: transform;
+}
+
+.t-set {
+  display: flex;
+  gap: 24px;
+  /* padding-right == gap so the set-to-set boundary matches internal gap;
+     translateX(-50%) then lands seamlessly on the start of the duplicate. */
+  padding-right: 24px;
+  flex-shrink: 0;
+}
+
+.t-carousel:hover .t-track,
+.t-carousel:focus-within .t-track {
+  animation-play-state: paused;
+}
+
+@keyframes tMarquee {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-track { animation: none; }
+}
+
+.t-card {
+  flex: 0 0 min(360px, 82vw);
+  min-height: 328px;
+  padding: 40px 32px 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  color: #FDF8EE;
+  position: relative;
+  isolation: isolate;
+  box-shadow:
+    0 28px 60px -20px rgba(0, 0, 0, 0.55),
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.5s var(--transition), box-shadow 0.5s var(--transition);
+}
+
+/* Subtle inner highlight + sheen for depth */
+.t-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 18% -10%, rgba(255, 255, 255, 0.22), transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+.t-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.18));
+  pointer-events: none;
+  z-index: 0;
+}
+.t-card > * { position: relative; z-index: 1; }
+
+/* Parallax-ish vertical stagger so the row reads with rhythm */
+.t-card:nth-child(odd)  { transform: translateY(0); }
+.t-card:nth-child(even) { transform: translateY(14px); }
+
+.t-card:hover {
+  transform: translateY(-6px) scale(1.018);
+  box-shadow:
+    0 40px 80px -24px rgba(0, 0, 0, 0.65),
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.t-card:nth-child(even):hover {
+  transform: translateY(8px) scale(1.018);
+}
+
+/* Wood-stain jewel tones */
+.t-card--mahogany { background: linear-gradient(135deg, #5C1F1A 0%, #8F3A2A 100%); }
+.t-card--walnut   { background: linear-gradient(135deg, #2E1F15 0%, #5A3E28 100%); }
+.t-card--teal     { background: linear-gradient(135deg, #0F3838 0%, #216363 100%); }
+.t-card--amber    { background: linear-gradient(135deg, #6F5014 0%, #B48A2E 100%); }
+.t-card--forest   { background: linear-gradient(135deg, #16321F 0%, #2E5C3A 100%); }
+.t-card--sienna   { background: linear-gradient(135deg, #6A2D12 0%, #B2561F 100%); }
+.t-card--slate    { background: linear-gradient(135deg, #1E2A38 0%, #3E506A 100%); }
+.t-card--oxblood  { background: linear-gradient(135deg, #4A1419 0%, #7A2630 100%); }
+.t-card--bronze   { background: linear-gradient(135deg, #3A2812 0%, #6E4A1E 100%); }
+
+.t-stars {
+  margin-bottom: 20px;
+  line-height: 0;
+}
+.t-stars svg {
+  width: 112px;
+  height: 18px;
+  fill: #F5C66E;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  display: block;
+}
+
+.t-quote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+  flex: 1;
+  margin: 0 0 24px;
+}
+
+.t-author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+.t-author-name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #FFFFFF;
+}
+.t-author-detail {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .t-card {
+    min-height: 300px;
+    padding: 32px 26px 24px;
+  }
+  .t-quote { font-size: 1rem; }
+}
+
+/* Legacy grid rules kept below for any stragglers; no longer used. */
 .testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  display: none;
 }
 
 .testimonial-card {
@@ -2243,6 +2426,117 @@ h1, h2, h3, h4 {
 
 .map-embed iframe {
   display: block;
+}
+
+/* Triangle service-area key (three vertex cities) */
+.area-triangle-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin: 18px 0 22px;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  color: var(--charcoal-mid);
+}
+.area-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.02em;
+}
+.area-key-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(168, 144, 96, 0.18);
+  display: inline-block;
+}
+.area-key-dot--nw { background: var(--accent); }
+.area-key-dot--e  { background: var(--accent-light); }
+.area-key-dot--sw { background: var(--accent-dark); }
+
+/* Custom SVG triangle map */
+.triangle-map {
+  background: linear-gradient(180deg, #FBF9F3 0%, #F2ECDA 100%);
+  border: 1px solid rgba(140, 118, 72, 0.22);
+  border-radius: 12px;
+  padding: 22px 22px 18px;
+  box-shadow:
+    0 18px 48px -24px rgba(28, 28, 30, 0.28),
+    0 2px 6px rgba(28, 28, 30, 0.05);
+}
+.triangle-map-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin: 0 0 14px;
+  letter-spacing: 0.01em;
+}
+.triangle-map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  overflow: visible;
+}
+.triangle-map-note {
+  margin: 12px 0 0;
+  font-size: 0.72rem;
+  color: rgba(28, 28, 30, 0.55);
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.tm-label {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  fill: var(--charcoal-mid);
+  letter-spacing: 0.02em;
+  dominant-baseline: middle;
+}
+.tm-label--strong {
+  font-weight: 600;
+  fill: var(--charcoal);
+  font-size: 12px;
+}
+.tm-vertex-label {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--charcoal);
+  letter-spacing: 0.02em;
+}
+.tm-compass-n {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 700;
+  fill: var(--charcoal);
+}
+
+/* Gentle pulse on the three vertex pins */
+@keyframes tmPinPulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+.tm-vertices > g {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: tmPinPulse 3.2s var(--transition) infinite;
+}
+.tm-vertices > g:nth-child(2) { animation-delay: 0.6s; }
+.tm-vertices > g:nth-child(3) { animation-delay: 1.2s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tm-vertices > g { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .area-triangle-key { font-size: 0.78rem; gap: 10px 16px; }
+  .triangle-map { padding: 16px 14px 14px; }
+  .tm-label { font-size: 10px; }
+  .tm-vertex-label { font-size: 12px; }
 }
 
 /* ============================================
