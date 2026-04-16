@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Connect Jobber &middot; Flooring Hub</title>
+  <style>
+    :root {
+      --charcoal: #1C1C1E;
+      --charcoal-mid: #3A3A3C;
+      --silver: #8E8E93;
+      --off-white: #F2F2F7;
+      --accent: #A89060;
+      --accent-light: #C4AA76;
+      --accent-dark: #8C7648;
+      --success: #2E5C3A;
+      --error: #8A3A2A;
+      --warn: #8A6A1E;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(180deg, #F7F4EC 0%, #EDE6D6 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 48px 20px;
+      color: var(--charcoal);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 32px; color: var(--charcoal-mid);
+      font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .brand-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(168,144,96,0.18);
+    }
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 2.4rem; font-weight: 600; margin: 0 0 6px;
+      letter-spacing: 0.01em;
+    }
+    .lede { color: var(--charcoal-mid); margin: 0 0 28px; }
+    .card {
+      background: #fff; border-radius: 14px; padding: 28px 32px;
+      box-shadow: 0 14px 40px -20px rgba(28,28,30,0.2), 0 2px 6px rgba(28,28,30,0.05);
+      margin-bottom: 20px;
+    }
+    .status-row {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 999px;
+    }
+    .pill--ok     { background: rgba(46,92,58,0.12); color: var(--success); }
+    .pill--err    { background: rgba(138,58,42,0.12); color: var(--error); }
+    .pill--warn   { background: rgba(138,106,30,0.12); color: var(--warn); }
+    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .meta {
+      font-size: 0.86rem; color: var(--charcoal-mid);
+      display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px;
+      margin: 18px 0 0;
+    }
+    .meta dt { font-weight: 600; color: var(--charcoal); }
+    .meta dd { margin: 0; }
+    .meta .is-warn { color: var(--warn); font-weight: 600; }
+    code {
+      background: rgba(0,0,0,0.06); padding: 1px 6px;
+      border-radius: 4px; font-size: 0.88em;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .btn {
+      display: inline-block; padding: 14px 28px;
+      background: var(--charcoal); color: #fff; border: 0;
+      border-radius: 10px; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn:hover { background: var(--charcoal-mid); transform: translateY(-1px); }
+    .btn--ghost {
+      background: transparent; color: var(--charcoal);
+      border: 1px solid rgba(28,28,30,0.2);
+    }
+    .btn--ghost:hover { background: rgba(0,0,0,0.04); }
+    .checks { list-style: none; padding: 0; margin: 0; }
+    .checks li {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-top: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.92rem;
+    }
+    .checks li:first-child { border-top: 0; }
+    .check-icon {
+      flex-shrink: 0; width: 20px; height: 20px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+    }
+    .check-icon--ok  { background: rgba(46,92,58,0.15); color: var(--success); }
+    .check-icon--err { background: rgba(138,58,42,0.15); color: var(--error); }
+    .footnote { font-size: 0.78rem; color: var(--silver); margin-top: 24px; text-align: center; }
+    .footnote a { color: var(--charcoal-mid); }
+    .banner {
+      background: rgba(46,92,58,0.1); color: var(--success);
+      padding: 12px 16px; border-radius: 8px; margin-bottom: 20px;
+      font-size: 0.9rem; font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      Flooring Hub &middot; Admin
+    </div>
+
+    <h1>Connect Jobber</h1>
+    <p class="lede">One-time OAuth handshake. Once connected, every lead submitted at <code>flooringhubnc.com</code> becomes a Request in Tom's Jobber pipeline.</p>
+
+    <div id="banner" class="banner" hidden>Jobber connected successfully.</div>
+
+    <div class="card">
+      <div class="status-row">
+        <span id="statusPill" class="pill pill--warn">
+          <span class="pill-dot"></span>
+          <span id="statusPillText">Checking&hellip;</span>
+        </span>
+        <strong id="statusHeadline">Checking connection&hellip;</strong>
+      </div>
+
+      <dl id="meta" class="meta" hidden></dl>
+
+      <div id="actionRow" style="margin-top: 22px; display: flex; gap: 10px; flex-wrap: wrap;">
+        <a id="connectBtn" href="/api/oauth/jobber/start" class="btn" hidden>Connect Jobber</a>
+        <a id="reconnectBtn" href="/api/oauth/jobber/start" class="btn btn--ghost" hidden>Reconnect</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin:0 0 14px;font-size:1.05rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--charcoal-mid);">Server configuration</h2>
+      <ul id="checks" class="checks"></ul>
+    </div>
+
+    <p class="footnote">
+      Trouble? Check the Vercel function logs for <code>/api/oauth/jobber/callback</code>.
+      &middot; <a href="/">Back to site</a>
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('connected') === '1') {
+        document.getElementById('banner').hidden = false;
+      }
+
+      function formatRelative(ms) {
+        if (!ms) return 'never';
+        var diff = Date.now() - ms;
+        if (diff < 0) return 'in the future';
+        var s = Math.floor(diff / 1000);
+        if (s < 60) return s + 's ago';
+        var m = Math.floor(s / 60);
+        if (m < 60) return m + 'm ago';
+        var h = Math.floor(m / 60);
+        if (h < 24) return h + 'h ago';
+        return Math.floor(h / 24) + 'd ago';
+      }
+
+      function formatDuration(ms) {
+        if (!ms || ms <= 0) return 'expired';
+        var s = Math.floor(ms / 1000);
+        if (s < 60) return s + 's';
+        var m = Math.floor(s / 60);
+        if (m < 60) return m + 'm';
+        var h = Math.floor(m / 60);
+        return h + 'h ' + (m % 60) + 'm';
+      }
+
+      function el(tag, opts, children) {
+        var node = document.createElement(tag);
+        if (opts) {
+          if (opts.className) node.className = opts.className;
+          if (opts.text) node.textContent = opts.text;
+          if (opts.attrs) {
+            Object.keys(opts.attrs).forEach(function (k) {
+              node.setAttribute(k, opts.attrs[k]);
+            });
+          }
+        }
+        if (children) children.forEach(function (c) { if (c) node.appendChild(c); });
+        return node;
+      }
+
+      function metaRow(label, valueNode) {
+        return [
+          el('dt', { text: label }),
+          valueNode.nodeType ? valueNode : el('dd', { text: String(valueNode) })
+        ];
+      }
+
+      function renderMeta(metaEl, status) {
+        // Clear then append — fully safe, no innerHTML.
+        while (metaEl.firstChild) metaEl.removeChild(metaEl.firstChild);
+
+        metaEl.appendChild(el('dt', { text: 'Connected since' }));
+        metaEl.appendChild(el('dd', { text: formatRelative(status.connectedAt) }));
+
+        metaEl.appendChild(el('dt', { text: 'Last token refresh' }));
+        metaEl.appendChild(el('dd', { text: formatRelative(status.lastRefreshAt) }));
+
+        metaEl.appendChild(el('dt', { text: 'Access token' }));
+        var tokenValue = el('dd');
+        if (status.accessTokenValid) {
+          tokenValue.textContent = 'valid, expires in ' + formatDuration(status.millisUntilExpiry);
+        } else {
+          var warn = el('strong', { className: 'is-warn', text: 'expired — next request will auto-refresh' });
+          tokenValue.appendChild(warn);
+        }
+        metaEl.appendChild(tokenValue);
+      }
+
+      function setStatus(status) {
+        var pill = document.getElementById('statusPill');
+        var pillText = document.getElementById('statusPillText');
+        var headline = document.getElementById('statusHeadline');
+        var meta = document.getElementById('meta');
+        var connectBtn = document.getElementById('connectBtn');
+        var reconnectBtn = document.getElementById('reconnectBtn');
+
+        if (status.connected) {
+          pill.className = 'pill pill--ok';
+          pillText.textContent = 'Connected';
+          headline.textContent = 'Flooring Hub is connected to Jobber.';
+          meta.hidden = false;
+          renderMeta(meta, status);
+          connectBtn.hidden = true;
+          reconnectBtn.hidden = false;
+        } else {
+          pill.className = 'pill pill--err';
+          pillText.textContent = 'Not connected';
+          headline.textContent = 'Jobber is not connected yet.';
+          meta.hidden = true;
+          connectBtn.hidden = false;
+          reconnectBtn.hidden = true;
+        }
+      }
+
+      function makeCheckItem(ok, labelParts) {
+        // labelParts: array of either strings (plain text) or {code: '...'} to render <code>
+        var icon = el('span', {
+          className: 'check-icon ' + (ok ? 'check-icon--ok' : 'check-icon--err'),
+          text: ok ? '\u2713' : '\u00D7'
+        });
+        var label = el('span');
+        labelParts.forEach(function (part) {
+          if (typeof part === 'string') {
+            label.appendChild(document.createTextNode(part));
+          } else if (part && part.code) {
+            label.appendChild(el('code', { text: part.code }));
+          }
+        });
+        return el('li', null, [icon, label]);
+      }
+
+      function renderChecks(status) {
+        var list = document.getElementById('checks');
+        while (list.firstChild) list.removeChild(list.firstChild);
+
+        list.appendChild(makeCheckItem(
+          status.clientIdConfigured,
+          [{ code: 'JOBBER_CLIENT_ID' }, ' environment variable set']
+        ));
+        list.appendChild(makeCheckItem(
+          status.clientSecretConfigured,
+          [{ code: 'JOBBER_CLIENT_SECRET' }, ' environment variable set']
+        ));
+        list.appendChild(makeCheckItem(
+          status.stateSecretConfigured,
+          [{ code: 'JOBBER_STATE_SECRET' }, ' environment variable set (≥ 16 chars)']
+        ));
+        list.appendChild(makeCheckItem(
+          status.kvConfigured,
+          ['KV token store reachable (', { code: 'UPSTASH_REDIS_*' }, ' or ', { code: 'KV_REST_*' }, ')']
+        ));
+      }
+
+      fetch('/api/jobber-status', { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (status) {
+          setStatus(status);
+          renderChecks(status);
+        })
+        .catch(function (err) {
+          document.getElementById('statusPill').className = 'pill pill--err';
+          document.getElementById('statusPillText').textContent = 'Error';
+          document.getElementById('statusHeadline').textContent =
+            'Could not reach /api/jobber-status: ' + (err && err.message ? err.message : 'unknown error');
+        });
+    })();
+  </script>
+</body>
+</html>
