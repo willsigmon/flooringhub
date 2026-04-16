@@ -173,6 +173,16 @@ async function postToWebhook(payload) {
   return { ok: true, response: responseBody };
 }
 
+function escapeHtml(value) {
+  if (value === null || value === undefined) return '';
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 async function sendFallbackEmail(payload) {
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.LEAD_FROM_EMAIL || process.env.RESEND_FROM_EMAIL;
@@ -181,6 +191,15 @@ async function sendFallbackEmail(payload) {
   if (!apiKey || !fromEmail || !toEmail) {
     return { skipped: true };
   }
+
+  const safeFirstName = escapeHtml(payload.firstName);
+  const safeLastName = escapeHtml(payload.lastName);
+  const safeEmail = escapeHtml(payload.email);
+  const safePhone = escapeHtml(payload.phone || 'N/A');
+  const safeService = escapeHtml(payload.service || 'N/A');
+  const safeDetails = escapeHtml(payload.details || 'N/A');
+  const safeUtm = escapeHtml(JSON.stringify(payload.utm || {}));
+  const subjectService = payload.service ? String(payload.service).replace(/[\r\n]+/g, ' ').slice(0, 120) : 'General Inquiry';
 
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -191,8 +210,8 @@ async function sendFallbackEmail(payload) {
     body: JSON.stringify({
       from: fromEmail,
       to: [toEmail],
-      subject: `New Flooring Hub Lead: ${payload.service || 'General Inquiry'}`,
-      html: `<p><strong>Name:</strong> ${payload.firstName} ${payload.lastName}</p><p><strong>Email:</strong> ${payload.email}</p><p><strong>Phone:</strong> ${payload.phone || 'N/A'}</p><p><strong>Service:</strong> ${payload.service || 'N/A'}</p><p><strong>Project details:</strong> ${payload.details || 'N/A'}</p><p><strong>UTM:</strong> ${JSON.stringify(payload.utm)}</p>`
+      subject: `New Flooring Hub Lead: ${subjectService}`,
+      html: `<p><strong>Name:</strong> ${safeFirstName} ${safeLastName}</p><p><strong>Email:</strong> ${safeEmail}</p><p><strong>Phone:</strong> ${safePhone}</p><p><strong>Service:</strong> ${safeService}</p><p><strong>Project details:</strong> ${safeDetails}</p><p><strong>UTM:</strong> ${safeUtm}</p>`
     })
   });
 

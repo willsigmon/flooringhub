@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    if (email && email.value && !/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email.value)) {
+    if (email && email.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
       setFieldError(email, true, 'Please enter a valid email.');
       hasError = true;
     }
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
       hasError = true;
     }
 
-    if (phone && phone.value && phone.value.replace(/\\D/g, '').length < 10) {
+    if (phone && phone.value && phone.value.replace(/\D/g, '').length < 10) {
       setFieldError(phone, true, 'Please enter a valid phone number.');
       hasError = true;
     }
@@ -315,7 +315,8 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    var hp = form.querySelector('#leadHoneypot').value;
+    var honeypotField = form.querySelector('#leadHoneypot');
+    var hp = honeypotField ? honeypotField.value : '';
     if (hp) {
       showFormState(formStatus, 'Submission blocked.', true);
       trackEvent('lead_bot_blocked', {
@@ -372,10 +373,12 @@ document.addEventListener('DOMContentLoaded', function () {
           throw new Error((result.data && result.data.message) || ('Unable to submit your request. Please try again. (' + result.status + ')'));
         }
 
+        var utmCampaignField = form.querySelector('#utm_campaign');
+        var utmMediumField = form.querySelector('#utm_medium');
         trackEvent('lead_submit', {
-          campaign: form.querySelector('#utm_campaign').value || 'n/a',
+          campaign: (utmCampaignField && utmCampaignField.value) || 'n/a',
           service: payload.service || 'unknown',
-          medium: form.querySelector('#utm_medium').value || 'direct',
+          medium: (utmMediumField && utmMediumField.value) || 'direct',
           button: buttonId
         });
         showFormState(formStatus, 'Thanks! Your request was sent successfully.', false);
@@ -431,17 +434,19 @@ document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
 
-  toggle.addEventListener('click', function () {
-    toggle.classList.toggle('active');
-    links.classList.toggle('open');
-  });
-
-  links.querySelectorAll('a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      toggle.classList.remove('active');
-      links.classList.remove('open');
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      toggle.classList.toggle('active');
+      links.classList.toggle('open');
     });
-  });
+
+    links.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        toggle.classList.remove('active');
+        links.classList.remove('open');
+      });
+    });
+  }
 
   // ---- FAQ Accordion ----
   document.querySelectorAll('.faq-question').forEach(function (btn) {
