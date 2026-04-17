@@ -211,22 +211,19 @@ h1, h2, h3, h4 {
   min-width: 0;
 }
 
-/* Logo is 720x240 (3:1). Height drives size; width is derived to preserve
-   aspect; object-fit + aspect-ratio prevent any squash if a parent ever
-   tries to constrain width. */
+/* Logo is 720x240 (3:1). Set only height; width derives naturally from the
+   image's own aspect. Deliberately NOT setting aspect-ratio or object-fit --
+   those combined with flex parents can produce a wider-than-intrinsic box,
+   and the logo reads as stretched. */
 .logo-img {
   display: block;
-  height: 76px;
+  height: 72px;
   width: auto;
-  max-width: none;
-  aspect-ratio: 3 / 1;
-  object-fit: contain;
-  object-position: left center;
   transition: height 0.4s var(--transition), opacity 0.3s var(--transition);
 }
 
 .nav.scrolled .logo-img {
-  height: 58px;
+  height: 54px;
 }
 
 .logo-img:hover {
@@ -234,8 +231,8 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 640px) {
-  .logo-img { height: 60px; }
-  .nav.scrolled .logo-img { height: 48px; }
+  .logo-img { height: 56px; }
+  .nav.scrolled .logo-img { height: 46px; }
 }
 
 .logo-text {
