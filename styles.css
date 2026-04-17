@@ -208,22 +208,24 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
-  min-width: 0;
 }
 
-/* Logo is 720x240 (3:1). Set only height; width derives naturally from the
-   image's own aspect. Deliberately NOT setting aspect-ratio or object-fit --
-   those combined with flex parents can produce a wider-than-intrinsic box,
-   and the logo reads as stretched. */
+/* Logo is 720x240 (3:1). We set BOTH width and height explicitly in a 3:1
+   ratio and override the global `img { max-width: 100% }` rule, so a flex
+   parent can't squish the box. The numbers are the only source of truth
+   for proportions here. */
 .logo-img {
   display: block;
   height: 72px;
-  width: auto;
-  transition: height 0.4s var(--transition), opacity 0.3s var(--transition);
+  width: 216px;
+  max-width: none;
+  flex-shrink: 0;
+  transition: height 0.4s var(--transition), width 0.4s var(--transition), opacity 0.3s var(--transition);
 }
 
 .nav.scrolled .logo-img {
   height: 54px;
+  width: 162px;
 }
 
 .logo-img:hover {
@@ -231,8 +233,8 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 640px) {
-  .logo-img { height: 56px; }
-  .nav.scrolled .logo-img { height: 46px; }
+  .logo-img              { height: 56px; width: 168px; }
+  .nav.scrolled .logo-img { height: 46px; width: 138px; }
 }
 
 .logo-text {
@@ -747,8 +749,11 @@ h1, h2, h3, h4 {
 }
 
 @keyframes marqueeScroll {
+  /* Track has 4 identical sets in a row; shifting -25% lands the 2nd set
+     exactly where the 1st started, so the infinite loop is seamless even
+     on ultra-wide viewports where 2 sets weren't wider than the window. */
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-25%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1883,8 +1888,10 @@ h1, h2, h3, h4 {
 }
 
 @keyframes tMarquee {
+  /* Track has 4 identical sets; -25% translate lands set 2 where set 1
+     started, so the loop is seamless on any viewport width. */
   0%   { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(-25%, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
