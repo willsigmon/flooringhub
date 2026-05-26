@@ -1,0 +1,32 @@
+name: Weekly IndexNow Search Engine Submission
+
+on:
+  schedule:
+    # Runs every Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+  submit-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Submit URLs to IndexNow
+        run: |
+          if [ -f scripts/submit-indexnow.mjs ]; then
+            node scripts/submit-indexnow.mjs
+          elif [ -f site/scripts/submit-indexnow.mjs ]; then
+            node site/scripts/submit-indexnow.mjs
+          elif [ -f js/submit-indexnow.js ]; then
+            node js/submit-indexnow.js
+          else
+            echo "No IndexNow script found!"
+            exit 1
+          fi
