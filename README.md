@@ -17,7 +17,7 @@ Marketing and service website for Flooring Hub (Raleigh, NC), delivered as a sta
 For local verification, serve either root files or `site/` files directly with any static host.
 
 ```bash
-cd /Volumes/NVME/GitHubMaster/flooringhub
+cd /Volumes/SitHub/flooringhub
 # Open locally with your preferred static server (example):
 python -m http.server -d .  # root site
 python -m http.server -d site  # /site mirror
