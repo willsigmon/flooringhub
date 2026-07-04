@@ -1,31 +1,30 @@
 # FlooringHub
 
 ## Purpose
-Marketing and service website for Flooring Hub (Raleigh, NC), delivered as a static web presence with branded assets and static SEO/security metadata.
+Marketing and service website for Flooring Hub (Raleigh, NC), delivered as a fully static site with branded assets and static SEO/security metadata.
 
 ## Platform & stack
-- **Platform:** Static Site
-- **Runtime model:** static HTML/CSS/JS with prebuilt asset bundles
+- **Framework:** Next.js (App Router) + React + TypeScript, statically exported (`output: "export"` → plain HTML/CSS/JS in `out/`)
+- **Styling:** Tailwind CSS v4 + the original hand-written stylesheet (`app/site.css`); shadcn/ui configured (`components.json`)
 - **Hosting target:** Vercel (`vercel.json` present)
+- **Lead capture:** root `/api` directory remains plain Vercel serverless functions (Jobber integration), deployed independently of Next
 
-## What’s included
-- Multi-page static site in root + mirrored `site/` folder
-- Sitemap + robots metadata
-- Static style/theme assets and brand manifest files
+## Structure
+- `app/` — routes: `/` (home), `/privacy`, `/terms`, `/thank-you`; global metadata in `app/layout.tsx`
+- `components/` — one component per page section, ported 1:1 from the original static HTML
+- `lib/site-config.ts` — single source of truth for company contact details
+- `public/` — static assets (images, `sitemap.xml`, `robots.txt`, IndexNow key file, `admin/jobber.html`)
+- `api/` + `lib/jobber-*.js` — Vercel serverless lead/OAuth endpoints (excluded from the Next build)
+- `scripts/submit-indexnow.mjs` — weekly IndexNow submission (`.github/workflows/indexnow.yml`)
 
 ## Local workflow
-For local verification, serve either root files or `site/` files directly with any static host.
-
 ```bash
-cd /Volumes/SitHub/flooringhub
-# Open locally with your preferred static server (example):
-python -m http.server -d .  # root site
-python -m http.server -d site  # /site mirror
+cd /Volumes/SitHub/clients/flooringhub
+npm install
+npm run dev     # local dev server
+npm run build   # static export into ./out
 ```
 
 ## Deployment contract
-- Recommended deployment is `vercel.json` in this repo.
-- Keep the `main.js`, `styles.css`, and image manifest files aligned between root and mirrored copies.
-
-## Notes for orchestration
-- Added this README to satisfy portfolio completeness checks and to explicitly document this repo as a brochure/static asset channel.
+- `next build` emits `out/index.html`, `out/privacy.html`, `out/terms.html`, `out/thank-you.html` — the same `.html` URL structure as the original static site, so `sitemap.xml` and the IndexNow script keep working unchanged.
+- Deployment is driven by `vercel.json` in this repo.

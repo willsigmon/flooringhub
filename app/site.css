@@ -864,14 +864,14 @@ h1, h2, h3, h4 {
 .service-hero-bg-hardwood {
   /* Signature hero: Cary sand-and-refinish after shot (red-brown, finished) */
   background-image: image-set(
-    url('assets/refinish-cary.webp') type('image/webp')
+    url('/assets/refinish-cary.webp') type('image/webp')
   );
 }
 
 .service-feature-bg-lvp {
   /* Real install: warm-grain LVP */
   background-image: image-set(
-    url('assets/lvp-warm.webp') type('image/webp')
+    url('/assets/lvp-warm.webp') type('image/webp')
   );
 }
 
@@ -879,29 +879,29 @@ h1, h2, h3, h4 {
   /* Finished white laminate tile install. Previous image was the prep/dehumidifier
      stage of the same job, which read as confusing on a marketing card. */
   background-image: image-set(
-    url('assets/laminate-after.webp') type('image/webp'),
-    url('assets/laminate-after.jpg') type('image/jpeg')
+    url('/assets/laminate-after.webp') type('image/webp'),
+    url('/assets/laminate-after.jpg') type('image/jpeg')
   );
 }
 
 .service-card-bg-carpet {
   background-image: image-set(
-    url('assets/carpet-bedroom.webp') type('image/webp'),
-    url('assets/carpet-bedroom.jpg') type('image/jpeg')
+    url('/assets/carpet-bedroom.webp') type('image/webp'),
+    url('/assets/carpet-bedroom.jpg') type('image/jpeg')
   );
 }
 
 .service-card-bg-leveling {
   background-image: image-set(
-    url('assets/refinish-during.webp') type('image/webp'),
-    url('assets/refinish-during.jpg') type('image/jpeg')
+    url('/assets/refinish-during.webp') type('image/webp'),
+    url('/assets/refinish-during.jpg') type('image/jpeg')
   );
 }
 
 .service-card-bg-trim {
   background-image: image-set(
-    url('assets/stairs-after.webp') type('image/webp'),
-    url('assets/stairs-after.jpg') type('image/jpeg')
+    url('/assets/stairs-after.webp') type('image/webp'),
+    url('/assets/stairs-after.jpg') type('image/jpeg')
   );
 }
 
