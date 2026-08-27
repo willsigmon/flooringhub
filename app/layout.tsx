@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { WebMcpProvider } from "@/components/WebMcpProvider";
+import { SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
 import "./globals.css";
 import "./site.css";
-import { SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,15 +41,31 @@ export const viewport: Viewport = {
   themeColor: "#1C1C1E",
 };
 
+const flooringTools = [
+  {
+    name: "calculate_flooring_estimate",
+    description: "Calculate material requirements and cost estimate by square footage and material type",
+    parameters: {
+      type: "object",
+      properties: {
+        sqFt: { type: "number" },
+        material: {
+          type: "string",
+          enum: ["hardwood", "laminate", "tile", "vinyl_plank"],
+        },
+      },
+      required: ["sqFt", "material"],
+    },
+  },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        {/* Optional GA4 id read at runtime by GaBootstrap/ScrollEffects (empty = disabled) */}
         <meta name="ga-measurement-id" content="" />
-        {/* Google Fonts (same families as the static site) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -59,8 +76,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <WebMcpProvider businessName="FlooringHub" tools={flooringTools} />
         {children}
-        {/* Vercel Web Analytics (same tag as the static site) */}
         <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
       </body>
     </html>

@@ -1,0 +1,17 @@
+# FlooringHub
+> Direct-to-consumer and contractor flooring marketplace with local installation matching.
+
+## Summary & Identity
+- Website: https://flooringhub.vercel.app
+- Vertical: Marketplace
+
+## AI Agent & Machine Interface
+- WebMCP Manifest: https://flooringhub.vercel.app/.well-known/mcp.json
+- Full Documentation: https://flooringhub.vercel.app/llms-full.txt
+
+## Interactive Tools & Capabilities (WebMCP)
+- `calculate_flooring_estimate`: Calculate material requirements and cost estimate by square footage and material type
+
+## Direct Links & Booking
+- Homepage: https://flooringhub.vercel.app
+- Contact: https://flooringhub.vercel.app/contact

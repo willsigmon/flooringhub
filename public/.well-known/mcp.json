@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "FlooringHub",
+  "description": "Direct-to-consumer and contractor flooring marketplace with local installation matching.",
+  "website": "https://flooringhub.vercel.app",
+  "tools": [
+    {
+      "name": "flooringhub_calculate_flooring_estimate",
+      "description": "Calculate material requirements and cost estimate by square footage and material type",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sqFt": {
+            "type": "number"
+          },
+          "material": {
+            "type": "string",
+            "enum": [
+              "hardwood",
+              "laminate",
+              "tile",
+              "vinyl_plank"
+            ]
+          }
+        },
+        "required": [
+          "sqFt",
+          "material"
+        ]
+      }
+    }
+  ]
+}
