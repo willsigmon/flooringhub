@@ -70,7 +70,7 @@ export default function Hero() {
             </a>
           </div>
           <div className="hero-trust">
-            {/* TODO(tom): replace href with your Google Business Profile review URL (https://g.page/r/YOUR_CID/review) */}
+            {/* GBP review URL is not published yet; keep the public Maps search. */}
             <a
               className="trust-item trust-item--link"
               href="https://www.google.com/maps/search/?api=1&query=Flooring+Hub+Raleigh+NC"

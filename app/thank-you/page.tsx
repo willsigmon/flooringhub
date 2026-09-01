@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 
-import GaBootstrap from "@/components/ga-bootstrap";
 import ThankYouConversion from "@/components/thank-you-conversion";
-import { SITE_CONFIG, SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
+import { SITE_CONFIG, SITE_PATHS, SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
 
 const TITLE = "Thank You | Flooring Hub";
 const DESCRIPTION = "Thank you for your Flooring Hub request. Tom will reach out within 24 hours.";
@@ -11,11 +10,11 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   robots: { index: false, follow: false },
-  alternates: { canonical: `${SITE_URL}/thank-you` },
+  alternates: { canonical: `${SITE_URL}${SITE_PATHS.thankYou}` },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: `${SITE_URL}/thank-you`,
+    url: `${SITE_URL}${SITE_PATHS.thankYou}`,
     siteName: "Flooring Hub",
     type: "website",
     images: [
@@ -39,7 +38,6 @@ export const metadata: Metadata = {
 export default function ThankYouPage() {
   return (
     <>
-      <GaBootstrap />
       <ThankYouConversion />
 
       <nav className="nav" id="nav">
@@ -62,7 +60,12 @@ export default function ThankYouPage() {
               </a>
             </div>
             <div className="thank-you-note">
-              <p>If you don&apos;t hear back soon, call the office directly or send a follow-up message from the contact section.</p>
+              <p>
+                If you don&apos;t hear back soon, call{" "}
+                <a href={`tel:${SITE_CONFIG.phone}`}>{SITE_CONFIG.phoneDisplay}</a>
+                {" "}or email{" "}
+                <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>.
+              </p>
             </div>
           </div>
         </div>

@@ -1,92 +1,78 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
-
-export interface WebMcpParameterSchema {
-  type: string;
-  properties?: Record<string, any>;
-  required?: string[];
-}
-
-export interface WebMcpToolDefinition {
-  name: string;
-  description: string;
-  parameters: WebMcpParameterSchema;
-  execute?: (params: Record<string, any>) => Promise<any>;
-}
+import { useEffect, type ReactNode } from "react";
+import type {
+  WebMcpModelContext,
+  WebMcpToolDefinition,
+  WebMcpToolResult,
+} from "@/lib/webmcp";
+import { SITE_PATHS } from "@/lib/site-config";
 
 export interface WebMcpProviderProps {
   businessName: string;
   tools: WebMcpToolDefinition[];
   endpoint?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
+}
+
+type WindowWithModelContext = Window & {
+  modelContext?: WebMcpModelContext;
+};
+
+type NavigatorWithModelContext = Navigator & {
+  modelContext?: WebMcpModelContext;
+};
+
+function asErrorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  return "Unknown WebMCP tool error";
 }
 
 /**
- * WebMcpProvider - Outfits the website for browser-native AI Agent interaction (WebMCP).
- * Injects tool definitions onto navigator.modelContext / window.modelContext
- * and advertises the standard /.well-known/mcp.json manifest.
+ * Injects tool definitions onto window/navigator.modelContext for
+ * browser-native AI agents. Manifest lives at /.well-known/mcp.json
+ * (linked from the document head). Tools execute locally from public
+ * site facts — there is no /api/agent-action endpoint.
  */
 export function WebMcpProvider({
   businessName,
   tools,
-  endpoint = '/.well-known/mcp.json',
+  endpoint = SITE_PATHS.mcp,
   children,
 }: WebMcpProviderProps) {
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const normalizedNamespace = businessName.toLowerCase().replace(/[^a-z0-9]/g, '_');
-    
-    const win = window as any;
-    const nav = navigator as any;
-    const existingContext = win.modelContext || nav.modelContext || {};
-    
+    const normalizedNamespace = businessName.toLowerCase().replace(/[^a-z0-9]/g, "_");
+    const win = window as WindowWithModelContext;
+    const nav = navigator as NavigatorWithModelContext;
+    const existingContext = win.modelContext || nav.modelContext;
+
     const formattedTools = tools.map((tool) => ({
       name: `${normalizedNamespace}_${tool.name}`,
       description: tool.description,
       inputSchema: tool.parameters,
-      call: async (args: Record<string, any>) => {
-        if (tool.execute) {
-          return await tool.execute(args);
-        }
+      call: async (args: Record<string, unknown>): Promise<WebMcpToolResult> => {
         try {
-          const res = await fetch('/api/agent-action', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              tool: tool.name,
-              arguments: args,
-              timestamp: new Date().toISOString(),
-            }),
-          });
-          return await res.json();
-        } catch (err: any) {
-          return { status: 'error', message: err.message };
+          return await tool.execute(args);
+        } catch (err: unknown) {
+          return { status: "error", message: asErrorMessage(err) };
         }
       },
     }));
 
-    const updatedContext = {
-      ...existingContext,
-      version: '1.0.0',
+    const updatedContext: WebMcpModelContext = {
+      version: "1.0.0",
       businessName,
       endpoint,
-      tools: [...(existingContext.tools || []), ...formattedTools],
+      tools: [...(existingContext?.tools ?? []), ...formattedTools],
     };
 
     win.modelContext = updatedContext;
-    if ('modelContext' in navigator) {
-      nav.modelContext = updatedContext;
-    }
+    nav.modelContext = updatedContext;
   }, [businessName, tools, endpoint]);
 
-  return (
-    <>
-      <link rel="alternate" type="application/json" title="WebMCP Manifest" href={endpoint} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
 
 export default WebMcpProvider;

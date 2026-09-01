@@ -22,10 +22,9 @@ function LogoItems() {
 }
 
 /**
- * NOTE: the original HTML left the .trust-set divs unclosed, so the browser
- * parsed the four sets as NESTED (set 2 inside set 1, etc.). This component
- * intentionally reproduces that exact resulting DOM so the marquee renders
- * pixel-identically.
+ * Four sibling .trust-set rows so the -25% marquee loop is seamless.
+ * The live static HTML left those sets unclosed (nested by the parser);
+ * this port closes them as intended instead of reproducing that bug.
  */
 export default function TrustBar() {
   return (
@@ -35,15 +34,15 @@ export default function TrustBar() {
         <div className="trust-track">
           <div className="trust-set">
             <LogoItems />
-            <div className="trust-set" aria-hidden="true">
-              <LogoItems />
-              <div className="trust-set" aria-hidden="true">
-                <LogoItems />
-                <div className="trust-set" aria-hidden="true">
-                  <LogoItems />
-                </div>
-              </div>
-            </div>
+          </div>
+          <div className="trust-set" aria-hidden="true">
+            <LogoItems />
+          </div>
+          <div className="trust-set" aria-hidden="true">
+            <LogoItems />
+          </div>
+          <div className="trust-set" aria-hidden="true">
+            <LogoItems />
           </div>
         </div>
       </div>

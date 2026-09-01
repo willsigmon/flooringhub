@@ -3,6 +3,11 @@
   "buildCommand": "npm run build",
   "outputDirectory": "out",
   "framework": null,
+  "redirects": [
+    { "source": "/privacy", "destination": "/privacy.html", "permanent": true },
+    { "source": "/terms", "destination": "/terms.html", "permanent": true },
+    { "source": "/thank-you", "destination": "/thank-you.html", "permanent": true }
+  ],
   "functions": {
     "api/**/*.js": {
       "maxDuration": 10

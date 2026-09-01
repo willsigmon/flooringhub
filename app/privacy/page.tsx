@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import "../legal.css";
 
 import LegalNav from "@/components/legal-nav";
-import GaBootstrap from "@/components/ga-bootstrap";
 import { LegalFooter } from "@/components/site-footer";
-import { SITE_CONFIG, SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
+import { SITE_CONFIG, SITE_PATHS, SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
 
 const TITLE = "Privacy Policy | Flooring Hub";
 const DESCRIPTION = "How Flooring Hub handles your personal information.";
@@ -12,11 +11,11 @@ const DESCRIPTION = "How Flooring Hub handles your personal information.";
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: `${SITE_URL}/privacy` },
+  alternates: { canonical: `${SITE_URL}${SITE_PATHS.privacy}` },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: `${SITE_URL}/privacy`,
+    url: `${SITE_URL}${SITE_PATHS.privacy}`,
     siteName: "Flooring Hub",
     type: "website",
     images: [
@@ -40,7 +39,6 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <GaBootstrap />
       <LegalNav />
 
       <main className="legal-page">

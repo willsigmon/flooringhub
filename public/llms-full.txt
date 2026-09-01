@@ -1,17 +1,50 @@
-# FlooringHub
-> Direct-to-consumer and contractor flooring marketplace with local installation matching.
+# Flooring Hub
+> Raleigh / Triangle flooring contractor. Hardwood, LVP, laminate, and carpet installation by Tom Smith. Free in-home estimates.
 
 ## Summary & Identity
-- Website: https://flooringhub.vercel.app
-- Vertical: Marketplace
+- Legal / public name: Flooring Hub (also Flooring Hub NC)
+- Website: https://www.flooringhubnc.com
+- Vertical: Local flooring contractor — not a marketplace, not a materials storefront
+- Owner: Tom Smith, Owner & Master Craftsman
+- Established: 1999
+- Public metrics already used on the site: 25+ years, 500+ homes, 5.0 Google (9 named reviews)
+- Pricing: estimates are free and given in person. No published per-square-foot or online calculator prices.
+
+## Contact
+- Phone: (330) 573-0370 (`tel:+13305730370`)
+- Email: tsmith@flooringhubnc.com
+- Hours: Monday–Friday, 8am–6pm
+- Locality: Raleigh, North Carolina
+- Facebook: https://www.facebook.com/p/Flooring-Hub-61578767536673/
+- Instagram: https://www.instagram.com/flooringhubnc/
+
+## Services
+- Hardwood flooring installation
+- Luxury vinyl plank (LVP) installation
+- Laminate flooring installation
+- Carpet installation
+
+## Service area
+Raleigh, Durham, Chapel Hill, Cary, Apex, Garner, Clayton, Fuquay-Varina, Wake Forest, Holly Springs, Pittsboro, Hillsborough, Zebulon.
+
+## How to request an estimate
+1. Submit the free estimate form at https://www.flooringhubnc.com/#quote
+2. Or call (330) 573-0370
+3. Or email tsmith@flooringhubnc.com
+Tom reviews requests and usually responds within 24 hours to schedule a free consultation. Do not invent a price.
+
+## Named Google reviews on the site
+Mary Brown; Shelley Welch; Krystal Greenhaw; Kelly Wade; Brent A.; Ben Madugu; Ariel Davis; Alex French; Cassidy C. Smith.
 
 ## AI Agent & Machine Interface
-- WebMCP Manifest: https://flooringhub.vercel.app/.well-known/mcp.json
-- Full Documentation: https://flooringhub.vercel.app/llms-full.txt
+- WebMCP Manifest: https://www.flooringhubnc.com/.well-known/mcp.json
+- Short documentation: https://www.flooringhubnc.com/llms.txt
+- Tools:
+  - `flooring_hub_get_service_info` — public contact, area, hours, services. No pricing.
+  - `flooring_hub_request_estimate` — how to request a free in-home estimate. No pricing.
 
-## Interactive Tools & Capabilities (WebMCP)
-- `calculate_flooring_estimate`: Calculate material requirements and cost estimate by square footage and material type
-
-## Direct Links & Booking
-- Homepage: https://flooringhub.vercel.app
-- Contact: https://flooringhub.vercel.app/contact
+## Direct Links
+- Homepage: https://www.flooringhubnc.com/
+- Request estimate: https://www.flooringhubnc.com/#quote
+- Privacy: https://www.flooringhubnc.com/privacy.html
+- Terms: https://www.flooringhubnc.com/terms.html

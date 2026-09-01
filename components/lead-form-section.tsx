@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { haptic, trackCtaEvent, trackEvent } from "@/lib/analytics";
+import { SITE_PATHS } from "@/lib/site-config";
 import { CheckIcon } from "@/components/icons";
 
 /** Lead capture section — form behavior ported 1:1 from main.js (posts to /api/lead). */
@@ -197,7 +198,7 @@ export default function LeadFormSection() {
         form.reset();
         populateUtmFields();
         setTimeout(() => {
-          window.location.assign("/thank-you.html");
+          window.location.assign(SITE_PATHS.thankYou);
         }, 900);
       })
       .catch((error: Error) => {
@@ -261,7 +262,7 @@ export default function LeadFormSection() {
               </div>
               <div className="form-group">
                 <label htmlFor="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" autoComplete="tel" inputMode="tel" />
+                <input type="tel" id="phone" name="phone" placeholder="Your phone number" autoComplete="tel" inputMode="tel" />
               </div>
               <div className="form-group">
                 <label htmlFor="service">Service Needed</label>

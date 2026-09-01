@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import "../legal.css";
 
 import LegalNav from "@/components/legal-nav";
-import GaBootstrap from "@/components/ga-bootstrap";
 import { LegalFooter } from "@/components/site-footer";
-import { SITE_CONFIG, SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
+import { SITE_CONFIG, SITE_PATHS, SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
 
 const TITLE = "Terms of Service | Flooring Hub";
 const DESCRIPTION = "Terms of service for Flooring Hub website and services.";
@@ -12,11 +11,11 @@ const DESCRIPTION = "Terms of service for Flooring Hub website and services.";
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
-  alternates: { canonical: `${SITE_URL}/terms` },
+  alternates: { canonical: `${SITE_URL}${SITE_PATHS.terms}` },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: `${SITE_URL}/terms`,
+    url: `${SITE_URL}${SITE_PATHS.terms}`,
     siteName: "Flooring Hub",
     type: "website",
     images: [
@@ -40,7 +39,6 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <>
-      <GaBootstrap />
       <LegalNav />
 
       <main className="legal-page">

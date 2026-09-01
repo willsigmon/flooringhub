@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   // The root /api directory remains plain Vercel serverless functions
   // (deployed via vercel.json, independent of Next).
   output: "export",
+  trailingSlash: false,
   images: {
     unoptimized: true,
   },

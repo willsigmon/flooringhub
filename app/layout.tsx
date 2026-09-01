@@ -1,7 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { WebMcpProvider } from "@/components/WebMcpProvider";
-import { SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
+import { FLOORING_HUB_WEBMCP_TOOLS } from "@/lib/webmcp";
+import {
+  GTM_ID,
+  SITE_PATHS,
+  SITE_URL,
+  SOCIAL_PREVIEW_IMAGE,
+} from "@/lib/site-config";
 import "./globals.css";
 import "./site.css";
 
@@ -41,31 +47,12 @@ export const viewport: Viewport = {
   themeColor: "#1C1C1E",
 };
 
-const flooringTools = [
-  {
-    name: "calculate_flooring_estimate",
-    description: "Calculate material requirements and cost estimate by square footage and material type",
-    parameters: {
-      type: "object",
-      properties: {
-        sqFt: { type: "number" },
-        material: {
-          type: "string",
-          enum: ["hardwood", "laminate", "tile", "vinyl_plank"],
-        },
-      },
-      required: ["sqFt", "material"],
-    },
-  },
-];
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
-        <meta name="ga-measurement-id" content="" />
+      <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -76,8 +63,28 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <WebMcpProvider businessName="FlooringHub" tools={flooringTools} />
+        <link
+          rel="alternate"
+          type="application/json"
+          title="WebMCP Manifest"
+          href={SITE_PATHS.mcp}
+        />
+      </head>
+      <body>
+        <WebMcpProvider businessName="Flooring Hub" tools={FLOORING_HUB_WEBMCP_TOOLS} />
         {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${GTM_ID}');
+          `}
+        </Script>
         <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
       </body>
     </html>

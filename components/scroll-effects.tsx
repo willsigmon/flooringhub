@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { haptic, trackCtaEvent } from "@/lib/analytics";
 
 /**
- * Page-wide behaviors ported 1:1 from the static site's main.js:
+ * Page-wide behaviors ported from the static site's main.js:
  * scroll-reveal animations, stagger, stat counters, haptics, CTA tracking,
- * optional GA bootstrap, smooth anchor scrolling, and active-nav highlighting.
+ * smooth anchor scrolling, and active-nav highlighting.
  */
 export default function ScrollEffects() {
   useEffect(() => {
@@ -105,32 +105,6 @@ export default function ScrollEffects() {
       statNums.forEach((el) => statsObserver.observe(el));
       cleanups.push(() => statsObserver.disconnect());
     }
-
-    // ---- GA bootstrap from <meta name="ga-measurement-id"> ----
-    function initGaMeasurementId() {
-      const meta = document.querySelector<HTMLMetaElement>('meta[name="ga-measurement-id"]');
-      if (!meta || !meta.content) return;
-
-      const measurementId = meta.content.trim();
-      if (!measurementId || typeof window.gtag === "function") return;
-
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function (...args: unknown[]) {
-        window.dataLayer!.push(args);
-      };
-
-      window.gtag("js", new Date());
-      window.gtag("config", measurementId, {
-        anonymize_ip: true,
-        cookie_flags: "SameSite=None;Secure",
-      });
-
-      const script = document.createElement("script");
-      script.async = true;
-      script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
-      document.head.appendChild(script);
-    }
-    initGaMeasurementId();
 
     // ---- CTA click tracking ----
     document.querySelectorAll("[data-cta]").forEach((el) => {

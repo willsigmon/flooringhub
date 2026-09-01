@@ -1,32 +1,29 @@
 {
   "schemaVersion": "1.0.0",
-  "name": "FlooringHub",
-  "description": "Direct-to-consumer and contractor flooring marketplace with local installation matching.",
-  "website": "https://flooringhub.vercel.app",
+  "name": "Flooring Hub",
+  "description": "Raleigh / Triangle flooring contractor. Hardwood, LVP, laminate, and carpet installation. Free in-home estimates. Not a marketplace.",
+  "website": "https://www.flooringhubnc.com",
   "tools": [
     {
-      "name": "flooringhub_calculate_flooring_estimate",
-      "description": "Calculate material requirements and cost estimate by square footage and material type",
+      "name": "flooring_hub_get_service_info",
+      "description": "Return Flooring Hub contact details, service area, hours, and services. Does not include pricing.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "flooring_hub_request_estimate",
+      "description": "Explain how a homeowner can request a free in-home estimate. Does not calculate prices.",
       "inputSchema": {
         "type": "object",
         "properties": {
-          "sqFt": {
-            "type": "number"
-          },
-          "material": {
+          "service": {
             "type": "string",
-            "enum": [
-              "hardwood",
-              "laminate",
-              "tile",
-              "vinyl_plank"
-            ]
+            "enum": ["hardwood", "lvp", "laminate", "carpet", "other"],
+            "description": "Optional service the homeowner is asking about."
           }
-        },
-        "required": [
-          "sqFt",
-          "material"
-        ]
+        }
       }
     }
   ]

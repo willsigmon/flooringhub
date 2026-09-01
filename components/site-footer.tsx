@@ -1,4 +1,4 @@
-import { SITE_CONFIG } from "@/lib/site-config";
+import { SITE_CONFIG, SITE_PATHS } from "@/lib/site-config";
 import { FacebookIcon, InstagramIcon, MailIcon, PhoneIcon, PinIcon } from "@/components/icons";
 
 export function FooterSocial() {
@@ -64,8 +64,8 @@ export default function SiteFooter() {
         <div className="footer-bottom">
           <p>&copy; 2026 Flooring Hub. All Rights Reserved.</p>
           <div className="footer-legal">
-            <a href="/privacy.html">Privacy Policy</a>
-            <a href="/terms.html">Terms of Service</a>
+            <a href={SITE_PATHS.privacy}>Privacy Policy</a>
+            <a href={SITE_PATHS.terms}>Terms of Service</a>
           </div>
           <FooterSocial />
         </div>

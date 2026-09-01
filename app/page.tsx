@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 
 import SiteNav from "@/components/site-nav";
 import Hero from "@/components/hero";
@@ -18,7 +17,7 @@ import Faq from "@/components/faq";
 import SiteFooter from "@/components/site-footer";
 import MobileCta from "@/components/mobile-cta";
 import ScrollEffects from "@/components/scroll-effects";
-import { SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
+import { SITE_CONFIG, SITE_FACTS, SITE_URL, SOCIAL_PREVIEW_IMAGE } from "@/lib/site-config";
 
 const TITLE = "Flooring Hub | The Flooring Experts - Raleigh, NC";
 const DESCRIPTION =
@@ -70,16 +69,16 @@ const PREVIEW_NOINDEX_SCRIPT = `
 const STRUCTURED_DATA = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
-  name: "Flooring Hub",
+  name: SITE_CONFIG.companyName,
   alternateName: "Flooring Hub NC",
   description:
     "North Carolina's trusted flooring specialist. Over 25 years of expert hardwood, LVP, laminate, and carpet installation. Free in-home estimates.",
-  url: "https://www.flooringhubnc.com",
-  telephone: "+13305730370",
-  email: "tsmith@flooringhubnc.com",
+  url: SITE_URL,
+  telephone: SITE_CONFIG.phone,
+  email: SITE_CONFIG.email,
   founder: {
     "@type": "Person",
-    name: "Tom Smith",
+    name: SITE_FACTS.owner,
     jobTitle: "Owner & Master Craftsman",
   },
   address: {
@@ -88,35 +87,19 @@ const STRUCTURED_DATA = {
     addressRegion: "NC",
     addressCountry: "US",
   },
-  areaServed: [
-    { "@type": "City", name: "Raleigh" },
-    { "@type": "City", name: "Durham" },
-    { "@type": "City", name: "Chapel Hill" },
-    { "@type": "City", name: "Cary" },
-    { "@type": "City", name: "Apex" },
-    { "@type": "City", name: "Garner" },
-    { "@type": "City", name: "Clayton" },
-    { "@type": "City", name: "Fuquay-Varina" },
-    { "@type": "City", name: "Wake Forest" },
-    { "@type": "City", name: "Holly Springs" },
-    { "@type": "City", name: "Pittsboro" },
-    { "@type": "City", name: "Hillsborough" },
-    { "@type": "City", name: "Zebulon" },
-  ],
+  areaServed: SITE_FACTS.cities.map((name) => ({ "@type": "City" as const, name })),
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Flooring Services",
-    itemListElement: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hardwood Flooring Installation" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Luxury Vinyl Plank (LVP) Installation" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Laminate Flooring Installation" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Carpet Installation" } },
-    ],
+    itemListElement: SITE_FACTS.services.map((name) => ({
+      "@type": "Offer" as const,
+      itemOffered: { "@type": "Service" as const, name },
+    })),
   },
   aggregateRating: {
     "@type": "AggregateRating",
-    ratingValue: "5.0",
-    reviewCount: "9",
+    ratingValue: SITE_FACTS.googleRating,
+    reviewCount: String(SITE_FACTS.reviewCount),
     bestRating: "5",
   },
   priceRange: "$$",
@@ -126,10 +109,7 @@ const STRUCTURED_DATA = {
     opens: "08:00",
     closes: "18:00",
   },
-  sameAs: [
-    "https://www.facebook.com/p/Flooring-Hub-61578767536673/",
-    "https://www.instagram.com/flooringhubnc/",
-  ],
+  sameAs: [SITE_CONFIG.social.facebook, SITE_CONFIG.social.instagram],
 };
 
 export default function HomePage() {
@@ -148,20 +128,6 @@ export default function HomePage() {
 
       {/* Vercel-preview noindex guard */}
       <script dangerouslySetInnerHTML={{ __html: PREVIEW_NOINDEX_SCRIPT }} />
-
-      {/* Google Tag Manager */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7"
-        strategy="afterInteractive"
-      />
-      <Script id="gtag-init" strategy="afterInteractive">
-        {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'GT-NM2HNMF7');
-        `}
-      </Script>
 
       {/* Structured Data for AI/Search Discovery */}
       <script
