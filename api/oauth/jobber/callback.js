@@ -4,7 +4,8 @@
  * Jobber redirects here with ?code=...&state=... after Tom approves the
  * consent screen. We verify the state (CSRF), exchange the code for an
  * access_token + refresh_token at Jobber's token endpoint, and persist both
- * to our KV store for api/lead.js to use when pushing leads as Requests.
+ * to KV. /api/lead.js does not yet create Jobber Requests from those tokens;
+ * current lead delivery is webhook / Resend / FormSubmit.
  */
 
 const { verifyState } = require('../../../lib/jobber-state');
@@ -55,7 +56,7 @@ function errorPage(res, status, detail) {
 function successPage(res, expiresInSeconds) {
   const body = [
     '<p>Flooring Hub is now connected to your Jobber account.</p>',
-    '<p>Lead form submissions at <code>flooringhubnc.com</code> will create Jobber Requests automatically.</p>',
+    '<p>Tokens are stored for a future Jobber Request integration. Lead form submissions today still use the webhook / email fallbacks in <code>/api/lead</code>.</p>',
     '<ul>',
     `<li>Access token valid for roughly ${Math.round(expiresInSeconds / 60)} minutes &mdash; refreshed automatically as needed.</li>`,
     '<li>Tokens are stored in the Vercel-side KV, not the browser.</li>',
