@@ -437,18 +437,26 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---- Mobile nav toggle ----
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
+  var navA11y = window.FLOORING_HUB_NAV_A11Y;
 
-  if (toggle && links) {
+  if (toggle && links && navA11y) {
+    navA11y.applyNavOpen(toggle, links, false);
+
     toggle.addEventListener('click', function () {
-      toggle.classList.toggle('active');
-      links.classList.toggle('open');
+      navA11y.applyNavOpen(toggle, links, !links.classList.contains('open'));
     });
 
     links.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
-        toggle.classList.remove('active');
-        links.classList.remove('open');
+        navA11y.applyNavOpen(toggle, links, false);
       });
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (navA11y.shouldCloseNavOnKey(event.key) && links.classList.contains('open')) {
+        navA11y.applyNavOpen(toggle, links, false);
+        toggle.focus();
+      }
     });
   }
 
@@ -472,6 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ---- Smooth scroll for anchor links ----
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    if (anchor.classList.contains('skip-link')) return;
     anchor.addEventListener('click', function (e) {
       var targetId = this.getAttribute('href');
       if (targetId === '#') return;

@@ -75,6 +75,7 @@
       border-radius: 4px; font-size: 0.88em;
       font-family: ui-monospace, "SF Mono", Menlo, monospace;
     }
+    [hidden] { display: none !important; }
     .btn {
       display: inline-block; padding: 14px 28px;
       background: var(--charcoal); color: #fff; border: 0;
@@ -110,10 +111,26 @@
       padding: 12px 16px; border-radius: 8px; margin-bottom: 20px;
       font-size: 0.9rem; font-weight: 600;
     }
+    .skip-link {
+      position: absolute; left: 16px; top: 16px; z-index: 20;
+      transform: translateY(-220%);
+      background: #F2F2F7; color: var(--charcoal);
+      padding: 12px 16px; min-height: 44px;
+      display: inline-flex; align-items: center;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid var(--charcoal);
+    }
+    .skip-link:focus, .skip-link:focus-visible { transform: translateY(0); }
+    .empty-note {
+      margin: 0; font-size: 0.92rem; color: var(--charcoal-mid);
+    }
+    .checks .empty-note { padding: 4px 0; }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="wrap" id="main" tabindex="-1">
     <div class="brand">
       <span class="brand-dot"></span>
       Flooring Hub &middot; Admin
@@ -121,6 +138,12 @@
 
     <h1>Connect Jobber</h1>
     <p class="lede">One-time OAuth handshake. Once connected, every lead submitted at <code>flooringhubnc.com</code> becomes a Request in Tom's Jobber pipeline.</p>
+
+    <noscript>
+      <div class="card">
+        <p class="empty-note">This page needs JavaScript to read Jobber connection status. It does not show live Jobber jobs or requests. Call Tom at (330) 573-0370 if you need help connecting.</p>
+      </div>
+    </noscript>
 
     <div id="banner" class="banner" hidden>Jobber connected successfully.</div>
 
@@ -152,6 +175,7 @@
     </p>
   </div>
 
+  <script src="/lib/admin-empty.js"></script>
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
@@ -296,11 +320,20 @@
           setStatus(status);
           renderChecks(status);
         })
-        .catch(function (err) {
+        .catch(function () {
+          var empty = window.FLOORING_HUB_ADMIN_EMPTY && window.FLOORING_HUB_ADMIN_EMPTY.COPY;
           document.getElementById('statusPill').className = 'pill pill--err';
-          document.getElementById('statusPillText').textContent = 'Error';
+          document.getElementById('statusPillText').textContent = 'Unavailable';
           document.getElementById('statusHeadline').textContent =
-            'Could not reach /api/jobber-status: ' + (err && err.message ? err.message : 'unknown error');
+            empty ? empty.unreachable : 'Could not reach Jobber status.';
+          document.getElementById('connectBtn').hidden = false;
+          document.getElementById('reconnectBtn').hidden = true;
+          var list = document.getElementById('checks');
+          while (list.firstChild) list.removeChild(list.firstChild);
+          var note = document.createElement('li');
+          note.className = 'empty-note';
+          note.textContent = empty ? empty.checksEmpty : 'Server checks did not load.';
+          list.appendChild(note);
         });
     })();
   </script>
