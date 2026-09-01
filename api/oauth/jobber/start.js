@@ -24,10 +24,26 @@ function redirectHtml(url) {
   ].join('');
 }
 
-function errorJson(res, status, message) {
+function errorPage(res, status, message) {
+  const html = [
+    '<!doctype html><html lang="en"><head>',
+    '<meta charset="utf-8">',
+    '<meta name="viewport" content="width=device-width, initial-scale=1">',
+    '<meta name="robots" content="noindex, nofollow">',
+    '<title>Jobber connect is not configured</title>',
+    '</head><body>',
+    '<h1>Jobber connect is not configured</h1>',
+    `<p>${message}</p>`,
+    '<p>This page only starts an OAuth handshake. It does not create Jobber Requests or change how website leads are delivered.</p>',
+    '<p><a href="/admin/jobber.html">&larr; Back to the Connect Jobber page</a></p>',
+    '</body></html>'
+  ].join('');
+
   res.statusCode = status;
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.end(JSON.stringify({ ok: false, message }));
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  res.end(html);
 }
 
 module.exports = async (req, res) => {
@@ -37,14 +53,22 @@ module.exports = async (req, res) => {
     `https://${req.headers.host}/api/oauth/jobber/callback`;
 
   if (!clientId) {
-    return errorJson(res, 500, 'JOBBER_CLIENT_ID env var not set.');
+    return errorPage(
+      res,
+      500,
+      'JOBBER_CLIENT_ID is not set on this server. Connecting Jobber from the admin page will not work until that env var exists.'
+    );
   }
 
   let state;
   try {
     state = createState();
   } catch (err) {
-    return errorJson(res, 500, err.message);
+    return errorPage(
+      res,
+      500,
+      'The OAuth state secret is missing or invalid. The handshake did not start. Website leads are unchanged.'
+    );
   }
 
   const params = new URLSearchParams({

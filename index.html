@@ -114,6 +114,17 @@
       "reviewCount": "9",
       "bestRating": "5"
     },
+    "review": [
+      {"@type": "Review", "author": {"@type": "Person", "name": "Mary Brown"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "My experience with Flooring Hub was Exceptionally Amazing from beginning to end. Great professional, expert, efficient service every step of the way — they far surpassed and exceeded my expectations."},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Shelley Welch"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "As a Realtor, we often have quick turn-around times even when we try to plan well in advance. Tom made sure a high-profile listing had carpet replaced at a reasonable cost and with impeccable quality. I highly recommend Flooring Hub."},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Krystal Greenhaw"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "What a fantastic company! Tom, the owner, knows his stuff on flooring and works hard to provide the greatest options and project goals. Highly recommend!"},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Kelly Wade"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "Great experience! Tom was friendly, replied to my question quickly, came and gave a first-hand estimate, and fixed my issue perfectly. I highly recommend this company — they are fantastic."},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Brent A."}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "Tom is stellar — they got our old carpets completely replaced and the installation was without a doubt the easiest experience I've had with a contractor. 30+ years of experience and it shows."},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Ben Madugu"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "Versatile, knowledgeable, thorough, and fair priced. Tommy brings an uplifting and personable demeanor that will brighten your day. Highly recommended."},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Alex French"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "Flooring Hub installed some carpets in my house. The work was high quality and I was impressed with the company's professionalism."},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Ariel Davis"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "Great customer service. Very professional and prompt. The tech was extremely knowledgeable about the repair and a great communicator. I highly recommend."},
+      {"@type": "Review", "author": {"@type": "Person", "name": "Cassidy C. Smith"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "The Flooring Hub team is incredible to work with. They are very knowledgeable and got the job done right!"}
+    ],
     "priceRange": "$$",
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
@@ -958,6 +969,9 @@
               Request Free Estimate
             </button>
             <p class="form-note">No spam. No obligation. Your info stays with Tom.</p>
+            <noscript>
+              <p class="form-noscript">This form needs JavaScript. Call Tom at <a href="tel:+13305730370">(330) 573-0370</a> or email <a href="mailto:tsmith@flooringhubnc.com">tsmith@flooringhubnc.com</a>.</p>
+            </noscript>
             <div id="leadFormStatus" class="form-feedback" aria-live="polite" role="status" aria-atomic="true"></div>
           </form>
           <!-- Lead routing note (dev only) -->
@@ -981,7 +995,7 @@
         <div class="area-text fade-up">
           <h2 class="section-label">Service Area</h2>
           <p class="section-headline">A triangle across the Triangle.</p>
-          <p>Flooring Hub covers a wide swath of central North Carolina &mdash; from Hillsborough in the northwest, out to Zebulon in the east, and south to Pittsboro. If your home sits inside the three points below, we come to you.</p>
+          <p>Flooring Hub covers a wide swath of central North Carolina &mdash; from Hillsborough in the northwest, out to Zebulon in the east, and south to Pittsboro. The cities listed here are the ones this site claims.</p>
           <div class="area-triangle-key">
             <span class="area-key-item"><span class="area-key-dot area-key-dot--nw"></span> Hillsborough &middot; NW corner</span>
             <span class="area-key-item"><span class="area-key-dot area-key-dot--e"></span> Zebulon &middot; E corner</span>
@@ -1002,7 +1016,7 @@
             <li>Hillsborough</li>
             <li>Zebulon</li>
           </ul>
-          <p class="area-note">Don't see your city? <a href="tel:+13305730370" data-config-phone>Give us a call</a> -- we likely service your area too.</p>
+          <p class="area-note">If you are close but not listed, <a href="tel:+13305730370" data-config-phone>call Tom</a> &mdash; he will say whether he can come out. This page does not invent extra coverage.</p>
         </div>
         <div class="area-map fade-up">
           <div class="map-embed">
@@ -1015,6 +1029,7 @@
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p class="map-fallback">Map embed is a Triangle overview, not a storefront pin. <a href="https://www.google.com/maps/search/?api=1&amp;query=Flooring+Hub+Raleigh+NC" target="_blank" rel="noopener">Open the Triangle on Google Maps</a> if the frame is empty.</p>
           </div>
         </div>
       </div>
@@ -1146,6 +1161,7 @@
     </a>
   </div>
 
+  <script src="lib/lead-form-validate.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
