@@ -267,34 +267,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return hasError;
   }
 
-  function initGaMeasurementId() {
-    var meta = document.querySelector('meta[name="ga-measurement-id"]');
-    if (!meta || !meta.content) {
-      return;
-    }
-
-    var measurementId = meta.content.trim();
-    if (!measurementId || typeof window.gtag === 'function') {
-      return;
-    }
-
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-      window.dataLayer.push(arguments);
-    };
-
-    window.gtag('js', new Date());
-    window.gtag('config', measurementId, {
-      anonymize_ip: true,
-      cookie_flags: 'SameSite=None;Secure'
-    });
-
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
-    document.head.appendChild(script);
-  }
-
   function submitLeadForm(event) {
     event.preventDefault();
     var form = event.target;
@@ -427,7 +399,6 @@ document.addEventListener('DOMContentLoaded', function () {
     leadForm.addEventListener('submit', function () { haptic('medium'); });
   }
 
-  initGaMeasurementId();
   initCtaTracking();
 
   // ---- Mobile nav toggle ----
