@@ -36,7 +36,8 @@ describe("satellite leftover bugs", () => {
     const thanks = read("thank-you.html");
     assert.match(home, /GT-NM2HNMF7/);
     assert.match(thanks, /GT-NM2HNMF7/);
-    assert.match(thanks, /If you don't hear back soon, call the office directly or send a follow-up message from the contact section\./);
+    assert.match(thanks, /If you don't hear back soon, call Tom at/);
+    assert.match(thanks, /mailto:tsmith@flooringhubnc.com/);
     assert.match(thanks, /class="nav scrolled"/);
   });
 });
@@ -52,11 +53,12 @@ describe("homepage leftover a11y + honest copy", () => {
     assert.match(read("main.js"), /if \(anchor\.classList\.contains\('skip-link'\)\) return;/);
   });
 
-  it("does not rewrite the FAQ types answer claimed by PR 3", () => {
+  it("keeps the FAQ types answer residential and honest", () => {
     assert.match(
       html,
-      /We handle the full spectrum of residential and commercial flooring/
+      /Residential homes in the Triangle/
     );
+    assert.doesNotMatch(html, /commercial flooring|custom inlays/i);
   });
 
   it("treats leveling as prep, not a standalone product", () => {
@@ -96,9 +98,9 @@ describe("homepage leftover a11y + honest copy", () => {
     assert.match(data.description, /Raleigh's trusted flooring specialist/);
   });
 
-  it("leaves unrelated CRM / 555 placeholders unchanged", () => {
-    assert.match(html, /Secure lead intake/);
-    assert.match(html, /\(555\) 123-4567/);
+  it("removes invented CRM and 555 placeholders", () => {
+    assert.doesNotMatch(html, /Secure lead intake|lead inbox or CRM/i);
+    assert.doesNotMatch(html, /555/);
   });
 });
 
@@ -128,7 +130,7 @@ describe("robots, OG, IndexNow, admin empty leftovers", () => {
     assert.match(admin, new RegExp(COPY.noscript.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(admin, /FLOORING_HUB_ADMIN_EMPTY/);
     assert.match(admin, /\[hidden\] \{ display: none !important; \}/);
-    assert.match(admin, /every lead submitted at <code>flooringhubnc.com<\/code> becomes a Request/);
-    assert.equal(admin.includes("live Jobber jobs"), true);
+    assert.doesNotMatch(admin, /every lead submitted at <code>flooringhubnc.com<\/code> becomes a Request/);
+    assert.equal(admin.includes("does not show live Jobber jobs or requests"), true);
   });
 });

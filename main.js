@@ -266,34 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return !result.ok;
   }
 
-  function initGaMeasurementId() {
-    var meta = document.querySelector('meta[name="ga-measurement-id"]');
-    if (!meta || !meta.content) {
-      return;
-    }
-
-    var measurementId = meta.content.trim();
-    if (!measurementId || typeof window.gtag === 'function') {
-      return;
-    }
-
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-      window.dataLayer.push(arguments);
-    };
-
-    window.gtag('js', new Date());
-    window.gtag('config', measurementId, {
-      anonymize_ip: true,
-      cookie_flags: 'SameSite=None;Secure'
-    });
-
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
-    document.head.appendChild(script);
-  }
-
   function submitLeadForm(event) {
     event.preventDefault();
     var form = event.target;
@@ -431,7 +403,6 @@ document.addEventListener('DOMContentLoaded', function () {
     leadForm.addEventListener('submit', function () { haptic('medium'); });
   }
 
-  initGaMeasurementId();
   initCtaTracking();
 
   // ---- Mobile nav toggle ----
@@ -594,24 +565,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // ---- Gallery filter pills ----
+  // ---- Gallery filter pills + empty state ----
+  var galleryFilterApi = window.FlooringHubGalleryFilter;
   var galleryPills = document.querySelectorAll('.g-pill');
   var galleryTiles = document.querySelectorAll('.g-tile');
-  if (galleryPills.length && galleryTiles.length) {
+  var galleryEmpty = document.getElementById('galleryEmpty');
+  var galleryReset = document.querySelector('.gallery-empty-reset');
+
+  function applySiteGalleryFilter(filter) {
+    if (!galleryFilterApi) {
+      return;
+    }
+    var result = galleryFilterApi.applyGalleryFilter(galleryTiles, filter);
+    galleryFilterApi.syncGalleryEmptyState(galleryEmpty, result);
+    galleryFilterApi.setActiveFilterControl(galleryPills, filter);
+  }
+
+  if (galleryFilterApi && galleryPills.length && galleryTiles.length) {
     galleryPills.forEach(function (pill) {
       pill.addEventListener('click', function () {
-        galleryPills.forEach(function (p) { p.classList.remove('is-active'); });
-        pill.classList.add('is-active');
-        var filter = pill.getAttribute('data-filter');
-        galleryTiles.forEach(function (tile) {
-          var cat = tile.getAttribute('data-cat');
-          if (filter === 'all' || cat === filter) {
-            tile.classList.remove('is-dim');
-          } else {
-            tile.classList.add('is-dim');
-          }
-        });
+        applySiteGalleryFilter(pill.getAttribute('data-filter'));
       });
+    });
+  }
+
+  if (galleryReset) {
+    galleryReset.addEventListener('click', function () {
+      applySiteGalleryFilter('all');
     });
   }
 

@@ -362,11 +362,15 @@ h1, h2, h3, h4 {
 .nav-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
 }
 
 .nav-toggle span {
@@ -1336,7 +1340,8 @@ h1, h2, h3, h4 {
   color: var(--charcoal-mid);
   background: transparent;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  padding: 10px 20px;
+  min-height: 44px;
+  padding: 12px 20px;
   cursor: pointer;
   transition: all 0.3s var(--transition);
 }
@@ -1453,12 +1458,46 @@ h1, h2, h3, h4 {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Tile hidden (non-matching filter) */
+/* Tile hidden (non-matching filter) — hide, do not leave dim holes */
+.g-tile.is-hidden,
+.g-tile[hidden] {
+  display: none;
+}
+
 .g-tile.is-dim {
-  opacity: 0.18;
-  transform: scale(0.96);
-  filter: grayscale(1);
-  pointer-events: none;
+  display: none;
+}
+
+.gallery-empty {
+  margin: 8px 0 0;
+  padding: 28px 4px 4px;
+  border-top: 1px solid rgba(28, 28, 30, 0.1);
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 500;
+  color: var(--charcoal);
+  letter-spacing: -0.01em;
+}
+
+.gallery-empty[hidden] {
+  display: none;
+}
+
+.gallery-empty-reset {
+  display: inline-block;
+  margin-left: 12px;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--accent);
+  min-height: 44px;
+  padding: 0 2px;
+  cursor: pointer;
 }
 
 @media (max-width: 900px) {
@@ -1618,13 +1657,13 @@ h1, h2, h3, h4 {
   align-items: start;
 }
 
-.jobber-badge {
+.lead-badge {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 8px 16px;
-  background: rgba(122, 193, 67, 0.08);
-  border: 1px solid rgba(122, 193, 67, 0.2);
+  background: transparent;
+  border: 1px solid rgba(28, 28, 30, 0.14);
   margin-bottom: 24px;
 }
 
@@ -1638,7 +1677,7 @@ h1, h2, h3, h4 {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #5a9a2f;
+  color: var(--charcoal-mid);
 }
 
 .lead-info .section-headline {

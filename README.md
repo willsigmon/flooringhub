@@ -1,31 +1,44 @@
-# FlooringHub
+# Flooring Hub
 
-## Purpose
-Marketing and service website for Flooring Hub (Raleigh, NC), delivered as a static web presence with branded assets and static SEO/security metadata.
+Marketing and service website for Flooring Hub (Raleigh, NC). Production (`flooringhubnc.com`) is the static HTML on `main`. Do not treat preview or Next.js leftover branches as production.
 
 ## Platform & stack
-- **Platform:** Static Site
-- **Runtime model:** static HTML/CSS/JS with prebuilt asset bundles
-- **Hosting target:** Vercel (`vercel.json` present)
+
+- **Platform:** Static HTML/CSS/JS at the repo root
+- **Serverless:** Vercel functions in `api/` for lead intake, Jobber OAuth, and OG images
+- **Hosting:** Vercel (`vercel.json`)
 
 ## What’s included
-- Multi-page static site in root + mirrored `site/` folder
-- Sitemap + robots metadata
-- Static style/theme assets and brand manifest files
+
+- Home, privacy, terms, and thank-you pages
+- Shared contact facts in `lib/site-config.js` (`(330) 573-0370`, `tsmith@flooringhubnc.com`)
+- Lead pipeline: webhook, then Resend, then FormSubmit
+- Jobber OAuth handshake + admin page (tokens only; leads are not auto-created as Jobber Requests)
+- Sitemap + robots + IndexNow key file
 
 ## Local workflow
-For local verification, serve either root files or `site/` files directly with any static host.
 
 ```bash
-cd /Volumes/SitHub/flooringhub
-# Open locally with your preferred static server (example):
-python -m http.server -d .  # root site
-python -m http.server -d site  # /site mirror
+python -m http.server
+npm test
 ```
 
-## Deployment contract
-- Recommended deployment is `vercel.json` in this repo.
-- Keep the `main.js`, `styles.css`, and image manifest files aligned between root and mirrored copies.
+This checkout has no `site/` directory. Serve the root HTML files directly.
 
-## Notes for orchestration
-- Added this README to satisfy portfolio completeness checks and to explicitly document this repo as a brochure/static asset channel.
+## Lead delivery
+
+`/api/lead` forwards a valid submission to `LEAD_WEBHOOK_URL` / `JOBBER_WEBHOOK_URL` when set. If that is missing or fails, it tries Resend, then FormSubmit. Duplicate suppression only records a lead after delivery succeeds, so a failed send can be retried.
+
+## Jobber
+
+`/admin/jobber.html` starts the OAuth handshake and stores tokens in Upstash/Vercel KV. That is not the same as pushing website leads into Jobber Requests. Wire a webhook or finish the Request integration before claiming that path.
+
+## Deployment contract
+
+- `main` auto-deploys the static site. Keep production on this tree unless Will explicitly flips DNS.
+- Keep `main.js`, `styles.css`, and image paths aligned with the HTML that references them.
+- Do not invent testimonials, review metrics, or phone numbers.
+
+## Tests
+
+`npm test` runs Node’s built-in test runner over `test/`. No extra test framework and no GitHub Actions CI (CI was removed to avoid cloud billing).
