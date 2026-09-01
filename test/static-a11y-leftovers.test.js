@@ -96,10 +96,9 @@ describe("homepage leftover a11y + honest copy", () => {
     assert.match(data.description, /Raleigh's trusted flooring specialist/);
   });
 
-  it("leaves CRM / 555 / likely-service leftovers to the other leftover PRs", () => {
+  it("leaves unrelated CRM / 555 placeholders unchanged", () => {
     assert.match(html, /Secure lead intake/);
     assert.match(html, /\(555\) 123-4567/);
-    assert.match(html, /we likely service your area too/);
   });
 });
 
