@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { WebMcpProvider } from "@/components/WebMcpProvider";
-import { FLOORING_HUB_WEBMCP_TOOLS } from "@/lib/webmcp";
+import FlooringHubWebMcp from "@/components/flooring-hub-webmcp";
 import {
   GTM_ID,
   SITE_PATHS,
@@ -71,7 +70,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <WebMcpProvider businessName="Flooring Hub" tools={FLOORING_HUB_WEBMCP_TOOLS} />
+        <FlooringHubWebMcp />
         {children}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`}
