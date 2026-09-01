@@ -1,5 +1,8 @@
 {
   "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
   "dependencies": {
     "@vercel/og": "^0.11.1"
   }
