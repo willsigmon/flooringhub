@@ -1,3 +1,10 @@
+const {
+  publicLeadSuccess,
+  publicLeadFailure,
+  classifyDeliveryError,
+  deliveryStatusCode
+} = require('../lib/lead-public-response');
+
 const dedupeCache = new Map();
 const rateLimitCache = new Map();
 
@@ -410,11 +417,7 @@ module.exports = async (req, res) => {
 
     const dedupeKey = `${payload.email || 'noemail'}|${payload.phone || 'nophone'}|${clientId}`;
     if (isDuplicate(dedupeKey, payload)) {
-      return jsonResponse(res, 200, {
-        ok: true,
-        duplicate: true,
-        message: 'A similar lead was submitted recently. Tom will follow up shortly.'
-      });
+      return jsonResponse(res, 200, publicLeadSuccess('duplicate'));
     }
 
     const normalizedPayload = {
@@ -423,32 +426,13 @@ module.exports = async (req, res) => {
     };
 
     try {
-      const integration = await deliverLead(normalizedPayload);
-
-      return jsonResponse(res, 200, {
-        ok: true,
-        id: normalizedPayload.id,
-        duplicate: false,
-        message: 'Thanks! Your request was received. Tom will contact you soon.',
-        integration
-      });
+      await deliverLead(normalizedPayload);
+      return jsonResponse(res, 200, publicLeadSuccess('ok'));
     } catch (integrationError) {
-      const isActivationError = integrationError.code === 'FORMSUBMIT_ACTIVATION_REQUIRED';
-      const isConfigError = integrationError.message === 'Lead forwarding is not configured.';
-      return jsonResponse(res, isActivationError || isConfigError ? 503 : 502, {
-        ok: false,
-        message: isActivationError
-          ? 'Lead email delivery is waiting on a one-time activation email. Please call Tom directly until that is completed.'
-          : isConfigError
-            ? 'Lead delivery is not configured yet. Please call Tom directly for now.'
-            : 'Lead forwarding is currently unavailable. Please call to confirm.',
-        leadId: normalizedPayload.id
-      });
+      const kind = classifyDeliveryError(integrationError);
+      return jsonResponse(res, deliveryStatusCode(kind), publicLeadFailure(kind));
     }
-  } catch (error) {
-    return jsonResponse(res, 500, {
-      ok: false,
-      message: error && error.message ? error.message : 'Server error while handling lead.'
-    });
+  } catch (_error) {
+    return jsonResponse(res, 500, publicLeadFailure('server'));
   }
 };
