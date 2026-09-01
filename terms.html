@@ -31,6 +31,13 @@
   <link rel="stylesheet" href="styles.css">
   <script src="lib/site-config.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GT-NM2HNMF7');
+  </script>
   <script>
     (function initGa4() {
       var meta = document.querySelector('meta[name="ga-measurement-id"]');
@@ -73,10 +80,15 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <nav class="nav scrolled" id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/logo-horizontal.webp" alt="Flooring Hub" class="logo-img" loading="eager" decoding="async" width="232" height="77">
+      <a href="index.html" class="nav-logo" aria-label="Flooring Hub — home">
+        <img src="assets/icon.png" alt="" class="logo-mark" loading="eager" decoding="async" width="446" height="446">
+        <span class="logo-wordmark">
+          <span class="logo-wordmark-primary">Flooring Hub</span>
+          <span class="logo-wordmark-sub">The Flooring Guru</span>
+        </span>
       </a>
       <ul class="nav-links">
         <li><a href="index.html#services">Services</a></li>
@@ -86,7 +98,7 @@
     </div>
   </nav>
 
-  <main class="legal-page">
+  <main class="legal-page" id="main">
     <div class="container">
       <a href="index.html" class="legal-back">&larr; Back to Home</a>
       <h1>Terms of Service</h1>
@@ -132,7 +144,7 @@
           <h2>Contact</h2>
           <p>For questions about these terms, contact us at:<br>
             <a href="mailto:tsmith@flooringhubnc.com" data-config-email="text">tsmith@flooringhubnc.com</a><br>
-            <a href="tel:3305730370" data-config-phone="text">(330) 573-0370</a>
+            <a href="tel:+13305730370" data-config-phone="text">(330) 573-0370</a>
           </p>
         </section>
       </div>

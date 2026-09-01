@@ -32,6 +32,13 @@
   <link rel="stylesheet" href="styles.css">
   <script src="lib/site-config.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GT-NM2HNMF7');
+  </script>
   <script>
     (function initGa4() {
       var meta = document.querySelector('meta[name="ga-measurement-id"]');
@@ -60,15 +67,20 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">
-        <img src="assets/logo-horizontal.webp" alt="Flooring Hub" class="logo-img" loading="eager" decoding="async" width="232" height="77">
+      <a href="/" class="nav-logo" aria-label="Flooring Hub — home">
+        <img src="assets/icon.png" alt="" class="logo-mark" loading="eager" decoding="async" width="446" height="446">
+        <span class="logo-wordmark">
+          <span class="logo-wordmark-primary">Flooring Hub</span>
+          <span class="logo-wordmark-sub">The Flooring Guru</span>
+        </span>
       </a>
     </div>
   </nav>
 
-  <main class="section lead-capture">
+  <main class="section lead-capture" id="main">
     <div class="container">
       <div class="thank-you-wrap" role="status" aria-live="polite">
         <h1>Thanks for reaching out.</h1>

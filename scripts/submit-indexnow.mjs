@@ -5,8 +5,7 @@ const keyLocation = `${siteUrl}/${indexNowKey}.txt`;
 const changedPaths = [
   "/",
   "/terms.html",
-  "/privacy.html",
-  "/thank-you.html"
+  "/privacy.html"
 ];
 
 const urlList = changedPaths.map((path) => new URL(path, siteUrl).toString());

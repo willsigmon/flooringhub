@@ -68,8 +68,9 @@
     "@type": "HomeAndConstructionBusiness",
     "name": "Flooring Hub",
     "alternateName": "Flooring Hub NC",
-    "description": "North Carolina's trusted flooring specialist. Over 25 years of expert hardwood, LVP, laminate, and carpet installation. Free in-home estimates.",
+    "description": "Flooring Hub is Raleigh's trusted flooring specialist. Over 25 years of expert hardwood, LVP, laminate, and carpet installation. Free in-home estimates.",
     "url": "https://www.flooringhubnc.com",
+    "image": "https://www.flooringhubnc.com/assets/flooringhub-social-preview-20260515.jpg",
     "telephone": "+13305730370",
     "email": "tsmith@flooringhubnc.com",
     "founder": {
@@ -105,7 +106,8 @@
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hardwood Flooring Installation"}},
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Luxury Vinyl Plank (LVP) Installation"}},
         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Laminate Flooring Installation"}},
-        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Carpet Installation"}}
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Carpet Installation"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hardwood Floor Refinishing"}}
       ]
     },
     "aggregateRating": {
@@ -129,6 +131,7 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
@@ -139,7 +142,7 @@
           <span class="logo-wordmark-sub">The Flooring Guru</span>
         </span>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
@@ -154,6 +157,7 @@
     </div>
   </nav>
 
+  <main id="main">
   <!-- Hero -->
   <section class="hero" id="hero">
     <div class="hero-bg-glow"></div>
@@ -509,7 +513,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
           </div>
           <h3>25+ Years Expertise</h3>
-          <p>Decades of hands-on experience with hardwood, laminate, tile, carpet, and more.</p>
+          <p>Decades of hands-on experience with hardwood, LVP, laminate, and carpet.</p>
         </div>
         <div class="feature-card fade-up">
           <div class="feature-icon">
@@ -523,7 +527,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3>Licensed & Insured</h3>
-          <p>Full peace of mind that your home or business is protected throughout the project.</p>
+          <p>Full peace of mind that your home is protected throughout the project.</p>
         </div>
         <div class="feature-card fade-up">
           <div class="feature-icon">
@@ -935,6 +939,7 @@
               <option value="lvp">Luxury Vinyl Plank (LVP)</option>
               <option value="laminate">Laminate Flooring</option>
                 <option value="carpet">Carpet</option>
+                <option value="refinish">Sand &amp; Refinish</option>
                 <option value="other">Other / Not Sure</option>
               </select>
             </div>
@@ -1028,62 +1033,63 @@
       <p class="section-headline fade-up">Common questions, straight answers.</p>
       <div class="faq-list">
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-types">
             <span>What types of flooring does Flooring Hub specialize in?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-types">
             <p>Hardwood, laminate, luxury vinyl plank (LVP), carpeted flooring, custom inlays, and more. We handle the full spectrum of residential and commercial flooring.</p>
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-leveling">
             <span>Do you offer floor leveling?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">
-            <p>Yes. We provide full-pour leveling services using high-performance self-leveling compounds as part of our prep services.</p>
+          <div class="faq-answer" id="faq-answer-leveling">
+            <p>If a subfloor needs it, Tom includes leveling as part of prep. It is not a standalone service listed on this site.</p>
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-quote">
             <span>How do I get a quote?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-quote">
             <p>Call us at <a href="tel:+13305730370" data-config-phone="text">(330) 573-0370</a> or <a href="mailto:tsmith@flooringhubnc.com" data-config-email>email us</a> to schedule a free in-home or on-site consultation. No obligation.</p>
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-install">
             <span>Why is professional installation important?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-install">
             <p>Professional installation ensures quality, longevity, and a flawless finish. We follow strict national standards and manufacturer guidelines to protect your warranty and investment.</p>
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-complex">
             <span>Can you handle complex flooring projects?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">
-            <p>Absolutely. We specialize in custom trim, staircases, moisture mitigation, and challenging layouts. No project is too complex for our team.</p>
+          <div class="faq-answer" id="faq-answer-complex">
+            <p>Tom handles custom trim, staircases, moisture mitigation, and challenging layouts himself — not a rotating crew.</p>
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-area">
             <span>What areas do you service?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-area">
             <p>We proudly serve the greater Raleigh-Durham area. See our full <a href="#service-area">service area</a> for all covered cities.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+  </main>
 
   <!-- Contact / Footer -->
   <footer class="footer" id="contact">
@@ -1146,6 +1152,7 @@
     </a>
   </div>
 
+  <script src="lib/nav-a11y.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

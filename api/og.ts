@@ -78,7 +78,7 @@ export default function handler(request: Request) {
         "div",
         { style: { display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 26 } },
         h("div", { style: { display: 'flex', color: SITE.muted } }, SITE.domainLabel),
-        h("div", { style: { display: 'flex', color: SITE.fg, fontWeight: 800 } }, "Built for search + sharing"),
+        h("div", { style: { display: 'flex', color: SITE.fg, fontWeight: 800 } }, "Free in-home estimates"),
       ),
     ) as never,
     { width: 1200, height: 630 },
