@@ -19,6 +19,7 @@ describe("satellite leftover bugs", () => {
       assert.match(html, /logo-wordmark-primary/);
       assert.match(html, /href="#main"/);
       assert.match(html, /id="main"/);
+      assert.match(html, /tabindex="-1"/);
     }
   });
 
@@ -36,6 +37,7 @@ describe("satellite leftover bugs", () => {
     assert.match(home, /GT-NM2HNMF7/);
     assert.match(thanks, /GT-NM2HNMF7/);
     assert.match(thanks, /If you don't hear back soon, call the office directly or send a follow-up message from the contact section\./);
+    assert.match(thanks, /class="nav scrolled"/);
   });
 });
 
@@ -47,6 +49,7 @@ describe("homepage leftover a11y + honest copy", () => {
     assert.match(html, /<main id="main" tabindex="-1">/);
     assert.match(html, /aria-expanded="false"/);
     assert.match(html, /aria-controls="navLinks"/);
+    assert.match(read("main.js"), /if \(anchor\.classList\.contains\('skip-link'\)\) return;/);
   });
 
   it("does not rewrite the FAQ types answer claimed by PR 3", () => {
