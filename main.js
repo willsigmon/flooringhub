@@ -436,14 +436,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (toggle && links) {
     toggle.addEventListener('click', function () {
-      toggle.classList.toggle('active');
-      links.classList.toggle('open');
+      var isOpen = toggle.classList.toggle('active');
+      links.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
 
     links.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         toggle.classList.remove('active');
         links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
@@ -581,24 +583,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // ---- Gallery filter pills ----
+  // ---- Gallery filter pills + empty state ----
+  var galleryFilterApi = window.FlooringHubGalleryFilter;
   var galleryPills = document.querySelectorAll('.g-pill');
   var galleryTiles = document.querySelectorAll('.g-tile');
-  if (galleryPills.length && galleryTiles.length) {
+  var galleryEmpty = document.getElementById('galleryEmpty');
+  var galleryReset = document.querySelector('.gallery-empty-reset');
+
+  function applySiteGalleryFilter(filter) {
+    if (!galleryFilterApi) {
+      return;
+    }
+    var result = galleryFilterApi.applyGalleryFilter(galleryTiles, filter);
+    galleryFilterApi.syncGalleryEmptyState(galleryEmpty, result);
+    galleryFilterApi.setActiveFilterControl(galleryPills, filter);
+  }
+
+  if (galleryFilterApi && galleryPills.length && galleryTiles.length) {
     galleryPills.forEach(function (pill) {
       pill.addEventListener('click', function () {
-        galleryPills.forEach(function (p) { p.classList.remove('is-active'); });
-        pill.classList.add('is-active');
-        var filter = pill.getAttribute('data-filter');
-        galleryTiles.forEach(function (tile) {
-          var cat = tile.getAttribute('data-cat');
-          if (filter === 'all' || cat === filter) {
-            tile.classList.remove('is-dim');
-          } else {
-            tile.classList.add('is-dim');
-          }
-        });
+        applySiteGalleryFilter(pill.getAttribute('data-filter'));
       });
+    });
+  }
+
+  if (galleryReset) {
+    galleryReset.addEventListener('click', function () {
+      applySiteGalleryFilter('all');
     });
   }
 
