@@ -19,14 +19,4 @@ jobs:
           node-version: '22'
 
       - name: Submit URLs to IndexNow
-        run: |
-          if [ -f scripts/submit-indexnow.mjs ]; then
-            node scripts/submit-indexnow.mjs
-          elif [ -f site/scripts/submit-indexnow.mjs ]; then
-            node site/scripts/submit-indexnow.mjs
-          elif [ -f js/submit-indexnow.js ]; then
-            node js/submit-indexnow.js
-          else
-            echo "No IndexNow script found!"
-            exit 1
-          fi
+        run: node scripts/submit-indexnow.mjs

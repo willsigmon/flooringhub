@@ -4,11 +4,16 @@
  * Jobber redirects here with ?code=...&state=... after Tom approves the
  * consent screen. We verify the state (CSRF), exchange the code for an
  * access_token + refresh_token at Jobber's token endpoint, and persist both
- * to our KV store for api/lead.js to use when pushing leads as Requests.
+ * to KV. /api/lead.js does not yet create Jobber Requests from those tokens;
+ * current lead delivery is webhook / Resend / FormSubmit.
  */
 
 const { verifyState } = require('../../../lib/jobber-state');
 const { saveTokens, isConfigured } = require('../../../lib/jobber-tokens');
+const {
+  publicCallbackError,
+  publicCallbackTokenBullet
+} = require('../../../lib/jobber-callback-public');
 
 const JOBBER_TOKEN_URL = 'https://api.getjobber.com/api/oauth/token';
 
@@ -45,9 +50,9 @@ function respondHtml(res, status, html) {
   res.end(html);
 }
 
-function errorPage(res, status, detail) {
+function errorPage(res, status, kind) {
   const body =
-    `<p>${detail}</p>` +
+    `<p>${publicCallbackError(kind)}</p>` +
     '<p><a href="/admin/jobber.html">&larr; Back to the Connect Jobber page</a></p>';
   return respondHtml(res, status, page('Jobber connection failed', 'Jobber connection failed', body, '#8A3A2A'));
 }
@@ -55,9 +60,9 @@ function errorPage(res, status, detail) {
 function successPage(res, expiresInSeconds) {
   const body = [
     '<p>Flooring Hub is now connected to your Jobber account.</p>',
-    '<p>Lead form submissions at <code>flooringhubnc.com</code> will create Jobber Requests automatically.</p>',
+    '<p>Tokens are stored for a future Jobber Request integration. Lead form submissions today still use the webhook / email fallbacks in <code>/api/lead</code>.</p>',
     '<ul>',
-    `<li>Access token valid for roughly ${Math.round(expiresInSeconds / 60)} minutes &mdash; refreshed automatically as needed.</li>`,
+    `<li>${publicCallbackTokenBullet(expiresInSeconds)}</li>`,
     '<li>Tokens are stored in the Vercel-side KV, not the browser.</li>',
     '</ul>',
     '<p><a href="/admin/jobber.html?connected=1">View connection status &rarr;</a></p>'
@@ -71,33 +76,26 @@ module.exports = async (req, res) => {
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
   const jobberError = url.searchParams.get('error');
-  const jobberErrorDesc = url.searchParams.get('error_description');
 
   if (jobberError) {
-    return errorPage(
-      res,
-      400,
-      `Jobber returned <code>${escapeHtml(jobberError)}</code>${
-        jobberErrorDesc ? `: ${escapeHtml(jobberErrorDesc)}` : '.'
-      }`
-    );
+    return errorPage(res, 400, 'jobber_denied');
   }
 
   if (!code) {
-    return errorPage(res, 400, 'Missing <code>code</code> query param. Start the flow from <a href="/admin/jobber.html">the Connect page</a>.');
+    return errorPage(res, 400, 'missing_code');
   }
 
   if (!state) {
-    return errorPage(res, 400, 'Missing <code>state</code> query param. Potential CSRF attempt or direct link &mdash; start again from <a href="/admin/jobber.html">the Connect page</a>.');
+    return errorPage(res, 400, 'missing_state');
   }
 
   try {
     const stateCheck = verifyState(state);
     if (!stateCheck.valid) {
-      return errorPage(res, 400, `State verification failed (${escapeHtml(stateCheck.reason)}). Start again from <a href="/admin/jobber.html">the Connect page</a>.`);
+      return errorPage(res, 400, 'state_invalid');
     }
-  } catch (err) {
-    return errorPage(res, 500, `State verification error: ${escapeHtml(err.message)}`);
+  } catch (_err) {
+    return errorPage(res, 500, 'server');
   }
 
   const clientId = process.env.JOBBER_CLIENT_ID;
@@ -106,11 +104,11 @@ module.exports = async (req, res) => {
     process.env.JOBBER_REDIRECT_URI || `https://${host}/api/oauth/jobber/callback`;
 
   if (!clientId || !clientSecret) {
-    return errorPage(res, 500, 'Server is missing <code>JOBBER_CLIENT_ID</code> or <code>JOBBER_CLIENT_SECRET</code>. Set them in Vercel env vars.');
+    return errorPage(res, 500, 'missing_config');
   }
 
   if (!isConfigured()) {
-    return errorPage(res, 500, 'KV token store is not configured. Set <code>UPSTASH_REDIS_REST_URL</code> + <code>UPSTASH_REDIS_REST_TOKEN</code> (or the <code>KV_*</code> equivalents) in Vercel env vars.');
+    return errorPage(res, 500, 'kv_unconfigured');
   }
 
   let tokenResponse;
@@ -128,8 +126,8 @@ module.exports = async (req, res) => {
       }).toString()
     });
     tokenRawText = await tokenResponse.text();
-  } catch (err) {
-    return errorPage(res, 502, `Network error reaching Jobber token endpoint: ${escapeHtml(err.message)}`);
+  } catch (_err) {
+    return errorPage(res, 502, 'network');
   }
 
   let tokenData;
@@ -140,15 +138,12 @@ module.exports = async (req, res) => {
   }
 
   if (!tokenResponse.ok || !tokenData) {
-    const detail = tokenData && tokenData.error_description
-      ? tokenData.error_description
-      : tokenRawText || `Status ${tokenResponse.status}`;
-    return errorPage(res, 502, `Jobber token exchange failed: ${escapeHtml(detail)}`);
+    return errorPage(res, 502, 'token_exchange');
   }
 
   const { access_token, refresh_token, expires_in } = tokenData;
   if (!access_token || !refresh_token) {
-    return errorPage(res, 502, 'Jobber returned no tokens in the response body.');
+    return errorPage(res, 502, 'token_exchange');
   }
 
   const expiresInSeconds = Number(expires_in) || 3600;
@@ -160,19 +155,9 @@ module.exports = async (req, res) => {
       refreshToken: refresh_token,
       expiresAt
     });
-  } catch (err) {
-    return errorPage(res, 500, `Token persistence failed: ${escapeHtml(err.message)}`);
+  } catch (_err) {
+    return errorPage(res, 500, 'persist');
   }
 
   return successPage(res, expiresInSeconds);
 };
-
-function escapeHtml(value) {
-  if (value === null || value === undefined) return '';
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}

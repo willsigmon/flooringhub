@@ -42,7 +42,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#1C1C1E">
-  <meta name="ga-measurement-id" content="">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -128,12 +127,6 @@
       {"@type": "Review", "author": {"@type": "Person", "name": "Cassidy C. Smith"}, "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"}, "reviewBody": "The Flooring Hub team is incredible to work with. They are very knowledgeable and got the job done right!"}
     ],
     "priceRange": "$$",
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-      "opens": "08:00",
-      "closes": "18:00"
-    },
     "sameAs": [
       "https://www.facebook.com/p/Flooring-Hub-61578767536673/",
       "https://www.instagram.com/flooringhubnc/"
@@ -153,7 +146,7 @@
           <span class="logo-wordmark-sub">The Flooring Guru</span>
         </span>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
@@ -485,6 +478,7 @@
           <div class="trust-logo-item"><span class="tl-brand">DuraSeal</span><span class="tl-sub">Stains & Finishes</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Bona</span><span class="tl-sub">Floor Care</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Real Wood</span><span class="tl-sub">Real Life</span></div>
+        </div><!-- /trust-set -->
         <div class="trust-set" aria-hidden="true">
           <div class="trust-logo-item"><span class="tl-brand">NWFA</span><span class="tl-sub">Member</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Carlisle</span><span class="tl-sub">Wide Plank</span></div>
@@ -493,6 +487,7 @@
           <div class="trust-logo-item"><span class="tl-brand">DuraSeal</span><span class="tl-sub">Stains & Finishes</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Bona</span><span class="tl-sub">Floor Care</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Real Wood</span><span class="tl-sub">Real Life</span></div>
+        </div><!-- /trust-set -->
         <div class="trust-set" aria-hidden="true">
           <div class="trust-logo-item"><span class="tl-brand">NWFA</span><span class="tl-sub">Member</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Carlisle</span><span class="tl-sub">Wide Plank</span></div>
@@ -501,6 +496,7 @@
           <div class="trust-logo-item"><span class="tl-brand">DuraSeal</span><span class="tl-sub">Stains & Finishes</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Bona</span><span class="tl-sub">Floor Care</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Real Wood</span><span class="tl-sub">Real Life</span></div>
+        </div><!-- /trust-set -->
         <div class="trust-set" aria-hidden="true">
           <div class="trust-logo-item"><span class="tl-brand">NWFA</span><span class="tl-sub">Member</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Carlisle</span><span class="tl-sub">Wide Plank</span></div>
@@ -509,6 +505,7 @@
           <div class="trust-logo-item"><span class="tl-brand">DuraSeal</span><span class="tl-sub">Stains & Finishes</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Bona</span><span class="tl-sub">Floor Care</span></div>
           <div class="trust-logo-item"><span class="tl-brand">Real Wood</span><span class="tl-sub">Real Life</span></div>
+        </div><!-- /trust-set -->
       </div>
     </div>
   </section>
@@ -688,13 +685,13 @@
       <h2 class="section-label fade-up">Selected work</h2>
       <p class="section-headline fade-up">Twenty-five years, one floor at a time.</p>
 
-      <div class="gallery-filter fade-up" role="tablist">
-        <button class="g-pill is-active" type="button" data-filter="all">All</button>
-        <button class="g-pill" type="button" data-filter="hardwood">Hardwood</button>
-        <button class="g-pill" type="button" data-filter="lvp">LVP</button>
-        <button class="g-pill" type="button" data-filter="laminate">Laminate</button>
-        <button class="g-pill" type="button" data-filter="carpet">Carpet</button>
-        <button class="g-pill" type="button" data-filter="refinish">Refinish</button>
+      <div class="gallery-filter fade-up" role="group" aria-label="Filter selected work">
+        <button class="g-pill is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="g-pill" type="button" data-filter="hardwood" aria-pressed="false">Hardwood</button>
+        <button class="g-pill" type="button" data-filter="lvp" aria-pressed="false">LVP</button>
+        <button class="g-pill" type="button" data-filter="laminate" aria-pressed="false">Laminate</button>
+        <button class="g-pill" type="button" data-filter="carpet" aria-pressed="false">Carpet</button>
+        <button class="g-pill" type="button" data-filter="refinish" aria-pressed="false">Refinish</button>
       </div>
 
       <div class="gallery-grid fade-up">
@@ -754,7 +751,7 @@
             <span class="g-meta">Cary</span>
           </figcaption>
         </figure>
-        <figure class="g-tile" data-cat="hardwood">
+        <figure class="g-tile" data-cat="refinish">
           <img src="assets/refinish-cary-1024w.webp" srcset="assets/refinish-cary-640w.webp 640w, assets/refinish-cary-1024w.webp 1024w, assets/refinish-cary-1600w.webp 1600w" sizes="(max-width: 900px) 92vw, 33vw" alt="Red-brown sand-and-refinish project in Cary" loading="lazy" decoding="async">
           <figcaption class="g-caption">
             <span class="g-cat">Refinish</span>
@@ -811,6 +808,10 @@
           </figcaption>
         </figure>
       </div>
+      <p class="gallery-empty" id="galleryEmpty" hidden>
+        No photos in this category are on the site yet.
+        <button type="button" class="gallery-empty-reset" data-filter="all">Show all work</button>
+      </p>
     </div>
   </section>
 
@@ -897,27 +898,27 @@
     <div class="container">
       <div class="lead-layout">
         <div class="lead-info fade-up">
-          <div class="jobber-badge">
-            <span class="badge-label">Secure lead intake</span>
+          <div class="lead-badge">
+            <span class="badge-label">Free in-home estimate</span>
           </div>
           <h2 class="section-headline">Request a quote in seconds.</h2>
-          <p>Fill out the form and your request is delivered into our lead workflow with spam protection and source tracking. Tom personally reviews every request and usually responds within 24 hours to schedule your free consultation.</p>
+          <p>Fill out the form and Tom reviews it himself. He usually responds within 24 hours to schedule a free consultation. Prefer to talk now? Call or email &mdash; those go straight to him.</p>
           <div class="lead-features">
             <div class="lead-feature">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Fast delivery to our lead inbox or CRM</span>
+              <span>Tom reads every request</span>
             </div>
             <div class="lead-feature">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Spam-protected and duplicate-checked submissions</span>
+              <span>No obligation, no sales deck</span>
             </div>
             <div class="lead-feature">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Tom responds within 24 hours</span>
+              <span>Usually a reply within 24 hours</span>
             </div>
             <div class="lead-feature">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <span>Campaign and page source tracking built in</span>
+              <span>Call or email if you want a faster path</span>
             </div>
           </div>
         </div>
@@ -940,7 +941,7 @@
           </div>
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel" inputmode="tel">
+            <input type="tel" id="phone" name="phone" placeholder="Your phone number" autocomplete="tel" inputmode="tel">
           </div>
           <div class="form-group">
             <label for="service">Service Needed</label>
@@ -1048,16 +1049,16 @@
       <p class="section-headline fade-up">Common questions, straight answers.</p>
       <div class="faq-list">
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-types">
+          <button class="faq-question" id="faq-q-types" type="button" aria-expanded="false" aria-controls="faq-answer-types">
             <span>What types of flooring does Flooring Hub specialize in?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer" id="faq-answer-types">
-            <p>Hardwood, laminate, luxury vinyl plank (LVP), carpeted flooring, custom inlays, and more. We handle the full spectrum of residential and commercial flooring.</p>
+            <p>Hardwood, laminate, luxury vinyl plank (LVP), and carpet &mdash; plus the prep those jobs need, like leveling. Residential homes in the Triangle.</p>
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-leveling">
+          <button class="faq-question" id="faq-q-leveling" type="button" aria-expanded="false" aria-controls="faq-answer-leveling">
             <span>Do you offer floor leveling?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
@@ -1066,7 +1067,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-quote">
+          <button class="faq-question" id="faq-q-quote" type="button" aria-expanded="false" aria-controls="faq-answer-quote">
             <span>How do I get a quote?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
@@ -1075,7 +1076,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-install">
+          <button class="faq-question" id="faq-q-install" type="button" aria-expanded="false" aria-controls="faq-answer-install">
             <span>Why is professional installation important?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
@@ -1084,7 +1085,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-complex">
+          <button class="faq-question" id="faq-q-complex" type="button" aria-expanded="false" aria-controls="faq-answer-complex">
             <span>Can you handle complex flooring projects?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
@@ -1093,7 +1094,7 @@
           </div>
         </div>
         <div class="faq-item fade-up">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-area">
+          <button class="faq-question" id="faq-q-area" type="button" aria-expanded="false" aria-controls="faq-answer-area">
             <span>What areas do you service?</span>
             <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
@@ -1169,6 +1170,7 @@
 
   <script src="lib/lead-form-validate.js"></script>
   <script src="lib/nav-a11y.js"></script>
+  <script src="lib/gallery-filter.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

@@ -137,7 +137,7 @@
     </div>
 
     <h1>Connect Jobber</h1>
-    <p class="lede">One-time OAuth handshake. Once connected, every lead submitted at <code>flooringhubnc.com</code> becomes a Request in Tom's Jobber pipeline.</p>
+    <p class="lede">One-time OAuth handshake. Tokens land in KV. Lead submissions at <code>flooringhubnc.com</code> still use the webhook / email path in <code>/api/lead</code> &mdash; this page does not invent automatic Jobber Requests.</p>
 
     <noscript>
       <div class="card">
@@ -243,7 +243,7 @@
         if (status.accessTokenValid) {
           tokenValue.textContent = 'valid, expires in ' + formatDuration(status.millisUntilExpiry);
         } else {
-          var warn = el('strong', { className: 'is-warn', text: 'expired — next request will auto-refresh' });
+          var warn = el('strong', { className: 'is-warn', text: 'expired — reconnect from this page. Tokens are not auto-refreshed.' });
           tokenValue.appendChild(warn);
         }
         metaEl.appendChild(tokenValue);
