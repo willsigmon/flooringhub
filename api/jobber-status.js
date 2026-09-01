@@ -42,8 +42,7 @@ module.exports = async (req, res) => {
     return respond(res, 200, {
       ...base,
       connected: false,
-      reason: 'kv_error',
-      message: err.message
+      reason: 'kv_error'
     });
   }
 

@@ -63,6 +63,42 @@ summary:focus-visible {
   outline-offset: 2px;
 }
 
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 1100;
+  transform: translateY(-220%);
+  background: var(--off-white);
+  color: var(--charcoal);
+  padding: 12px 16px;
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--charcoal);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+#main {
+  scroll-margin-top: 88px;
+}
+
+#main:focus {
+  outline: none;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -3074,4 +3110,81 @@ h1, h2, h3, h4 {
   }
 
   .feature-card { padding: 28px 20px; }
+}
+
+/* Leftover empty states: 404, form noscript, map fallback */
+.miss-page {
+  padding: 140px 0 96px;
+  background: var(--off-white);
+  min-height: 70vh;
+}
+
+.miss-page-grid {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
+  gap: 32px 64px;
+  align-items: start;
+  border-top: 1px solid rgba(28, 28, 30, 0.14);
+  padding-top: 40px;
+}
+
+.miss-kicker {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--silver);
+  padding-top: 10px;
+}
+
+.miss-page h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  margin: 0 0 16px;
+}
+
+.miss-copy p {
+  max-width: 38rem;
+  color: var(--charcoal-mid);
+  margin-bottom: 12px;
+}
+
+.miss-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.miss-page .btn-outline {
+  color: var(--charcoal);
+  border-color: rgba(28, 28, 30, 0.4);
+  margin-top: 0;
+}
+
+.miss-page .btn-outline:hover {
+  border-color: var(--charcoal);
+  background: rgba(28, 28, 30, 0.06);
+}
+
+.form-noscript,
+.map-fallback {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(28, 28, 30, 0.1);
+  font-size: 0.88rem;
+  color: var(--charcoal-mid);
+}
+
+.form-noscript a,
+.map-fallback a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .miss-page-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }

@@ -31,6 +31,13 @@
   <link rel="stylesheet" href="styles.css">
   <script src="lib/site-config.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GT-NM2HNMF7');
+  </script>
   <script>
     (function initGa4() {
       var meta = document.querySelector('meta[name="ga-measurement-id"]');
@@ -73,10 +80,15 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <nav class="nav scrolled" id="nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/logo-horizontal.webp" alt="Flooring Hub" class="logo-img" loading="eager" decoding="async" width="232" height="77">
+      <a href="index.html" class="nav-logo" aria-label="Flooring Hub — home">
+        <img src="assets/icon.png" alt="" class="logo-mark" loading="eager" decoding="async" width="446" height="446">
+        <span class="logo-wordmark">
+          <span class="logo-wordmark-primary">Flooring Hub</span>
+          <span class="logo-wordmark-sub">The Flooring Guru</span>
+        </span>
       </a>
       <ul class="nav-links">
         <li><a href="index.html#services">Services</a></li>
@@ -86,7 +98,7 @@
     </div>
   </nav>
 
-  <main class="legal-page">
+  <main class="legal-page" id="main" tabindex="-1">
     <div class="container">
       <a href="index.html" class="legal-back">&larr; Back to Home</a>
       <h1>Privacy Policy</h1>
@@ -98,9 +110,9 @@
           <p>When you request an estimate, contact us, or use our website, we may collect:</p>
           <ul>
             <li>Name, email address, and phone number</li>
-            <li>Property address and project details</li>
-            <li>Flooring preferences and budget information</li>
-            <li>Website usage data (pages visited, time on site)</li>
+            <li>Property address and project details you choose to send</li>
+            <li>Flooring preferences you describe in the form or on a call</li>
+            <li>Website usage data from the analytics tags already on this site</li>
           </ul>
         </section>
 
@@ -110,14 +122,14 @@
             <li>Provide flooring estimates and consultations</li>
             <li>Schedule and coordinate installation projects</li>
             <li>Follow up on project satisfaction</li>
-            <li>Send project updates and maintenance recommendations</li>
+            <li>Follow up on the estimate or project you asked about</li>
             <li>Improve our website and services</li>
           </ul>
         </section>
 
         <section>
           <h2>Data Sharing</h2>
-          <p>We share information with material suppliers and subcontractors solely to fulfill your flooring project. We do not sell, rent, or trade your personal information to third parties for marketing purposes.</p>
+          <p>When a job needs product ordered, Tom may share the details required with material suppliers. Tom installs the work himself. This page does not claim a subcontractor bench or a sold lead list. We do not sell, rent, or trade your personal information to third parties for marketing purposes.</p>
         </section>
 
         <section>
@@ -141,7 +153,7 @@
             Tom Smith, Owner<br>
             Raleigh, North Carolina<br>
             <a href="mailto:tsmith@flooringhubnc.com" data-config-email="text">tsmith@flooringhubnc.com</a><br>
-            <a href="tel:3305730370" data-config-phone="text">(330) 573-0370</a>
+            <a href="tel:+13305730370" data-config-phone="text">(330) 573-0370</a>
           </p>
         </section>
       </div>

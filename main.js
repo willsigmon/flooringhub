@@ -203,19 +203,24 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!key) return;
     var group = field.closest('.form-group');
     if (!group) return;
+    var errorId = key + '-error';
 
     var errorEl = group.querySelector('.field-error');
     if (!errorEl && isError) {
       errorEl = document.createElement('span');
       errorEl.className = 'field-error';
+      errorEl.id = errorId;
       group.appendChild(errorEl);
     }
 
     if (errorEl) {
+      errorEl.id = errorId;
       if (isError) {
         errorEl.textContent = message;
+        field.setAttribute('aria-describedby', errorId);
       } else {
         errorEl.textContent = '';
+        field.removeAttribute('aria-describedby');
       }
     }
 
@@ -224,47 +229,41 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function validateLeadForm(form) {
-    var requiredFields = form.querySelectorAll('[required]');
-    var hasError = false;
-    var email = form.querySelector('#email');
-    var phone = form.querySelector('#phone');
     var firstName = form.querySelector('#firstName');
     var lastName = form.querySelector('#lastName');
+    var email = form.querySelector('#email');
+    var phone = form.querySelector('#phone');
     var service = form.querySelector('#service');
     var details = form.querySelector('#details');
+    var fields = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      service: service,
+      details: details
+    };
+    var api = window.LeadFormValidate;
+    var result = api
+      ? api.validateLeadFields({
+          firstName: firstName ? firstName.value : '',
+          lastName: lastName ? lastName.value : '',
+          email: email ? email.value : '',
+          phone: phone ? phone.value : '',
+          service: service ? service.value : '',
+          details: details ? details.value : ''
+        })
+      : { ok: false, errors: { firstName: 'This field is required.' } };
 
-    requiredFields.forEach(function (field) {
-      setFieldError(field, false);
+    Object.keys(fields).forEach(function (key) {
+      if (fields[key]) setFieldError(fields[key], false);
     });
 
-    [firstName, lastName, email].forEach(function (field) {
-      if (!field.value.trim()) {
-        setFieldError(field, true, 'This field is required.');
-        hasError = true;
-      }
+    Object.keys(result.errors).forEach(function (key) {
+      if (fields[key]) setFieldError(fields[key], true, result.errors[key]);
     });
 
-    if (email && email.value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
-      setFieldError(email, true, 'Please enter a valid email.');
-      hasError = true;
-    }
-
-    if (service && service.value.length === 0) {
-      setFieldError(service, true, 'Please choose a service.');
-      hasError = true;
-    }
-
-    if (phone && phone.value && phone.value.replace(/\D/g, '').length < 10) {
-      setFieldError(phone, true, 'Please enter a valid phone number.');
-      hasError = true;
-    }
-
-    if (details && details.value.trim().length > 500) {
-      setFieldError(details, true, 'Please keep details under 500 characters.');
-      hasError = true;
-    }
-
-    return hasError;
+    return !result.ok;
   }
 
   function initGaMeasurementId() {
@@ -389,7 +388,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 900);
       })
       .catch(function (error) {
-        showFormState(formStatus, error.message || 'Network issue. Please try again in a moment.', true);
+        var phoneDisplay = (window.FLOORING_HUB_CONFIG && window.FLOORING_HUB_CONFIG.phoneDisplay) || '(330) 573-0370';
+        var formatError = window.LeadFormValidate && window.LeadFormValidate.formatLeadDeliveryError;
+        var deliveryMessage = formatError
+          ? formatError(error.message, phoneDisplay)
+          : (error.message || 'Network issue. Please try again in a moment.');
+        showFormState(formStatus, deliveryMessage, true);
         trackEvent('lead_submit_error', {
           cta: buttonId,
           section: 'lead_form',
@@ -433,18 +437,26 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---- Mobile nav toggle ----
   var toggle = document.getElementById('navToggle');
   var links = document.getElementById('navLinks');
+  var navA11y = window.FLOORING_HUB_NAV_A11Y;
 
-  if (toggle && links) {
+  if (toggle && links && navA11y) {
+    navA11y.applyNavOpen(toggle, links, false);
+
     toggle.addEventListener('click', function () {
-      toggle.classList.toggle('active');
-      links.classList.toggle('open');
+      navA11y.applyNavOpen(toggle, links, !links.classList.contains('open'));
     });
 
     links.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
-        toggle.classList.remove('active');
-        links.classList.remove('open');
+        navA11y.applyNavOpen(toggle, links, false);
       });
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (navA11y.shouldCloseNavOnKey(event.key) && links.classList.contains('open')) {
+        navA11y.applyNavOpen(toggle, links, false);
+        toggle.focus();
+      }
     });
   }
 
@@ -468,6 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ---- Smooth scroll for anchor links ----
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    if (anchor.classList.contains('skip-link')) return;
     anchor.addEventListener('click', function (e) {
       var targetId = this.getAttribute('href');
       if (targetId === '#') return;
