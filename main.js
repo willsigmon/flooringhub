@@ -476,6 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ---- Smooth scroll for anchor links ----
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    if (anchor.classList.contains('skip-link')) return;
     anchor.addEventListener('click', function (e) {
       var targetId = this.getAttribute('href');
       if (targetId === '#') return;

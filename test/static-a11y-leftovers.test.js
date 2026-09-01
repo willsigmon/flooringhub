@@ -44,7 +44,7 @@ describe("homepage leftover a11y + honest copy", () => {
 
   it("exposes a skip link and a main landmark", () => {
     assert.match(html, /class="skip-link"[^>]*href="#main"/);
-    assert.match(html, /<main id="main">/);
+    assert.match(html, /<main id="main" tabindex="-1">/);
     assert.match(html, /aria-expanded="false"/);
     assert.match(html, /aria-controls="navLinks"/);
   });
