@@ -219,7 +219,7 @@
         if (status.accessTokenValid) {
           tokenValue.textContent = 'valid, expires in ' + formatDuration(status.millisUntilExpiry);
         } else {
-          var warn = el('strong', { className: 'is-warn', text: 'expired — next request will auto-refresh' });
+          var warn = el('strong', { className: 'is-warn', text: 'expired — reconnect from this page. Tokens are not auto-refreshed.' });
           tokenValue.appendChild(warn);
         }
         metaEl.appendChild(tokenValue);
