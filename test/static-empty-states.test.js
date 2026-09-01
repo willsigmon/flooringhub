@@ -29,6 +29,8 @@ describe('leftover empty states and honest copy', () => {
     assert.doesNotMatch(page, /Jobber|CRM|marketplace|555|App Store|lead inbox/i);
     assert.doesNotMatch(page, /reviewCount|500\+|Secure lead intake/);
     assert.doesNotMatch(read('sitemap.xml'), /404\.html/);
+    assert.match(page, /href="\/styles\.css"/);
+    assert.match(read('styles.css'), /\.miss-page \.btn-outline \{[\s\S]*color: var\(--charcoal\)/);
   });
 
   it('gives the quote form and map an empty path when JS or the embed fails', () => {

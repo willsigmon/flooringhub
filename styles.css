@@ -3122,6 +3122,7 @@ h1, h2, h3, h4 {
 .miss-page .btn-outline {
   color: var(--charcoal);
   border-color: rgba(28, 28, 30, 0.4);
+  margin-top: 0;
 }
 
 .miss-page .btn-outline:hover {
