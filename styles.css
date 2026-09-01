@@ -3119,6 +3119,16 @@ h1, h2, h3, h4 {
   margin-top: 28px;
 }
 
+.miss-page .btn-outline {
+  color: var(--charcoal);
+  border-color: rgba(28, 28, 30, 0.4);
+}
+
+.miss-page .btn-outline:hover {
+  border-color: var(--charcoal);
+  background: rgba(28, 28, 30, 0.06);
+}
+
 .form-noscript,
 .map-fallback {
   margin-top: 12px;

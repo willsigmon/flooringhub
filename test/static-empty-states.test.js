@@ -25,7 +25,7 @@ describe('leftover empty states and honest copy', () => {
     assert.match(page, /tel:\+13305730370/);
     assert.match(page, /\(330\) 573-0370/);
     assert.match(page, /mailto:tsmith@flooringhubnc.com/);
-    assert.match(page, /href="index\.html"/);
+    assert.match(page, /href="\/"/);
     assert.doesNotMatch(page, /Jobber|CRM|marketplace|555|App Store|lead inbox/i);
     assert.doesNotMatch(page, /reviewCount|500\+|Secure lead intake/);
     assert.doesNotMatch(read('sitemap.xml'), /404\.html/);
