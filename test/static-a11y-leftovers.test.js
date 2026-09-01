@@ -128,6 +128,7 @@ describe("robots, OG, IndexNow, admin empty leftovers", () => {
     const admin = read("admin/jobber.html");
     assert.match(admin, new RegExp(COPY.noscript.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(admin, /FLOORING_HUB_ADMIN_EMPTY/);
+    assert.match(admin, /\[hidden\] \{ display: none !important; \}/);
     assert.match(admin, /every lead submitted at <code>flooringhubnc.com<\/code> becomes a Request/);
     assert.equal(admin.includes("live Jobber jobs"), true);
   });

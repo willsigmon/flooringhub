@@ -75,6 +75,7 @@
       border-radius: 4px; font-size: 0.88em;
       font-family: ui-monospace, "SF Mono", Menlo, monospace;
     }
+    [hidden] { display: none !important; }
     .btn {
       display: inline-block; padding: 14px 28px;
       background: var(--charcoal); color: #fff; border: 0;
@@ -325,6 +326,8 @@
           document.getElementById('statusPillText').textContent = 'Unavailable';
           document.getElementById('statusHeadline').textContent =
             empty ? empty.unreachable : 'Could not reach Jobber status.';
+          document.getElementById('connectBtn').hidden = false;
+          document.getElementById('reconnectBtn').hidden = true;
           var list = document.getElementById('checks');
           while (list.firstChild) list.removeChild(list.firstChild);
           var note = document.createElement('li');
