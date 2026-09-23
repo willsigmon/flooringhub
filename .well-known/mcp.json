@@ -1,0 +1,40 @@
+{
+  "name": "Flooring Hub",
+  "description": "Flooring installation and refinishing company serving the Raleigh-Durham (Triangle) area of North Carolina. Owner-operated by Tom Smith.",
+  "url": "https://www.flooringhubnc.com",
+  "contact": {
+    "phone": "+13305730370",
+    "email": "tsmith@flooringhubnc.com"
+  },
+  "documentation": {
+    "llms": "https://www.flooringhubnc.com/llms.txt",
+    "llmsFull": "https://www.flooringhubnc.com/llms-full.txt"
+  },
+  "webmcp": {
+    "transport": "in-page",
+    "api": "document.modelContext.registerTool",
+    "script": "https://www.flooringhubnc.com/webmcp.js",
+    "readOnly": true,
+    "tools": [
+      {
+        "name": "get_business_info",
+        "description": "Name, phone, email, website, and social links for Flooring Hub, a flooring installation and refinishing company in the Raleigh-Durham, NC area.",
+        "inputSchema": { "type": "object", "properties": {} }
+      },
+      {
+        "name": "list_services",
+        "description": "The flooring services Flooring Hub offers. No prices are listed -- the website does not show any, so none are returned here either.",
+        "inputSchema": { "type": "object", "properties": {} }
+      },
+      {
+        "name": "list_service_area",
+        "description": "The cities Flooring Hub serves in central North Carolina.",
+        "inputSchema": { "type": "object", "properties": {} }
+      }
+    ]
+  },
+  "estimateRequest": {
+    "url": "https://www.flooringhubnc.com/#quote",
+    "note": "Visitors submit the free estimate request form themselves on the website; agents cannot submit it on their behalf."
+  }
+}

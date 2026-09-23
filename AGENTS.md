@@ -1,5 +1,14 @@
 # flooringhub
 
+Marketing and service website for Flooring Hub (Raleigh, NC), production at `flooringhubnc.com`. See `README.md` for the fuller picture; this section is the quick-orient version for an agent.
+
+## Project facts
+
+- **Stack:** static HTML/CSS/vanilla JS at the repo root, no framework or build step. Vercel serverless functions live in `api/` (lead intake, Jobber OAuth, OG image). Shared browser-side logic lives in `lib/*.js`, loaded as classic `<script>` tags in `index.html` — they share one global scope, so each file's exports must stay wrapped in an IIFE (see `lib/nav-a11y.js`) to avoid colliding with a sibling script's top-level identifiers.
+- **Local workflow:** `python -m http.server` (or any static file server) to preview, `npm test` to run the Node test-runner suite in `test/`.
+- **Key env vars** (see `.env.example` for the full list): `LEAD_WEBHOOK_URL` / `JOBBER_WEBHOOK_URL` (primary lead delivery), `RESEND_API_KEY` + `LEAD_FROM_EMAIL`/`LEAD_TO_EMAIL` (email fallback), `FORMSUBMIT_ENDPOINT` (no-secret fallback), `JOBBER_CLIENT_ID`/`JOBBER_CLIENT_SECRET`/`JOBBER_STATE_SECRET`/`JOBBER_REDIRECT_URI` (Jobber OAuth), `UPSTASH_REDIS_REST_URL`/`UPSTASH_REDIS_REST_TOKEN` (token storage; Vercel KV's own `KV_REST_API_URL`/`KV_REST_API_TOKEN` names work too).
+- **Do not invent** testimonials, review metrics, or phone numbers — matches the site's own no-invented-claims rule, enforced by the `static-*-leftover` tests.
+
 <!-- NOT_ANOTHER_AI_WEBSITE_DESIGN_BIBLE_START -->
 ## Global Design Bible: Not-Another-AI-Website
 

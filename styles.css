@@ -8,11 +8,17 @@
   --charcoal: #1C1C1E;
   --charcoal-light: #2C2C2E;
   --charcoal-mid: #3A3A3C;
-  --silver: #8E8E93;
+  /* --silver and --accent are darkened from their original #8E8E93 / #A89060
+     to clear the WCAG AA 4.5:1 text-contrast minimum against white/off-white
+     (both were previously ~3.1-3.3:1, axe "serious" color-contrast failures
+     on .trust-bar-label, .legal-back, .section-label, and the white-on-accent
+     .nav-cta button). Same hue, just darker. Both still clear 3:1 against
+     --charcoal for the few places they sit on the dark background. */
+  --silver: #6A6A6E;
   --silver-light: #C7C7CC;
   --off-white: #F2F2F7;
   --white: #FFFFFF;
-  --accent: #A89060;
+  --accent: #7A6640;
   --accent-light: #C4AA76;
   --accent-dark: #8C7648;
   --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
@@ -32,6 +38,11 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* body{overflow-x:hidden} below doesn't stop a fixed-position, off-canvas
+     element (e.g. .nav-links) from still counting toward
+     document.documentElement.scrollWidth -- hide it here too so mobile has
+     no horizontal scroll capacity. */
+  overflow-x: hidden;
 }
 
 body {
@@ -1553,6 +1564,7 @@ h1, h2, h3, h4 {
 
 .about-badges {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   align-items: center;
   margin-top: 28px;
@@ -1638,7 +1650,10 @@ h1, h2, h3, h4 {
 }
 
 .cta-content p {
-  color: rgba(255, 255, 255, 0.8);
+  /* was rgba(255,255,255,0.8) -- only ~3.8:1 against the --accent banner
+     background, an axe "serious" color-contrast failure (same bg-with-
+     light-text pattern as .nav-cta). Solid white clears 4.5:1. */
+  color: var(--white);
   margin-bottom: 32px;
   font-size: 1rem;
 }
@@ -2384,7 +2399,10 @@ h1, h2, h3, h4 {
 }
 
 .footer-bottom p {
-  color: rgba(255, 255, 255, 0.3);
+  /* was rgba(255,255,255,0.3) -- ~2.7:1 against --charcoal, an axe "serious"
+     color-contrast failure. 0.55 matches the opacity already used for
+     .contact-item text in the same footer and clears 4.5:1. */
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.8rem;
 }
 
@@ -2394,7 +2412,9 @@ h1, h2, h3, h4 {
 }
 
 .footer-legal a {
-  color: rgba(255, 255, 255, 0.3);
+  /* was rgba(255,255,255,0.3) -- same axe "serious" color-contrast failure
+     as .footer-bottom p above; same 0.55 fix. */
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.8rem;
   transition: color 0.3s;
 }
@@ -3013,7 +3033,7 @@ h1, h2, h3, h4 {
   .nav-links {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 280px;
     height: 100vh;
     background: var(--charcoal);
@@ -3021,11 +3041,16 @@ h1, h2, h3, h4 {
     justify-content: center;
     gap: 28px;
     padding: 40px;
-    transition: right 0.4s var(--transition);
+    /* transform instead of right:-100% -- an off-canvas panel positioned with
+       `right` still counts toward document.documentElement.scrollWidth even
+       fully off-screen, causing real (if invisible) horizontal overflow on
+       mobile. transform is paint-only and never affects layout/scrollWidth. */
+    transform: translateX(100%);
+    transition: transform 0.4s var(--transition);
   }
 
   .nav-links.open {
-    right: 0;
+    transform: translateX(0);
   }
 
   .nav-links a {
