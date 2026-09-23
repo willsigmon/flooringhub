@@ -36,6 +36,12 @@
       ]
     },
     {
+      "source": "/(llms.txt|llms-full.txt|.well-known/mcp.json)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+      ]
+    },
+    {
       "source": "/admin/(.*)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
