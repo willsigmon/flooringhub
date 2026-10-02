@@ -12,7 +12,7 @@ Marketing and service website for Flooring Hub (Raleigh, NC). Production (`floor
 
 - Home, privacy, terms, and thank-you pages
 - Shared contact facts in `lib/site-config.js` (`(330) 573-0370`, `tsmith@flooringhubnc.com`)
-- Lead pipeline: webhook, then Resend, then FormSubmit
+- Lead delivery to Tom’s verified business email: configured Resend, otherwise FormSubmit
 - Jobber OAuth handshake + admin page (tokens only; leads are not auto-created as Jobber Requests)
 - Sitemap + robots + IndexNow key file
 
@@ -27,11 +27,13 @@ This checkout has no `site/` directory. Serve the root HTML files directly.
 
 ## Lead delivery
 
-`/api/lead` forwards a valid submission to `LEAD_WEBHOOK_URL` / `JOBBER_WEBHOOK_URL` when set. If that is missing or fails, it tries Resend, then FormSubmit. Duplicate suppression only records a lead after delivery succeeds, so a failed send can be retried.
+`/api/lead` sends valid inquiries only to `tsmith@flooringhubnc.com`, as confirmed by Tom on October 2, 2026. It uses Resend if `RESEND_API_KEY` and `LEAD_FROM_EMAIL` (or `RESEND_FROM_EMAIL`) are configured; otherwise it uses the existing FormSubmit email route for that recipient. A configured Resend failure is reported rather than silently switching providers. Legacy webhook, recipient and FormSubmit endpoint overrides are ignored. Duplicate suppression records a lead only after delivery succeeds, so a failed send can be retried.
+
+Production delivery/activation must be verified in an approved environment; changing provider setup or credentials is separate work. Local tests mock all provider requests and send no messages. Google analytics/advertising tags are removed; Vercel analytics, Google Fonts and the embedded map remain.
 
 ## Jobber
 
-`/admin/jobber.html` starts the OAuth handshake and stores tokens in Upstash/Vercel KV. That is not the same as pushing website leads into Jobber Requests. Wire a webhook or finish the Request integration before claiming that path.
+`/admin/jobber.html` starts the OAuth handshake and stores tokens in Upstash/Vercel KV. That is not the same as pushing website leads into Jobber Requests. Website inquiries go to Tom’s email; linking policies in Jobber does not enable a Request integration.
 
 ## Deployment contract
 

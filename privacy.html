@@ -31,13 +31,6 @@
   <script src="lib/site-config.js"></script>
   <script defer src="/webmcp.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'GT-NM2HNMF7');
-  </script>
   <style>
     .legal-page { padding: 140px 0 80px; background: var(--white); min-height: 100vh; }
     .legal-back { font-size: 0.85rem; color: var(--silver); display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px; transition: color 0.3s; }
@@ -51,11 +44,17 @@
     .legal-content ul { list-style: disc; padding-left: 20px; margin-top: 8px; }
     .legal-content li { font-size: 0.92rem; color: var(--silver); line-height: 1.65; margin-bottom: 6px; }
     .legal-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .legal-page .legal-date, .legal-content p, .legal-content li, .legal-content a { color: var(--charcoal); }
+    @media (max-width: 768px) {
+      .legal-page { padding-top: 152px; }
+      .legal-page h1 { font-size: 2rem; }
+      .legal-page + .footer .footer-legal { flex-wrap: wrap; justify-content: center; }
+    }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <nav class="nav scrolled" id="nav">
+  <nav class="nav scrolled legal-nav" id="nav" aria-label="Site navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo" aria-label="Flooring Hub — home">
         <img src="assets/icon.png" alt="" class="logo-mark" loading="eager" decoding="async" width="446" height="446">
@@ -76,55 +75,52 @@
     <div class="container">
       <a href="index.html" class="legal-back">&larr; Back to Home</a>
       <h1>Privacy Policy</h1>
-      <p class="legal-date">Last updated: April 13, 2026</p>
-
+      <p class="legal-date">Last updated: October 2, 2026</p>
       <div class="legal-content">
         <section>
-          <h2>Information We Collect</h2>
-          <p>When you request an estimate, contact us, or use our website, we may collect:</p>
-          <ul>
-            <li>Name, email address, and phone number</li>
-            <li>Property address and project details you choose to send</li>
-            <li>Flooring preferences you describe in the form or on a call</li>
-            <li>Website usage data from the analytics tags already on this site</li>
-          </ul>
+          <h2>About this policy</h2>
+          <p>This policy explains how information is handled through the Flooring Hub website and estimate-request form. Contact Tom Smith at Flooring Hub with questions using the details below.</p>
         </section>
 
         <section>
-          <h2>How We Use Your Information</h2>
-          <ul>
-            <li>Provide flooring estimates and consultations</li>
-            <li>Schedule and coordinate installation projects</li>
-            <li>Follow up on project satisfaction</li>
-            <li>Follow up on the estimate or project you asked about</li>
-            <li>Improve our website and services</li>
-          </ul>
+          <h2>Information you provide</h2>
+          <p>The estimate form asks for your first and last name, email address, and the service you need. Phone number and project details are optional. We receive the information you choose to include in your request, email, or call. Please do not send passwords, payment details, or other sensitive information through the estimate form.</p>
         </section>
 
         <section>
-          <h2>Data Sharing</h2>
-          <p>When a job needs product ordered, Tom may share the details required with material suppliers. Tom installs the work himself. This page does not claim a subcontractor bench or a sold lead list. We do not sell, rent, or trade your personal information to third parties for marketing purposes.</p>
+          <h2>Technical information</h2>
+          <p>The website collects campaign tags and the page and button used for an inquiry. The lead system also processes an IP address, referring page, browser information, submission time, and request identifier. These details support request delivery, spam prevention, duplicate detection, and understanding how visitors find the site.</p>
         </section>
 
         <section>
-          <h2>Data Security</h2>
-          <p>We use reasonable measures to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the internet is completely secure.</p>
+          <h2>How information is used and delivered</h2>
+          <p>We use inquiry information to respond to your request and discuss your flooring project. Website inquiries are sent to Tom at tsmith@flooringhubnc.com. We do not sell your inquiry information or share it for unrelated marketing. Service providers process information as needed to host the website and deliver email: Vercel hosts the site, and Resend or FormSubmit delivers form inquiries to Tom’s inbox. These email services receive contact, project, and campaign details from the form. Flooring Hub also uses Jobber as its customer-management service.</p>
         </section>
 
         <section>
-          <h2>Cookies</h2>
-          <p>Our website may use cookies and similar technologies to enhance your browsing experience and analyze site traffic. You can manage cookie preferences through your browser settings.</p>
+          <h2>Analytics and other providers</h2>
+          <p>The site uses Vercel Web Analytics to measure visits and interactions, including estimate-form activity. Google analytics and advertising tags are disabled on this website. Google Fonts and the embedded Google map still receive visit information when they load; these are separate from Google measurement tags. External links to Google, Facebook, or Instagram lead to services with their own privacy practices.</p>
         </section>
 
         <section>
-          <h2>Your Rights</h2>
-          <p>You may request access to, correction of, or deletion of your personal data at any time by contacting us.</p>
+          <h2>Cookies and browser choices</h2>
+          <p>You can manage or delete cookies through your browser settings. Those controls do not necessarily stop website logs, third-party font or map requests, or processing of an estimate you submit. Read <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s Privacy Policy</a>, <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel’s Privacy Policy</a>, and <a href="https://www.getjobber.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Jobber’s Privacy Policy</a> for their practices.</p>
+        </section>
+
+        <section>
+          <h2>Record retention and requests</h2>
+          <p>Flooring Hub keeps inquiry and customer records for seven years. To request access, a correction, or deletion of information you have provided, email Tom at <a href="mailto:tsmith@flooringhubnc.com">tsmith@flooringhubnc.com</a>. We will remove your information on request unless we are required by applicable law to retain it. Please describe your request without sending sensitive information. Service providers handle their own technical records under their privacy policies; questions about those records can also be directed to the relevant provider.</p>
+        </section>
+
+        <section>
+          <h2>Updates</h2>
+          <p>Changes to this policy will appear here with an updated date.</p>
         </section>
 
         <section>
           <h2>Contact</h2>
           <p>Flooring Hub<br>
-            Tom Smith, Owner<br>
+            Tom Smith<br>
             Raleigh, North Carolina<br>
             <a href="mailto:tsmith@flooringhubnc.com" data-config-email="text">tsmith@flooringhubnc.com</a><br>
             <a href="tel:+13305730370" data-config-phone="text">(330) 573-0370</a>
@@ -138,6 +134,10 @@
     <div class="container">
       <div class="footer-bottom">
         <p>&copy; 2026 Flooring Hub. All Rights Reserved.</p>
+        <div class="footer-legal">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms and Conditions</a>
+        </div>
         <div class="footer-social">
           <a href="https://www.facebook.com/p/Flooring-Hub-61578767536673/" target="_blank" rel="noopener" aria-label="Facebook">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>

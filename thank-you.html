@@ -32,13 +32,6 @@
   <script src="lib/site-config.js"></script>
   <script defer src="/webmcp.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-NM2HNMF7"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'GT-NM2HNMF7');
-  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -75,9 +68,6 @@
       var fireConversion = function () {
         if (typeof window.va === 'function') {
           window.va('event', 'lead_thank_you_view', { page: '/thank-you.html' });
-        }
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'lead_thank_you_view', { page_title: 'Thank You' });
         }
       };
 

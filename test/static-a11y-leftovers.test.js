@@ -31,11 +31,14 @@ describe("satellite leftover bugs", () => {
     }
   });
 
-  it("thank-you loads the same GTM container as the homepage so conversion can fire", () => {
+  it("public pages and event handlers omit Google measurement while retaining contact access", () => {
     const home = read("index.html");
     const thanks = read("thank-you.html");
-    assert.match(home, /GT-NM2HNMF7/);
-    assert.match(thanks, /GT-NM2HNMF7/);
+    for (const file of ['index.html', 'privacy.html', 'terms.html', 'thank-you.html', 'main.js']) {
+      assert.doesNotMatch(read(file), /googletagmanager|google-analytics|GT-NM2HNMF7|\bgtag\b|dataLayer/, file);
+    }
+    assert.match(home, /_vercel\/insights\/script\.js/);
+    assert.match(read('privacy.html'), /Google analytics and advertising tags are disabled/);
     assert.match(thanks, /If you don't hear back soon, call Tom at/);
     assert.match(thanks, /mailto:tsmith@flooringhubnc.com/);
     assert.match(thanks, /class="nav scrolled"/);

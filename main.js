@@ -148,9 +148,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (typeof window.va === 'function') {
       window.va('event', name, data || {});
     }
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', name, data || {});
-    }
   }
 
   function trackCtaEvent(el, action) {

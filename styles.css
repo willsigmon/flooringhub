@@ -3252,3 +3252,14 @@ h1, h2, h3, h4 {
     gap: 16px;
   }
 }
+
+/* Policy links have usable touch targets on every page. */
+.footer-legal a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Keep legal-page navigation available at mobile widths. */
+@media (max-width: 768px) {
+  .legal-nav .nav-inner { flex-wrap: wrap; gap: 10px; }
+  .legal-nav .nav-links { position: static; width: auto; height: auto; flex-direction: row; flex-wrap: wrap; padding: 0; background: transparent; transform: none; gap: 10px; }
+  .legal-nav .nav-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.75rem; }
+  .legal-nav .nav-links .nav-cta { width: auto; padding: 8px 12px !important; }
+}

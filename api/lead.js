@@ -20,40 +20,16 @@ const {
   deliveryStatusCode
 } = require('../lib/lead-public-response');
 
-async function postToWebhook(payload) {
-  const webhookUrl = process.env.LEAD_WEBHOOK_URL || process.env.JOBBER_WEBHOOK_URL;
-  if (!webhookUrl) return { skipped: true };
+// Tom confirmed this recipient on October 2, 2026. Old destination env vars
+// cannot redirect inquiries to a webhook or another mailbox.
+const LEAD_RECIPIENT = 'tsmith@flooringhubnc.com';
 
-  const response = await fetch(webhookUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  });
-
-  const responseText = await response.text();
-  const responseBody = responseText ? (() => {
-    try {
-      return JSON.parse(responseText);
-    } catch (_err) {
-      return { message: responseText };
-    }
-  })() : {};
-
-  if (!response.ok) {
-    throw new Error(responseBody.message || `Webhook request failed: ${response.status}`);
-  }
-
-  return { ok: true, response: responseBody };
-}
-
-async function sendFallbackEmail(payload) {
+async function sendEmail(payload) {
   const apiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.LEAD_FROM_EMAIL || process.env.RESEND_FROM_EMAIL;
-  const toEmail = process.env.LEAD_TO_EMAIL || process.env.ADMIN_EMAIL;
+  const toEmail = LEAD_RECIPIENT;
 
-  if (!apiKey || !fromEmail || !toEmail) {
+  if (!apiKey || !fromEmail) {
     return { skipped: true };
   }
 
@@ -89,8 +65,7 @@ async function sendFallbackEmail(payload) {
 }
 
 async function postToFormSubmit(payload) {
-  const toEmail = process.env.LEAD_TO_EMAIL || process.env.ADMIN_EMAIL || 'tsmith@flooringhubnc.com';
-  const endpoint = process.env.FORMSUBMIT_ENDPOINT || `https://formsubmit.co/ajax/${encodeURIComponent(toEmail)}`;
+  const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(LEAD_RECIPIENT)}`;
   const formBody = new URLSearchParams({
     firstName: payload.firstName,
     lastName: payload.lastName,
@@ -156,45 +131,15 @@ async function postToFormSubmit(payload) {
 }
 
 async function deliverLead(payload) {
-  let webhookError = null;
-
-  try {
-    const webhookResult = await postToWebhook(payload);
-    if (!webhookResult.skipped) {
-      return {
-        ok: true,
-        name: 'webhook',
-        response: webhookResult.response || null
-      };
-    }
-  } catch (error) {
-    webhookError = error;
-  }
-
-  const emailResult = await sendFallbackEmail(payload);
+  const emailResult = await sendEmail(payload);
   if (!emailResult.skipped) {
-    return {
-      ok: true,
-      name: 'resend',
-      fallback: webhookError ? 'webhook_failed' : 'webhook_unconfigured'
-    };
+    return { ok: true, name: 'resend' };
   }
 
+  // Existing no-secret email route. Do not report success until accepted;
+  // an unactivated recipient still gets the explicit activation error.
   const formSubmitResult = await postToFormSubmit(payload);
-  if (!formSubmitResult.skipped) {
-    return {
-      ok: true,
-      name: 'formsubmit',
-      fallback: webhookError ? 'webhook_failed' : 'webhook_unconfigured',
-      response: formSubmitResult.response || null
-    };
-  }
-
-  if (webhookError) {
-    throw webhookError;
-  }
-
-  throw new Error('Lead forwarding is not configured.');
+  return { ok: true, name: 'formsubmit', response: formSubmitResult.response || null };
 }
 
 async function handler(req, res) {

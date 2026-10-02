@@ -76,11 +76,12 @@ describe('POST /api/lead public leftover', () => {
     }
   });
 
-  it('does not return a lead_ ticket or webhook SQL on success', async () => {
+  it('does not return a lead_ ticket or provider SQL on success', async () => {
     global.fetch = async () => ({
       ok: true,
       status: 200,
       text: async () => JSON.stringify({
+        success: true,
         requestId: 'JOB-999',
         sql: 'SELECT * FROM jobber_requests'
       })

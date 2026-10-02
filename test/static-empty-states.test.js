@@ -59,8 +59,8 @@ describe('leftover empty states and honest copy', () => {
     const privacy = read('privacy.html');
     assert.doesNotMatch(privacy, /subcontractors/i);
     assert.doesNotMatch(privacy, /budget information/i);
-    assert.match(privacy, /material suppliers/);
-    assert.match(privacy, /Tom installs/);
+    // Website evidence does not establish supplier-sharing or installation terms.
+    // Keep the guard against invented collection/sharing; do not require those claims.
   });
 
   it('does not leak KV errors from Jobber status and shows an HTML empty state on OAuth start misconfig', () => {

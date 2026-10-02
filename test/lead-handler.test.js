@@ -47,30 +47,36 @@ function parsed(res) {
 
 describe('POST /api/lead', () => {
   const previousFetch = global.fetch;
-  const previousWebhook = process.env.LEAD_WEBHOOK_URL;
+  const envKeys = ['RESEND_API_KEY', 'LEAD_FROM_EMAIL', 'RESEND_FROM_EMAIL', 'LEAD_WEBHOOK_URL', 'JOBBER_WEBHOOK_URL', 'LEAD_TO_EMAIL', 'ADMIN_EMAIL', 'FORMSUBMIT_ENDPOINT'];
+  const previousEnv = Object.fromEntries(envKeys.map(key => [key, process.env[key]]));
   let fetchCalls;
 
   beforeEach(() => {
     resetCaches();
     fetchCalls = [];
+    envKeys.forEach(key => { delete process.env[key]; });
+    // Legacy destinations must not intercept an email inquiry.
     process.env.LEAD_WEBHOOK_URL = 'https://example.test/lead-webhook';
+    process.env.JOBBER_WEBHOOK_URL = 'https://example.test/jobber-webhook';
+    process.env.LEAD_TO_EMAIL = 'wrong@example.test';
+    process.env.ADMIN_EMAIL = 'admin@example.test';
+    process.env.FORMSUBMIT_ENDPOINT = 'https://example.test/wrong-endpoint';
     global.fetch = async (url, options) => {
       fetchCalls.push({ url: String(url), options });
       return {
         ok: true,
         status: 200,
-        text: async () => JSON.stringify({ ok: true })
+        text: async () => JSON.stringify({ success: true })
       };
     };
   });
 
   afterEach(() => {
     global.fetch = previousFetch;
-    if (previousWebhook === undefined) {
-      delete process.env.LEAD_WEBHOOK_URL;
-    } else {
-      process.env.LEAD_WEBHOOK_URL = previousWebhook;
-    }
+    envKeys.forEach(key => {
+      if (previousEnv[key] === undefined) delete process.env[key];
+      else process.env[key] = previousEnv[key];
+    });
     resetCaches();
   });
 
@@ -107,6 +113,10 @@ describe('POST /api/lead', () => {
     assert.equal('integration' in parsed(first), false);
     assert.equal('id' in parsed(first), false);
     assert.equal(fetchCalls.length, 1);
+    assert.equal(fetchCalls[0].url, 'https://formsubmit.co/ajax/tsmith%40flooringhubnc.com');
+    const emailBody = new URLSearchParams(fetchCalls[0].options.body);
+    assert.equal(emailBody.get('_replyto'), validBody.email);
+    assert.equal(emailBody.get('details'), validBody.details);
 
     const second = mockRes();
     await handler(mockReq(), second);
@@ -132,7 +142,7 @@ describe('POST /api/lead', () => {
       return {
         ok: true,
         status: 200,
-        text: async () => JSON.stringify({ ok: true })
+        text: async () => JSON.stringify({ success: true })
       };
     };
 
@@ -141,5 +151,50 @@ describe('POST /api/lead', () => {
     assert.equal(retry.statusCode, 200);
     assert.equal(parsed(retry).ok, true);
     assert.equal(parsed(retry).duplicate, false);
+  });
+  it('uses existing Resend configuration but fixes the recipient to Tom', async () => {
+    process.env.RESEND_API_KEY = 'test-key';
+    process.env.LEAD_FROM_EMAIL = 'Flooring Hub <sender@example.test>';
+    const res = mockRes();
+    await handler(mockReq(), res);
+    assert.equal(res.statusCode, 200);
+    assert.equal(fetchCalls.length, 1);
+    assert.equal(fetchCalls[0].url, 'https://api.resend.com/emails');
+    const email = JSON.parse(fetchCalls[0].options.body);
+    assert.deepEqual(email.to, ['tsmith@flooringhubnc.com']);
+    assert.equal(email.from, process.env.LEAD_FROM_EMAIL);
+    assert.match(email.html, /homeowner@example.com/);
+  });
+
+  it('reports Resend rejection without silently switching email providers', async () => {
+    process.env.RESEND_API_KEY = 'test-key';
+    process.env.RESEND_FROM_EMAIL = 'sender@example.test';
+    global.fetch = async (url, options) => {
+      fetchCalls.push({ url: String(url), options });
+      return { ok: false, status: 403, text: async () => 'sender is unverified' };
+    };
+    const res = mockRes();
+    await handler(mockReq(), res);
+    assert.equal(res.statusCode, 502);
+    assert.equal(parsed(res).ok, false);
+    assert.equal(fetchCalls.length, 1);
+    assert.equal(fetchCalls[0].url, 'https://api.resend.com/emails');
+    assert.doesNotMatch(res.body, /sender is unverified/);
+  });
+
+  it('reports FormSubmit activation requirements without acknowledging delivery', async () => {
+    global.fetch = async (url, options) => {
+      fetchCalls.push({ url: String(url), options });
+      return { ok: true, status: 200, text: async () => JSON.stringify({ success: false, message: 'Recipient activation required' }) };
+    };
+    const first = mockRes();
+    await handler(mockReq(), first);
+    assert.equal(first.statusCode, 503);
+    assert.equal(parsed(first).ok, false);
+    assert.match(parsed(first).message, /activation/);
+    const retry = mockRes();
+    await handler(mockReq(), retry);
+    assert.equal(retry.statusCode, 503);
+    assert.equal(fetchCalls.length, 2, 'failed delivery must remain retryable');
   });
 });
