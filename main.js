@@ -263,6 +263,20 @@ document.addEventListener('DOMContentLoaded', function () {
     return !result.ok;
   }
 
+  function focusFirstInvalidField(form) {
+    var field = form.querySelector('[aria-invalid="true"]');
+    if (!field) return;
+    var target = field.closest('.form-group') || field;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Center the field (and its label/hint) so the fixed nav never covers it on small screens.
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+    try {
+      field.focus({ preventScroll: true });
+    } catch (error) {
+      field.focus();
+    }
+  }
+
   function submitLeadForm(event) {
     event.preventDefault();
     var form = event.target;
@@ -276,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (validateLeadForm(form)) {
       showFormState(formStatus, 'Please fix the highlighted fields and try again.', true);
+      focusFirstInvalidField(form);
       trackEvent('lead_validation_error', {
         cta: buttonId,
         section: 'lead_form'
