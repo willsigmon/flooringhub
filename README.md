@@ -27,7 +27,7 @@ This checkout has no `site/` directory. Serve the root HTML files directly.
 
 ## Lead delivery
 
-`/api/lead` sends valid inquiries only to `tsmith@flooringhubnc.com`, as confirmed by Tom on October 2, 2026. It uses Resend if `RESEND_API_KEY` and `LEAD_FROM_EMAIL` (or `RESEND_FROM_EMAIL`) are configured; otherwise it uses the existing FormSubmit email route for that recipient. A configured Resend failure is reported rather than silently switching providers. Legacy webhook, recipient and FormSubmit endpoint overrides are ignored. Duplicate suppression records a lead only after delivery succeeds, so a failed send can be retried.
+`/api/lead` sends valid inquiries only to `tsmith@flooringhubnc.com`, as confirmed by Tom on October 2, 2026. It uses Resend if `RESEND_API_KEY` and `LEAD_FROM_EMAIL` (or `RESEND_FROM_EMAIL`) are configured; otherwise it uses the existing FormSubmit email route for that recipient. A configured Resend failure is reported rather than silently switching providers. Legacy webhook, recipient and FormSubmit endpoint overrides are ignored. Duplicate suppression (10 minutes) and the per-IP rate limit live in Upstash/Vercel KV when it is configured, so they hold across serverless instances; only SHA-256 hashes are stored there, never contact details. Without KV, or if KV is unreachable, they fall back to per-instance memory rather than blocking the lead. A lead is recorded only after delivery succeeds, so a failed send can be retried.
 
 Production delivery/activation must be verified in an approved environment; changing provider setup or credentials is separate work. Local tests mock all provider requests and send no messages. Google analytics/advertising tags are removed; Vercel analytics, Google Fonts and the embedded map remain.
 
