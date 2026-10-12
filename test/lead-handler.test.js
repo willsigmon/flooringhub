@@ -47,7 +47,7 @@ function parsed(res) {
 
 describe('POST /api/lead', () => {
   const previousFetch = global.fetch;
-  const envKeys = ['RESEND_API_KEY', 'LEAD_FROM_EMAIL', 'RESEND_FROM_EMAIL', 'LEAD_WEBHOOK_URL', 'JOBBER_WEBHOOK_URL', 'LEAD_TO_EMAIL', 'ADMIN_EMAIL', 'FORMSUBMIT_ENDPOINT'];
+  const envKeys = ['RESEND_API_KEY', 'LEAD_FROM_EMAIL', 'RESEND_FROM_EMAIL', 'LEAD_WEBHOOK_URL', 'JOBBER_WEBHOOK_URL', 'LEAD_TO_EMAIL', 'ADMIN_EMAIL', 'FORMSUBMIT_ENDPOINT', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'KV_REST_API_URL', 'KV_REST_API_TOKEN'];
   const previousEnv = Object.fromEntries(envKeys.map(key => [key, process.env[key]]));
   let fetchCalls;
 

@@ -1,6 +1,11 @@
 'use strict';
 
 const { describe, it, beforeEach } = require('node:test');
+
+// These cover the in-memory fallback; KV-backed behavior is in lead-store-kv.test.js.
+for (const key of ['UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'KV_REST_API_URL', 'KV_REST_API_TOKEN']) {
+  delete process.env[key];
+}
 const assert = require('node:assert/strict');
 const {
   MAX_DETAILS_CHARS,
@@ -72,20 +77,20 @@ describe('lead-core', () => {
     assert.equal(safeJsonParse('{'), null);
   });
 
-  it('rate-limits the fifth request in a window', () => {
+  it('rate-limits the fifth request in a window', async () => {
     for (let i = 0; i < RATE_LIMIT_MAX; i += 1) {
-      assert.equal(isRateLimited('203.0.113.10'), false);
+      assert.equal(await isRateLimited('203.0.113.10'), false);
     }
-    assert.equal(isRateLimited('203.0.113.10'), true);
-    assert.equal(isRateLimited('203.0.113.11'), false);
+    assert.equal(await isRateLimited('203.0.113.10'), true);
+    assert.equal(await isRateLimited('203.0.113.11'), false);
   });
 
-  it('does not treat a lead as duplicate until it is remembered', () => {
+  it('does not treat a lead as duplicate until it is remembered', async () => {
     const key = dedupeKeyFor(validLead, '203.0.113.10');
-    assert.equal(isDuplicate(key, validLead), false);
-    rememberLead(key, validLead);
-    assert.equal(isDuplicate(key, validLead), true);
-    assert.equal(isDuplicate(key, { ...validLead, service: 'carpet' }), false);
+    assert.equal(await isDuplicate(key, validLead), false);
+    await rememberLead(key, validLead);
+    assert.equal(await isDuplicate(key, validLead), true);
+    assert.equal(await isDuplicate(key, { ...validLead, service: 'carpet' }), false);
   });
 
   it('blocks honeypot submissions and accepts empty ones', () => {

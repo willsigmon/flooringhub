@@ -174,12 +174,12 @@ async function handler(req, res) {
       return jsonResponse(res, 400, { ok: false, errors, message: 'Please fix the highlighted fields and try again.' });
     }
 
-    if (isRateLimited(clientId)) {
+    if (await isRateLimited(clientId)) {
       return jsonResponse(res, 429, { ok: false, message: 'Too many submissions. Please wait a minute before trying again.' });
     }
 
     const dedupeKey = dedupeKeyFor(payload, clientId);
-    if (isDuplicate(dedupeKey, payload)) {
+    if (await isDuplicate(dedupeKey, payload)) {
       return jsonResponse(res, 200, publicLeadSuccess('duplicate'));
     }
 
@@ -190,7 +190,7 @@ async function handler(req, res) {
 
     try {
       await deliverLead(normalizedPayload);
-      rememberLead(dedupeKey, payload);
+      await rememberLead(dedupeKey, payload);
       return jsonResponse(res, 200, publicLeadSuccess('ok'));
     } catch (integrationError) {
       const kind = classifyDeliveryError(integrationError);
