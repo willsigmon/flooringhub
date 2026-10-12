@@ -34,7 +34,7 @@ function errorPage(res, status, message) {
     '</head><body>',
     '<h1>Jobber connect is not configured</h1>',
     `<p>${message}</p>`,
-    '<p>This page only starts an OAuth handshake. It does not create Jobber Requests or change how website leads are delivered.</p>',
+    '<p>This page only starts an OAuth handshake. Website leads are still emailed to Tom either way.</p>',
     '<p><a href="/admin/jobber.html">&larr; Back to the Connect Jobber page</a></p>',
     '</body></html>'
   ].join('');
