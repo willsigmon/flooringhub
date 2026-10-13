@@ -20,10 +20,12 @@ describe('static leftover: invented Jobber auto-refresh + callback leaks', () =>
     assert.doesNotMatch(src, /escapeHtml\(detail\)/);
   });
 
-  it('admin expired copy does not invent an auto-refresh path', () => {
+  it('admin expired copy describes the real on-demand refresh path', () => {
     const admin = read('admin/jobber.html');
     assert.doesNotMatch(admin, /next request will auto-refresh/);
-    assert.match(admin, /Tokens are not auto-refreshed/);
+    assert.doesNotMatch(admin, /Tokens are not auto-refreshed/);
+    assert.match(admin, /refreshes on the next website lead/);
+    assert.match(read('lib/jobber-client.js'), /acquireRefreshLock/);
   });
 
   it('initial token save does not stamp last_refresh_at', () => {

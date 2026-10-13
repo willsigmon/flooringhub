@@ -19,6 +19,7 @@ const {
   classifyDeliveryError,
   deliveryStatusCode
 } = require('../lib/lead-public-response');
+const { isSyncConfigured, createJobberRequest } = require('../lib/jobber-client');
 
 // Tom confirmed this recipient on October 2, 2026. Old destination env vars
 // cannot redirect inquiries to a webhook or another mailbox.
@@ -142,6 +143,39 @@ async function deliverLead(payload) {
   return { ok: true, name: 'formsubmit', response: formSubmitResult.response || null };
 }
 
+// Total time the Jobber copy may add to a submission. Email has already been
+// accepted by then, so running out of time only skips the Jobber copy.
+const JOBBER_SYNC_BUDGET_MS = 6000;
+
+// Secondary copy of an already-delivered lead into Jobber. Never throws: the
+// email to Tom is the record, and a Jobber outage must not fail the submission.
+async function syncLeadToJobber(payload, options = {}) {
+  if (!isSyncConfigured()) {
+    return { ok: false, skipped: true };
+  }
+
+  let timer;
+  const budget = new Promise((_resolve, reject) => {
+    timer = setTimeout(() => {
+      const error = new Error('Jobber sync ran out of time.');
+      error.code = 'JOBBER_TIMEOUT';
+      reject(error);
+    }, options.budgetMs || JOBBER_SYNC_BUDGET_MS);
+  });
+
+  try {
+    const create = options.createJobberRequest || createJobberRequest;
+    const result = await Promise.race([create(payload, options), budget]);
+    return { ok: true, ...result };
+  } catch (error) {
+    // Log the failure kind and lead id only; no customer contact details.
+    console.error('[lead] Jobber sync failed', { leadId: payload.id, code: error.code || 'JOBBER_UNKNOWN' });
+    return { ok: false, code: error.code || 'JOBBER_UNKNOWN' };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function handler(req, res) {
   cleanupCaches();
 
@@ -190,12 +224,17 @@ async function handler(req, res) {
 
     try {
       await deliverLead(normalizedPayload);
-      rememberLead(dedupeKey, payload);
-      return jsonResponse(res, 200, publicLeadSuccess('ok'));
     } catch (integrationError) {
       const kind = classifyDeliveryError(integrationError);
       return jsonResponse(res, deliveryStatusCode(kind), publicLeadFailure(kind));
     }
+
+    // Email reached Tom, so the lead is safe: remember it before the Jobber
+    // copy so a Jobber problem can never cause a duplicate email on retry.
+    rememberLead(dedupeKey, payload);
+    // Awaited because Vercel may freeze the function once the response ends.
+    await syncLeadToJobber(normalizedPayload);
+    return jsonResponse(res, 200, publicLeadSuccess('ok'));
   } catch (_error) {
     return jsonResponse(res, 500, publicLeadFailure('server'));
   }
@@ -203,3 +242,4 @@ async function handler(req, res) {
 
 module.exports = handler;
 module.exports.deliverLead = deliverLead;
+module.exports.syncLeadToJobber = syncLeadToJobber;

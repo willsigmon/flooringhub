@@ -13,7 +13,7 @@ Marketing and service website for Flooring Hub (Raleigh, NC). Production (`floor
 - Home, privacy, terms, and thank-you pages
 - Shared contact facts in `lib/site-config.js` (`(330) 573-0370`, `tsmith@flooringhubnc.com`)
 - Lead delivery to Tom’s verified business email: configured Resend, otherwise FormSubmit
-- Jobber OAuth handshake + admin page (tokens only; leads are not auto-created as Jobber Requests)
+- Jobber OAuth handshake + admin page; once connected, each emailed lead is also copied into Jobber as a Client + Request
 - Sitemap + robots + IndexNow key file
 
 ## Local workflow
@@ -33,7 +33,11 @@ Production delivery/activation must be verified in an approved environment; chan
 
 ## Jobber
 
-`/admin/jobber.html` starts the OAuth handshake and stores tokens in Upstash/Vercel KV. That is not the same as pushing website leads into Jobber Requests. Website inquiries go to Tom’s email; linking policies in Jobber does not enable a Request integration.
+`/admin/jobber.html` starts the OAuth handshake and stores tokens in Upstash/Vercel KV.
+
+Once those tokens exist, `/api/lead` copies each lead into Jobber after the email to Tom is accepted: `clientCreate` then `requestCreate` (`lib/jobber-client.js`). Email stays the primary path. A Jobber failure (disconnected, expired refresh token, API error, or the 6 s budget running out) is logged with the lead id only and the visitor still gets a success response, because Tom already has the email.
+
+Expired access tokens are refreshed on demand. The refresh holds a short `SET NX PX` lock in KV (`jobber:refresh_lock`) so two concurrent leads never spend the same single-use refresh token; the loser waits for the new token instead. Set `JOBBER_GRAPHQL_VERSION` to pin a different Jobber API version.
 
 ## Deployment contract
 
