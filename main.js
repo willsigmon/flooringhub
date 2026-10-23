@@ -356,6 +356,10 @@ document.addEventListener('DOMContentLoaded', function () {
           throw new Error((result.data && result.data.message) || ('Unable to submit your request. Please try again. (' + result.status + ')'));
         }
 
+        if (typeof window.va === 'function') {
+          window.va('event', { name: 'Estimate Submit', data: { location: 'quote' } });
+        }
+
         var utmCampaignField = form.querySelector('#utm_campaign');
         var utmMediumField = form.querySelector('#utm_medium');
         trackEvent('lead_submit', {
