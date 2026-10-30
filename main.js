@@ -146,19 +146,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function trackEvent(name, data) {
     if (typeof window.va === 'function') {
-      window.va('event', name, data || {});
+      window.va('event', { name: name, data: data || {} });
     }
-  }
-
-  function trackCtaEvent(el, action) {
-    if (!el || !el.getAttribute) return;
-    var cta = el.getAttribute('data-cta');
-    if (!cta) return;
-    trackEvent(action || 'cta_click', {
-      cta: cta,
-      label: cta,
-      section: (el.closest('section') && el.closest('section').getAttribute('id')) || 'unknown'
-    });
   }
 
   function setButtonState(button, enabled, label) {
@@ -284,17 +273,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var submitBtn = form.querySelector('.form-submit');
     var buttonId = form.querySelector('button[data-cta]') ? form.querySelector('button[data-cta]').getAttribute('data-cta') : 'lead-submit';
 
-    if (submitBtn) {
-      trackCtaEvent(submitBtn, 'lead_submit_attempt');
-    }
+    trackEvent('lead_submit_attempt', { location: 'quote' });
 
     if (validateLeadForm(form)) {
       showFormState(formStatus, 'Please fix the highlighted fields and try again.', true);
       focusFirstInvalidField(form);
-      trackEvent('lead_validation_error', {
-        cta: buttonId,
-        section: 'lead_form'
-      });
+      trackEvent('lead_validation_error', { location: 'quote' });
       return;
     }
 
@@ -302,10 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var hp = honeypotField ? honeypotField.value : '';
     if (hp) {
       showFormState(formStatus, 'Submission blocked.', true);
-      trackEvent('lead_bot_blocked', {
-        cta: buttonId,
-        section: 'lead_form'
-      });
+      trackEvent('lead_bot_blocked', { location: 'quote' });
       return;
     }
 
@@ -345,10 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(function (result) {
         if (result.data && result.data.duplicate) {
           showFormState(formStatus, 'You already submitted this request recently. Tom will reach out shortly.', false);
-          trackEvent('lead_duplicate', {
-            cta: buttonId,
-            section: 'lead_form'
-          });
+          trackEvent('lead_duplicate', { location: 'quote' });
           return;
         }
 
@@ -356,18 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
           throw new Error((result.data && result.data.message) || ('Unable to submit your request. Please try again. (' + result.status + ')'));
         }
 
-        if (typeof window.va === 'function') {
-          window.va('event', { name: 'Estimate Submit', data: { location: 'quote' } });
-        }
-
-        var utmCampaignField = form.querySelector('#utm_campaign');
-        var utmMediumField = form.querySelector('#utm_medium');
-        trackEvent('lead_submit', {
-          campaign: (utmCampaignField && utmCampaignField.value) || 'n/a',
-          service: payload.service || 'unknown',
-          medium: (utmMediumField && utmMediumField.value) || 'direct',
-          button: buttonId
-        });
+        trackEvent('Estimate Submit', { location: 'quote' });
         showFormState(formStatus, 'Thanks! Your request was sent successfully.', false);
         form.reset();
         populateUtmFields();
@@ -382,23 +349,15 @@ document.addEventListener('DOMContentLoaded', function () {
           ? formatError(error.message, phoneDisplay)
           : (error.message || 'Network issue. Please try again in a moment.');
         showFormState(formStatus, deliveryMessage, true);
-        trackEvent('lead_submit_error', {
-          cta: buttonId,
-          section: 'lead_form',
-          error: String(error && error.message || 'unknown')
-        });
+        trackEvent('lead_submit_error', { location: 'quote' });
       })
       .finally(function () {
         setButtonState(submitBtn, true, originalBtnLabel || 'Request Free Estimate');
       });
   }
 
-  function initCtaTracking() {
+  function initPlaceholderLinks() {
     document.querySelectorAll('[data-cta]').forEach(function (el) {
-      el.addEventListener('click', function () {
-        trackCtaEvent(el, 'cta_click');
-      });
-
       if (el.tagName === 'A' && el.getAttribute('href') === '#') {
         el.addEventListener('click', function (event) {
           event.preventDefault();
@@ -419,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
     leadForm.addEventListener('submit', function () { haptic('medium'); });
   }
 
-  initCtaTracking();
+  initPlaceholderLinks();
 
   // ---- Mobile nav toggle ----
   var toggle = document.getElementById('navToggle');

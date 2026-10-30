@@ -16,6 +16,7 @@ describe('static leftovers', () => {
   it('loads the real Flooring Hub contact facts without inventing a number', () => {
     const document = {
       readyState: 'complete',
+      addEventListener() {},
       querySelectorAll() {
         return [];
       }
