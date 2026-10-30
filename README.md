@@ -16,6 +16,23 @@ Marketing and service website for Flooring Hub (Raleigh, NC). Production (`floor
 - Jobber OAuth handshake + admin page; once connected, each emailed lead is also copied into Jobber as a Client + Request
 - Sitemap + robots + IndexNow key file
 
+## Service pages
+
+`/services` links to `/services/hardwood`, `/services/lvp`, `/services/refinishing`,
+`/services/laminate`, and `/services/carpet`. Explicit rewrites in `vercel.json`
+serve the root HTML files; direct `.html` URLs redirect to their canonical routes.
+The pages reuse the homepage navigation, footer, styles, scripts, and CTA hooks.
+For a plain static-server preview, open the corresponding `.html` file; Vercel
+applies the clean routes in a deployment.
+
+Content comes from `index.html`: services, process, FAQ, project-gallery captions,
+and the service-area list. `llms.txt` also explicitly lists refinishing and explains
+that leveling is installation prep, not a standalone service. Raleigh, Durham,
+and Cary are all confirmed service areas. Separate city pages were omitted because
+the available local detail is limited to short project captions; each service page
+instead includes the confirmed service area and relevant existing project examples.
+No new reviews, prices, credentials, guarantees, or project counts are introduced.
+
 ## Local workflow
 
 ```bash
