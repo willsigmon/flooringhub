@@ -55,5 +55,63 @@
         { "key": "Cache-Control", "value": "no-store" }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/services",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/services/hardwood",
+      "destination": "/hardwood-flooring.html"
+    },
+    {
+      "source": "/services/lvp",
+      "destination": "/lvp-flooring.html"
+    },
+    {
+      "source": "/services/refinishing",
+      "destination": "/hardwood-refinishing.html"
+    },
+    {
+      "source": "/services/laminate",
+      "destination": "/laminate-flooring.html"
+    },
+    {
+      "source": "/services/carpet",
+      "destination": "/carpet-installation.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/services.html",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/hardwood-flooring.html",
+      "destination": "/services/hardwood",
+      "permanent": true
+    },
+    {
+      "source": "/lvp-flooring.html",
+      "destination": "/services/lvp",
+      "permanent": true
+    },
+    {
+      "source": "/hardwood-refinishing.html",
+      "destination": "/services/refinishing",
+      "permanent": true
+    },
+    {
+      "source": "/laminate-flooring.html",
+      "destination": "/services/laminate",
+      "permanent": true
+    },
+    {
+      "source": "/carpet-installation.html",
+      "destination": "/services/carpet",
+      "permanent": true
+    }
   ]
 }
