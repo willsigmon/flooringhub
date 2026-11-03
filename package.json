@@ -4,7 +4,7 @@
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
-    "@vercel/og": "^0.11.1"
+    "@vercel/og": "^1.0.3"
   },
   "overrides": {
     "sharp": "^0.35.5"
