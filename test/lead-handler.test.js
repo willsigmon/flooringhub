@@ -85,11 +85,11 @@ describe('POST /api/lead', () => {
     await handler(mockReq({ method: 'PUT' }), putRes);
     assert.equal(putRes.statusCode, 405);
 
-    // GET only exposes the public Turnstile site key.
+    // GET only exposes the public Turnstile site key and a readiness boolean.
     const getRes = mockRes();
     await handler(mockReq({ method: 'GET' }), getRes);
     assert.equal(getRes.statusCode, 200);
-    assert.deepEqual(Object.keys(parsed(getRes)), ['turnstileSiteKey']);
+    assert.deepEqual(Object.keys(parsed(getRes)), ['turnstileSiteKey', 'turnstileReady']);
 
     const badRes = mockRes();
     await handler(mockReq({ body: '{' }), badRes);

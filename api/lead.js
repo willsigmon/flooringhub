@@ -20,7 +20,7 @@ const {
   deliveryStatusCode
 } = require('../lib/lead-public-response');
 const { isSyncConfigured, createJobberRequest } = require('../lib/jobber-client');
-const { checkSpam, siteKey } = require('../lib/turnstile-guard');
+const { checkSpam, siteKey, turnstileReadiness } = require('../lib/turnstile-guard');
 
 const TURNSTILE_HOSTS = ['flooringhubnc.com', 'www.flooringhubnc.com'];
 
@@ -190,7 +190,7 @@ async function handler(req, res) {
   // Public Turnstile site key for the static page (public by design).
   if (req.method === 'GET') {
     res.setHeader('Cache-Control', 'no-store');
-    return jsonResponse(res, 200, { turnstileSiteKey: siteKey() });
+    return jsonResponse(res, 200, { turnstileSiteKey: siteKey(), turnstileReady: turnstileReadiness().ready });
   }
 
   if (req.method !== 'POST') {
