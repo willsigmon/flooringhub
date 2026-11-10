@@ -81,14 +81,34 @@ describe('POST /api/lead', () => {
   });
 
   it('rejects non-POST methods and invalid JSON', async () => {
+    const putRes = mockRes();
+    await handler(mockReq({ method: 'PUT' }), putRes);
+    assert.equal(putRes.statusCode, 405);
+
+    // GET only exposes the public Turnstile site key and a readiness boolean.
     const getRes = mockRes();
     await handler(mockReq({ method: 'GET' }), getRes);
-    assert.equal(getRes.statusCode, 405);
+    assert.equal(getRes.statusCode, 200);
+    assert.deepEqual(Object.keys(parsed(getRes)), ['turnstileSiteKey', 'turnstileReady']);
 
     const badRes = mockRes();
     await handler(mockReq({ body: '{' }), badRes);
     assert.equal(badRes.statusCode, 400);
     assert.equal(parsed(badRes).message, 'Invalid JSON body.');
+  });
+
+  it('fails closed on Turnstile when the secret is set', async () => {
+    const prev = process.env.TURNSTILE_SECRET_KEY;
+    // Cloudflare's documented always-fail test secret.
+    process.env.TURNSTILE_SECRET_KEY = '2x0000000000000000000000000000000AA';
+    try {
+      const res = mockRes();
+      await handler(mockReq({ body: { ...validBody } }), res);
+      assert.equal(res.statusCode, 403);
+    } finally {
+      if (prev === undefined) delete process.env.TURNSTILE_SECRET_KEY;
+      else process.env.TURNSTILE_SECRET_KEY = prev;
+    }
   });
 
   it('blocks honeypot and missing fields before delivery', async () => {

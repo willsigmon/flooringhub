@@ -20,6 +20,9 @@ const {
   deliveryStatusCode
 } = require('../lib/lead-public-response');
 const { isSyncConfigured, createJobberRequest } = require('../lib/jobber-client');
+const { checkSpam, siteKey, turnstileReadiness } = require('../lib/turnstile-guard');
+
+const TURNSTILE_HOSTS = ['flooringhubnc.com', 'www.flooringhubnc.com'];
 
 // Tom confirmed this recipient on October 2, 2026. Old destination env vars
 // cannot redirect inquiries to a webhook or another mailbox.
@@ -184,8 +187,14 @@ async function handler(req, res) {
     return jsonResponse(res, 200, { ok: true });
   }
 
+  // Public Turnstile site key for the static page (public by design).
+  if (req.method === 'GET') {
+    res.setHeader('Cache-Control', 'no-store');
+    return jsonResponse(res, 200, { turnstileSiteKey: siteKey(), turnstileReady: turnstileReadiness().ready });
+  }
+
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST, OPTIONS');
+    res.setHeader('Allow', 'GET, POST, OPTIONS');
     return jsonResponse(res, 405, { ok: false, message: 'Method not allowed.' });
   }
 
@@ -210,6 +219,12 @@ async function handler(req, res) {
 
     if (isRateLimited(clientId)) {
       return jsonResponse(res, 429, { ok: false, message: 'Too many submissions. Please wait a minute before trying again.' });
+    }
+
+    // Cloudflare Turnstile: enforced whenever TURNSTILE_SECRET_KEY is set; fails closed.
+    const spam = await checkSpam(req, body, TURNSTILE_HOSTS, { rateLimit: false });
+    if (spam) {
+      return jsonResponse(res, spam.status, { ok: false, message: 'We could not verify this request. Please refresh the page and try again, or call us.' });
     }
 
     const dedupeKey = dedupeKeyFor(payload, clientId);
