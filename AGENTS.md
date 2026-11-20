@@ -79,3 +79,18 @@ Token JSON shape:
 - Cyberpunk: mono, neon on near-black, scan lines, glitch micro-animations.
 - Analog/craft: paper texture, hand-set type, irregular grid, warm palette.
 <!-- NOT_ANOTHER_AI_WEBSITE_DESIGN_BIBLE_END -->
+
+## Session routine (gold standard)
+
+Every coding session — agent or human — runs this loop:
+
+1. **Write the goal first.** Before touching code, state what "done" looks like:
+   acceptance criteria, the exact verification commands, and what you will
+   NOT change. No goal, no code.
+2. **Verify, don't claim.** Run this repo's own checks and report what the
+   tools actually said — not what you hoped. A green local build is not a
+   production deploy; a source build is not the uploaded build.
+3. **Every mistake becomes a rule.** When something breaks, misleads, or burns
+   an hour, add the lesson to this file in the same session — one bullet under
+   the right section, committed to git. That's how this file gets good.
+   That's how it stays good.
