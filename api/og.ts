@@ -1,7 +1,3 @@
-import { ImageResponse } from "@vercel/og";
-
-export const config = { runtime: "edge" };
-
 const SITE = {
   "siteName": "Flooring Hub",
   "defaultTitle": "Flooring Hub | Raleigh Flooring Experts",
@@ -16,6 +12,13 @@ const SITE = {
 };
 
 type OgElement = { type: string; props: Record<string, unknown> };
+type OgRequest = { url?: string };
+type OgResponse = {
+  statusCode: number;
+  statusMessage: string;
+  setHeader(name: string, value: string): void;
+  end(body: Uint8Array): void;
+};
 
 function h(type: string, props: Record<string, unknown>, ...children: unknown[]): OgElement {
   return { type, props: { ...props, children } };
@@ -26,13 +29,14 @@ function clean(value: string | null, fallback: string, max = 110) {
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
-export default function handler(request: Request) {
-  const url = new URL(request.url);
+export default async function handler(request: OgRequest, response: OgResponse) {
+  const { ImageResponse } = await import("@vercel/og");
+  const url = new URL(request.url || "/", "https://www.flooringhubnc.com");
   const title = clean(url.searchParams.get("title"), SITE.defaultTitle, 72);
   const subtitle = clean(url.searchParams.get("subtitle"), SITE.defaultSubtitle, 132);
   const eyebrow = clean(url.searchParams.get("eyebrow"), SITE.eyebrow, 72);
 
-  return new ImageResponse(
+  const image = new ImageResponse(
     h(
       "div",
       {
@@ -44,6 +48,7 @@ export default function handler(request: Request) {
           justifyContent: "space-between",
           background: `radial-gradient(circle at 18% 12%, ${SITE.accent}55 0, transparent 30%), linear-gradient(135deg, ${SITE.bg} 0%, ${SITE.bg2} 100%)`,
           color: SITE.fg,
+          fontFeatureSettings: '"liga" 0',
           padding: 72,
           fontFamily: "Arial, sans-serif",
         },
@@ -60,7 +65,7 @@ export default function handler(request: Request) {
               display: "flex",
               color: SITE.fg,
               borderRadius: 999,
-              padding: "10px 18px",
+              padding: "10px 21px",
               fontSize: 24,
               fontWeight: 700,
             },
@@ -71,16 +76,21 @@ export default function handler(request: Request) {
       h(
         "div",
         { style: { display: "flex", flexDirection: "column", gap: 24, maxWidth: 900 } },
-        h("div", { style: { display: "flex", fontSize: 82, lineHeight: 0.96, fontWeight: 900, letterSpacing: -2 } }, title),
-        h("div", { style: { display: "flex", fontSize: 38, lineHeight: 1.18, color: SITE.muted, maxWidth: 840 } }, subtitle),
+        h("div", { style: { display: "flex", fontSize: 82, lineHeight: 0.96, fontWeight: 900, letterSpacing: -1.7 } }, title),
+        h("div", { style: { display: "flex", fontSize: 38, lineHeight: 1.18, letterSpacing: 0.4, color: SITE.muted, maxWidth: 820 } }, subtitle),
       ),
       h(
         "div",
         { style: { display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 26 } },
         h("div", { style: { display: 'flex', color: SITE.muted } }, SITE.domainLabel),
-        h("div", { style: { display: 'flex', color: SITE.fg, fontWeight: 800 } }, "Free in-home estimates"),
+        h("div", { style: { display: 'flex', color: SITE.fg, fontWeight: 800, letterSpacing: 0.05, marginRight: 4 } }, "Free in-home estimates"),
       ),
     ) as never,
     { width: 1200, height: 630 },
   );
+
+  response.statusCode = image.status;
+  response.statusMessage = image.statusText || "OK";
+  image.headers.forEach((value, name) => response.setHeader(name, value));
+  response.end(new Uint8Array(await image.arrayBuffer()));
 }
