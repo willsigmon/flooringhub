@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "postinstall": "node scripts/patch-vercel-og.js"
   },
   "dependencies": {
     "@vercel/og": "^1.0.3"

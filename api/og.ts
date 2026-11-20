@@ -1,7 +1,5 @@
 import { ImageResponse } from "@vercel/og";
 
-export const config = { runtime: "edge" };
-
 const SITE = {
   "siteName": "Flooring Hub",
   "defaultTitle": "Flooring Hub | Raleigh Flooring Experts",
@@ -16,6 +14,13 @@ const SITE = {
 };
 
 type OgElement = { type: string; props: Record<string, unknown> };
+type OgRequest = { url?: string };
+type OgResponse = {
+  statusCode: number;
+  statusMessage: string;
+  setHeader(name: string, value: string): void;
+  end(body: Uint8Array): void;
+};
 
 function h(type: string, props: Record<string, unknown>, ...children: unknown[]): OgElement {
   return { type, props: { ...props, children } };
@@ -26,13 +31,13 @@ function clean(value: string | null, fallback: string, max = 110) {
   return text.length > max ? `${text.slice(0, max - 1)}…` : text;
 }
 
-export default function handler(request: Request) {
-  const url = new URL(request.url);
+export default async function handler(request: OgRequest, response: OgResponse) {
+  const url = new URL(request.url || "/", "https://www.flooringhubnc.com");
   const title = clean(url.searchParams.get("title"), SITE.defaultTitle, 72);
   const subtitle = clean(url.searchParams.get("subtitle"), SITE.defaultSubtitle, 132);
   const eyebrow = clean(url.searchParams.get("eyebrow"), SITE.eyebrow, 72);
 
-  return new ImageResponse(
+  const image = new ImageResponse(
     h(
       "div",
       {
@@ -84,4 +89,9 @@ export default function handler(request: Request) {
     ) as never,
     { width: 1200, height: 630 },
   );
+
+  response.statusCode = image.status;
+  response.statusMessage = image.statusText || "OK";
+  image.headers.forEach((value, name) => response.setHeader(name, value));
+  response.end(new Uint8Array(await image.arrayBuffer()));
 }
