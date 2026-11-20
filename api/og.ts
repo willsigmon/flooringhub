@@ -1,5 +1,3 @@
-import { ImageResponse } from "@vercel/og";
-
 const SITE = {
   "siteName": "Flooring Hub",
   "defaultTitle": "Flooring Hub | Raleigh Flooring Experts",
@@ -32,6 +30,7 @@ function clean(value: string | null, fallback: string, max = 110) {
 }
 
 export default async function handler(request: OgRequest, response: OgResponse) {
+  const { ImageResponse } = await import("@vercel/og");
   const url = new URL(request.url || "/", "https://www.flooringhubnc.com");
   const title = clean(url.searchParams.get("title"), SITE.defaultTitle, 72);
   const subtitle = clean(url.searchParams.get("subtitle"), SITE.defaultSubtitle, 132);
